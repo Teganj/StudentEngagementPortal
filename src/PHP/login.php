@@ -4,118 +4,104 @@
 ?>
 
 <?
-   // error_reporting(E_ALL);
-   // ini_set("display_errors", 1);
+
+$client = new MongoDB\Client(
+    'mongodb+srv://tegan:Cassidhe1!@cluster0.c8vya.mongodb.net/Project0?retryWrites=true&w=majority');
+
+$db = $client->test;
+
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../CSS/login_style.css">
+    <link rel="stylesheet" href="../CSS/main_style.css">
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
-<html lang = "en">
 
-   <head>
-      <title>Student Engagement</title>
-      <link href = "css/bootstrap.min.css" rel = "stylesheet">
+</head>
+<body>
 
-      <style>
-         body {
-            padding-top: 40px;
-            padding-bottom: 40px;
-            background-color: #ADABAB;
-         }
+<nav class="navbar navbar-icon-top navbar-expand-lg" style="background-color: #784794;">
+    <a class="navbar-brand" href="#" style="color: white; font-weight: bold;">NCI Student Engagement</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-         .form-signin {
-            max-width: 330px;
-            padding: 15px;
-            margin: 0 auto;
-            color: #017572;
-         }
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#" style="color: white; ">
+                    <i class="fa fa-home"></i>
+                    Home
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-         .form-signin .form-signin-heading,
-         .form-signin .checkbox {
-            margin-bottom: 10px;
-         }
 
-         .form-signin .checkbox {
-            font-weight: normal;
-         }
+<h2 style="text-align: center; margin-top: 10px;">National College of Ireland Student Retention Portal Login</h2>
 
-         .form-signin .form-control {
-            position: relative;
-            height: auto;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-            padding: 10px;
-            font-size: 16px;
-         }
+<div style="margin-top: 0px; margin-bottom: 0px;">
+    <form class="modal-content animate" action="../HTML/upload.html" method="post">
+        <div class="container">
+            <div class = "container form-signin">
 
-         .form-signin .form-control:focus {
-            z-index: 2;
-         }
+                <?php
+                $msg = '';
 
-         .form-signin input[type="email"] {
-            margin-bottom: -1px;
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0;
-            border-color:#017572;
-         }
+                if (isset($_POST['login']) && !empty($_POST['username'])
+                    && !empty($_POST['password'])) {
 
-         .form-signin input[type="password"] {
-            margin-bottom: 10px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-            border-color:#017572;
-         }
+                    if ($_POST['username'] == '12345' &&
+                        $_POST['password'] == '12345') {
+                        $_SESSION['valid'] = true;
+                        $_SESSION['timeout'] = time();
+                        $_SESSION['username'] = '12345';
 
-         h2{
-            text-align: center;
-            color: #017572;
-         }
-      </style>
+                        echo 'You have entered valid use name and password';
+                    }else {
+                        $msg = 'Wrong username or password';
+                    }
+                }
+                ?>
+            </div>
+            <div class = "container">
 
-   </head>
+                <form class = "form-signin" role = "form"
+                      action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);
+                      ?>" method = "post">
+                    <h4 class = "form-signin-heading"><?php echo $msg; ?></h4>
+                    <input type = "text" class = "form-control"
+                           name = "12345" placeholder = "username = 12345"
+                           required autofocus></br>
+                    <input type = "password" class = "form-control"
+                           name = "password" placeholder = "password = 1234" required>
+                    <button class = "btn btn-lg btn-primary btn-block" type = "submit"
+                            name = "login">Login</button>
+                </form>
+            <label for="username"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
 
-   <body>
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
 
-      <h2>Enter Username and Password</h2>
-      <div class = "container form-signin">
+            <button type="submit">Login</button>
 
-         <?php
-            $msg = '';
-
-            if (isset($_POST['login']) && !empty($_POST['username'])
-               && !empty($_POST['password'])) {
-
-               if ($_POST['username'] == '12345' &&
-                  $_POST['password'] == '12345') {
-                  $_SESSION['valid'] = true;
-                  $_SESSION['timeout'] = time();
-                  $_SESSION['username'] = '12345';
-
-                  echo 'You have entered valid use name and password';
-               }else {
-                  $msg = 'Wrong username or password';
-               }
-            }
-         ?>
-      </div> <!-- /container -->
-
-      <div class = "container">
-
-         <form class = "form-signin" role = "form"
-            action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);
-            ?>" method = "post">
-            <h4 class = "form-signin-heading"><?php echo $msg; ?></h4>
-            <input type = "text" class = "form-control"
-               name = "12345" placeholder = "username = 12345"
-               required autofocus></br>
-            <input type = "password" class = "form-control"
-               name = "password" placeholder = "password = 1234" required>
-            <button class = "btn btn-lg btn-primary btn-block" type = "submit"
-               name = "login">Login</button>
-         </form>
-
-         Click here to clean <a href = "logout.php" tite = "Logout">Session.
-
-      </div>
-
-   </body>
+            <label><input type="checkbox" checked="checked" name="remember"> Remember me</label>
+        </div>
+        <div class="container" style="background-color:#f1f1f1; margin-bottom: 10px;">
+            <span class="psw">Forgot <a href="#">password?</a></span>
+        </div>
+    </form>
+</div>
+</body>
 </html>

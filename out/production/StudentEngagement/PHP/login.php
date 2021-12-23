@@ -84,11 +84,11 @@
             if (isset($_POST['login']) && !empty($_POST['username'])
                && !empty($_POST['password'])) {
 
-               if ($_POST['username'] == 'tutorialspoint' &&
-                  $_POST['password'] == '1234') {
+               if ($_POST['username'] == '12345' &&
+                  $_POST['password'] == '12345') {
                   $_SESSION['valid'] = true;
                   $_SESSION['timeout'] = time();
-                  $_SESSION['username'] = 'tutorialspoint';
+                  $_SESSION['username'] = '12345';
 
                   echo 'You have entered valid use name and password';
                }else {
@@ -105,7 +105,7 @@
             ?>" method = "post">
             <h4 class = "form-signin-heading"><?php echo $msg; ?></h4>
             <input type = "text" class = "form-control"
-               name = "username" placeholder = "username = tutorialspoint"
+               name = "12345" placeholder = "username = 12345"
                required autofocus></br>
             <input type = "password" class = "form-control"
                name = "password" placeholder = "password = 1234" required>

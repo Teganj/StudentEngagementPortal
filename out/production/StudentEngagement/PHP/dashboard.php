@@ -12,23 +12,22 @@
                 animationEnabled: true,
                 exportEnabled: true,
                 title:{
-                    text: "Student Engagement"
+                    text: "Tuna Production"
                 },
                 axisY: {
-                    title: "Week"
-
+                    title: "In metric tons"
                 },
                 data: [{
                     type: "column",
-                    toolTipContent: "{y} Name",
+                    toolTipContent: "{y} metric tons",
                     dataPoints: dataPoints
                 }]
             });
 
-            $.get("../example.csv", getDataPointsFromCSV);
+            $.get("https://canvasjs.com/data/gallery/php/tuna-production.csv", getDataPointsFromCSV);
 
-            //CSV Format
-            //Year,Volume
+//CSV Format
+//Year,Volume
             function getDataPointsFromCSV(csv) {
                 var csvLines = points = [];
                 csvLines = csv.split(/[\r?\n|\r|\n]+/);

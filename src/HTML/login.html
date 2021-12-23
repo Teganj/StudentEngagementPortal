@@ -3,27 +3,30 @@
 <head>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../CSS/login_style.css">
     <link rel="stylesheet" href="../CSS/main_style.css">
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 
 </head>
 <body>
-<nav class="navbar navbar-icon-top navbar-expand-lg" style="background-color: #784794">
-    <a class="navbar-brand" href="#" style="color: black">NCI Student Engagement</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+    <nav class="navbar navbar-icon-top navbar-expand-lg" style="background-color: #784794;">
+    <a class="navbar-brand" href="#" style="color: white; font-weight: bold;">NCI Student Engagement</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#" style="color: black; float: right">
+                <a class="nav-link" href="#" style="color: white; ">
                     <i class="fa fa-home"></i>
-                    Login
+                    Home
                     <span class="sr-only">(current)</span>
                 </a>
             </li>
@@ -31,49 +34,26 @@
     </div>
 </nav>
 
-<h2>National College of Ireland Student Retention Portal Login</h2>
 
-<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+    <h2 style="text-align: center; margin-top: 10px;">National College of Ireland Student Retention Portal Login</h2>
 
-<div id="id01" class="modal">
+    <div style="margin-top: 0px; margin-bottom: 0px;">
+        <form class="modal-content animate" action="../HTML/upload.html" method="post">
+            <div class="container">
+                <label for="username"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
 
-    <form class="modal-content animate" action="../HTML/upload.html" method="post">
-        <div class="imgcontainer">
-            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-            <img src="../Images/nci_logo.png" alt="NCI Logo" class="avatar">
-        </div>
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
 
-        <div class="container">
-            <label for="username"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
+                <button type="submit">Login</button>
 
-            <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-
-            <button type="submit">Login</button>
-            <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
-        </div>
-
-        <div class="container" style="background-color:#f1f1f1">
-            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-            <span class="psw">Forgot <a href="#">password?</a></span>
-        </div>
-    </form>
-</div>
-
-<script>
-    // Get the modal
-    var modal = document.getElementById('id01');
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
-
+                <label><input type="checkbox" checked="checked" name="remember"> Remember me</label>
+            </div>
+            <div class="container" style="background-color:#f1f1f1; margin-bottom: 10px;">
+                <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

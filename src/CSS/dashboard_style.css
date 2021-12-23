@@ -1,0 +1,7 @@
+.container {
+    height: 60%;
+    position: relative;
+    border: 3px solid #784794;
+    text-align: center;
+    width: 100%;
+}

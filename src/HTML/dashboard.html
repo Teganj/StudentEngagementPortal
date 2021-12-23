@@ -7,6 +7,8 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <link rel="stylesheet" href="../CSS/main_style.css">
+    <link rel="stylesheet" href="../CSS/dashboard_style.css">
+
 
     <script>
         window.onload = function () {
@@ -53,56 +55,80 @@
     </script>
 </head>
 <body>
-<nav class="navbar navbar-icon-top navbar-expand-lg" style="background-color: #784794;">
-    <a class="navbar-brand" href="upload.html" style="color: white; font-weight: bold;">Student Engagement</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <nav class="navbar navbar-icon-top navbar-expand-lg" style="background-color: #784794;">
+        <a class="navbar-brand" href="upload.html" style="color: white; font-weight: bold;">Student Engagement</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#" style="color: white; ">
-                    <i class="fa fa-home"></i>
-                    Home
-                    <span class="sr-only">(current)</span>
-                </a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
-                    <i class="fa fa-envelope-o">
-                        <span class="badge badge-primary">11</span>
-                    </i>
-                    Modules
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">HDipC_IntroToDatabases</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">HDipC_SoftwareDev</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">HDipC_Multimedia</a>
-                </div>
-            </li>
-        </ul>
-        <ul class="navbar-nav ">
-            <li class="nav-item">
-                <a class="nav-link" href="#" style="color: white; ">
-                    <i class="fa fa-bell">
-                        <span class="badge badge-info">11</span>
-                    </i>
-                    Notifications
-                </a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" style="color: white; ">
-        </form>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" style="color: white; ">
+                        <i class="fa fa-home"></i>
+                        Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                        <i class="fa fa-envelope-o">
+                            <span class="badge badge-primary">11</span>
+                        </i>
+                        Modules
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">HDipC_IntroToDatabases</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">HDipC_SoftwareDev</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">HDipC_Multimedia</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav ">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: white; ">
+                        <i class="fa fa-bell">
+                            <span class="badge badge-info">11</span>
+                        </i>
+                        Notifications
+                    </a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" style="color: white; ">
+            </form>
+        </div>
+    </nav>
+
+    <h2>Module Engagement Dashboard</h2>
+
+    <div id="chartContainer" style="height: 370px; width: 45%;"></div>
+
+    <h2>Email Students</h2>
+    <div class="container">
+        <div class="row" style="width: 100%">
+            <div class="column" style="width: 50%">
+                <ul style="list-style: none; width: 100%;">
+                    <li><h3>Luke Byrne</h3><button class="emailbtn" onClick="alert('Emailed')">Email</button></li>
+                    <li><h3>April Chow</h3><button class="emailbtn" onClick="alert('Emailed')">Email</button></li>
+                    <li><h3>Eoghan Dempsey</h3><button class="emailbtn" onClick="alert('Emailed')">Email</button></li>
+                    <li><h3>Amanda Dunne</h3><button class="emailbtn" onClick="alert('Emailed')">Email</button></li>
+                    <li><h3>David Fitzgerald</h3><button class="emailbtn" onClick="alert('Emailed')">Email</button></li>
+                </ul>
+            </div>
+            <div class="column" style="width: 50%">
+                <ul style="list-style: none; width: 100%; float: right">
+                    <li><h3>Declan Kennedy</h3><button class="emailbtn" onClick="alert('Emailed')">Email</button></li>
+                    <li><h3>John Mcbride</h3><button class="emailbtn"onClick="alert('Emailed')">Email</button></li>
+                    <li><h3>Mark Mccarthy</h3><button class="emailbtn" onClick="alert('Emailed')">Email</button></li>
+                    <li><h3>Padraig Mccarthy</h3><button class="emailbtn" onClick="alert('Emailed')">Email</button></li>
+                    <li><h3>Sara Moore</h3><button class="emailbtn" onClick="alert('Emailed')">Email</button></li>
+                </ul>
+            </div>
+        </div>
     </div>
-</nav>
-
-<h2>View Previously Accessed Dashboards</h2>
-
-<div id="chartContainer" style="height: 370px; width: 45%;"></div>
 
 </body>
 </html>

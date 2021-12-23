@@ -16,7 +16,7 @@
     </head>
     <body>
         <nav class="navbar navbar-icon-top navbar-expand-lg" style="background-color: #784794;">
-            <a class="navbar-brand" href="#" style="color: white; font-weight: bold;">NCI Student Engagement</a>
+            <a class="navbar-brand" href="#" style="color: white; font-weight: bold;">Student Engagement</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -62,19 +62,48 @@
             </div>
         </nav>
 
-
+        <h2>Student Retention Portal</h2>
         <div style="margin-top: 0px; margin-bottom: 0px;">
-            <form class="modal-content" action="dashboard.html" method="post">
+            <form class="modal-content" action="dashboard.html" method="post" style="margin-bottom: 20px; margin-top: 20px;">
                 <div class="container">
-                    Select file to upload:
+                    <h4>Select file to upload:</h4>
                     <br>
                     <!-- actual upload which is hidden -->
                     <input type="file" id="actual-btn" hidden/>
                     <input type="file" name="fileToUpload" id="fileToUpload">
                     <br><br><br>
-                    <input type="submit" value="Submit" name="submit">
+                    <input type="submit" value="Submit" name="submit" id="submitbtnupload">
                 </div>
             </form>
         </div>
+        <h2>View Previously Accessed Dashboards</h2>
+        <div class="row">
+            <div class="column">
+                <h3>HDip in Computing - Databases</h3>
+                <br>
+                <button type="submit">View</button>
+                <br>
+            </div>
+            <div class="column">
+                <h3>HDip in Computing - Multimedia</h3>
+                <br>
+                <button type="submit">View</button>
+                <br>
+            </div>
+            <div class="column">
+                <h3>MSC in Cyber - PenTesting</h3>
+                <br>
+                <button type="submit">View</button>
+                <br>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
     </body>
 </html>

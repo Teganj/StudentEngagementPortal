@@ -6,4 +6,41 @@
     border-radius: 0.3rem;
     cursor: pointer;
     margin-top: 1rem;
+    align-self: center;
+}
+.column {
+    float: left;
+    width: 30%;
+    outline: 2px solid black;
+    padding: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin: auto;
+    height: 45%;
+    margin-bottom: 100px;
+    background-color: #bdb2b2;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+    }
+}
+#submitbtnupload{
+    margin-bottom:10px;
+    align-content: center;
+}
+#viewbtn{
+    width: 30%;
+    background-color: #bdb2b2;
+    outline: 5px solid black;
+    color: black;
+    margin: auto;
+
 }

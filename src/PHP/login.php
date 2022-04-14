@@ -1,14 +1,47 @@
 <?php
-   ob_start();
-   session_start();
-?>
 
-<?
+session_start();
 
-$client = new MongoDB\Client(
-    'mongodb+srv://tegan:Cassidhe1!@cluster0.c8vya.mongodb.net/Project0?retryWrites=true&w=majority');
+include("connection.php");
+include("functions.php");
 
-$db = $client->test;
+
+if($_SERVER['REQUEST_METHOD'] == "POST")
+{
+    //something was posted
+    $user_name = $_POST['user_name'];
+    $password = $_POST['password'];
+
+    if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
+    {
+
+        //read from database
+        $query = "select * from users where user_name = '$user_name' limit 1";
+        $result = mysqli_query($con, $query);
+
+        if($result)
+        {
+            if($result && mysqli_num_rows($result) > 0)
+            {
+
+                $user_data = mysqli_fetch_assoc($result);
+
+                if($user_data['password'] === $password)
+                {
+
+                    $_SESSION['user_id'] = $user_data['user_id'];
+                    header("Location: index.php");
+                    die;
+                }
+            }
+        }
+
+        echo "wrong username or password!";
+    }else
+    {
+        echo "wrong username or password!";
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -29,7 +62,7 @@ $db = $client->test;
 <body>
 
 <nav class="navbar navbar-icon-top navbar-expand-lg" style="background-color: #784794;">
-    <a class="navbar-brand" href="#" style="color: white; font-weight: bold;">NCI Student Engagement</a>
+    <a class="navbar-brand" href="#" style="color: white; font-weight: bold;">Student Engagement Portal</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -48,59 +81,18 @@ $db = $client->test;
 </nav>
 
 
-<h2 style="text-align: center; margin-top: 10px;">National College of Ireland Student Retention Portal Login</h2>
+<h2 style="text-align: center; margin-top: 10px;">Student Retention Portal Login</h2>
+<div id="box">
 
-<div style="margin-top: 0px; margin-bottom: 0px;">
-    <form class="modal-content animate" action="../HTML/upload.html" method="post">
-        <div class="container">
-            <div class = "container form-signin">
+    <form method="post">
+        <div style="font-size: 20px;margin: 10px;color: white;">Login</div>
 
-                <?php
-                $msg = '';
+        <input id="text" type="text" name="user_name"><br><br>
+        <input id="text" type="password" name="password"><br><br>
 
-                if (isset($_POST['login']) && !empty($_POST['username'])
-                    && !empty($_POST['password'])) {
+        <input id="button" type="submit" value="Login"><br><br>
 
-                    if ($_POST['username'] == '12345' &&
-                        $_POST['password'] == '12345') {
-                        $_SESSION['valid'] = true;
-                        $_SESSION['timeout'] = time();
-                        $_SESSION['username'] = '12345';
-
-                        echo 'You have entered valid use name and password';
-                    }else {
-                        $msg = 'Wrong username or password';
-                    }
-                }
-                ?>
-            </div>
-            <div class = "container">
-
-                <form class = "form-signin" role = "form"
-                      action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);
-                      ?>" method = "post">
-                    <h4 class = "form-signin-heading"><?php echo $msg; ?></h4>
-                    <input type = "text" class = "form-control"
-                           name = "12345" placeholder = "username = 12345"
-                           required autofocus></br>
-                    <input type = "password" class = "form-control"
-                           name = "password" placeholder = "password = 1234" required>
-                    <button class = "btn btn-lg btn-primary btn-block" type = "submit"
-                            name = "login">Login</button>
-                </form>
-            <label for="username"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
-
-            <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-
-            <button type="submit">Login</button>
-
-            <label><input type="checkbox" checked="checked" name="remember"> Remember me</label>
-        </div>
-        <div class="container" style="background-color:#f1f1f1; margin-bottom: 10px;">
-            <span class="psw">Forgot <a href="#">password?</a></span>
-        </div>
+        <a href="signup.php">Click to Signup</a><br><br>
     </form>
 </div>
 </body>

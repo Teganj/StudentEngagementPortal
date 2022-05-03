@@ -2,7 +2,6 @@
     session_start();
 	include("connection.php");
 	include("check_login.php");
-    include 'importData.php';
 
     if(!empty($_GET['status'])){
         switch($_GET['status']){
@@ -56,26 +55,21 @@
 
         <div class="container">
             <h2>Student List</h2>
-
-            <!-- Display Status Message-->
-            <div class="container">
-                <div class="upfrm">
-                    <?php if(!empty($statusMsg)){ ?>
-                        <p class = "status-msg"><?php echo $statusMsg; ?> </p>
-                    <?php } ?>
-                    <form action="" method="post" enctype="multipart/form-data">
-                        Select File to Upload:
-                        <input type="file" name="file">
-                        <input type="submit" name="submit" value="Upload">
-                    </form>
-                </div>
-            </div>
-
             <div class="row">
-            <!--Import Link-->
+
+                <!-- Display Status Message-->
+                <div class="container">
+                    <div class="upfrm">
+                        <?php if(!empty($statusMsg)){ ?>
+                            <p class = "status-msg"><?php echo $statusMsg; ?> </p>
+                        <?php } ?>
+                    </div>
+                </div>
+
+                <!--Import Link-->
                 <div class="col-md-12 head">
                     <div class="float-right">
-                        <a href="javascript:void(0);" class="btn btn-success" onclick="formToggle('importFrm');"><i class="plus"></i>Import</a>
+                        <a href="javascript:void(0);" class="btn btn-success" onclick="formToggle('importFrm');"><i class="plus"></i>Import File</a>
                     </div>
                 </div>
 
@@ -83,7 +77,7 @@
                 <div class="col-md-12" id="importFrm" style="display: none;">
                     <form action="importData.php" method="post" enctype="multipart/form-data">
                         <input type="file" name="file">
-                        <input type="submit" class="btn btn-primary" name="importSubmit" value="IMPORT">
+                        <input type="submit" class="btn btn-primary" name="importSubmit" value="Submit File">
                     </form>
                 </div>
 

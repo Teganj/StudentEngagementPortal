@@ -46,7 +46,7 @@ if(isset($_POST['importSubmit']) && !empty($_FILES["file"]["name"])){
                     $con->query("UPDATE reports SET name = '".$name."'");
                 }else{
                     //Insert data into DB
-                    $con->query("INSERT INTO reports (name, email, created, week1, week2, week3, week4, week5, week6) VALUES ('".$name."', '".$email."', '".$week1."', '".$week2."', '".$week3."', '".$week4."', '".$week5."', '".$week6."')");
+                    $con->query("INSERT INTO reports (name, email, week1, week2, week3, week4, week5, week6) VALUES ('".$name."', '".$email."', '".$week1."', '".$week2."', '".$week3."', '".$week4."', '".$week5."', '".$week6."')");
                 }
             }
 

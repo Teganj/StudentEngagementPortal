@@ -1,38 +1,38 @@
 <?php
 
-include("connection.php");
+include_once 'connection.php';
 $statusMsg = '';
 
-//File upload Dir
+// File upload path
 $targetDir = "../uploads/";
+$fileName = basename($_FILES["file"]["name"]);
+$targetFilePath = $targetDir . $fileName;
+$fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
 
-if(isset($_POST["submit"])){
-    if(!empty($_FILES["file"]["name"])){
-        $fileName = basename($_FILES["file"]["name"]);
-        $targetFilePath = $targetDir . $fileName;
-        $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-
-        //Only allow certain file types
-        $allowTypes = array('csv', 'xlsx');
-        if(in_array($fileType, $allowTypes)){
-            //Uploading file to server
-            if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
-                //Insert file to DB
-                $insert = $con->query("Insert into uploads (file_name, uploaded_on) values('".$fileName."', NOW())");
-                if($insert){
-                    $statusMsg = "The file ".$fileName. " has been uploaded successfully.";
-                }else{
-                    $statusMsg = "File upload failed, please try again.";
-                }
+if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])){
+    // Allow certain file formats
+    $allowTypes = array('csv', 'xlsx');
+    if(in_array($fileType, $allowTypes)){
+        // Upload file to server
+        if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
+            // Insert image file name into database
+            $insert = $con->query("INSERT into uploads (file_name, uploaded_on) VALUES ('".$fileName."', NOW())");
+            if($insert){
+                $statusMsg = "The file ".$fileName. " has been uploaded successfully.";
             }else{
-                $statusMsg = "Sorry, there was an error uploading your file.";
+                $statusMsg = "File upload failed, please try again.";
             }
         }else{
-            $statusMsg = "Sorry, only CSV XLSX files are allowed up be uploaded.";
+            $statusMsg = "Sorry, there was an error uploading your file.";
         }
     }else{
-        $statusMsg = "Please select a file to upload.";
+        $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
     }
+}else{
+    $statusMsg = 'Please select a file to upload.';
 }
+
+// Display status message
+echo $statusMsg;
 
 ?>

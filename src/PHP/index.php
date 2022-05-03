@@ -1,10 +1,9 @@
 <?php 
     session_start();
 	include("connection.php");
-	include("functions.php");
-
-    $statusMsg = '';
-
+	include("check_login.php");
+    include("upload.php");
+    include("importData.php");
 
     if(!empty($_GET['status'])){
         switch($_GET['status']){
@@ -24,39 +23,6 @@
                 $statusType = '';
                 $statusMsg = '';
         }
-
-    }
-
-    //File upload Dir
-    $targetDir = "../uploads/";
-
-    if(isset($_POST["submit"])){
-        if(!empty($_FILES["file"]["name"])){
-            $fileName = basename($_FILES["file"]["name"]);
-            $targetFilePath = $targetDir . $fileName;
-            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-
-            //Only allow certain file types
-            $allowTypes = array('csv', 'xlsx');
-            if(in_array($fileType, $allowTypes)){
-                //Uploading file to server
-                if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
-                    //Insert file to DB
-                    $insert = $con->query("Insert into files (file_name, uploaded_on) values('".$fileName."', NOW())");
-                    if($insert){
-                        $statusMsg = "The file ".$fileName. " has been uploaded successfully.";
-                    }else{
-                        $statusMsg = "File upload failed, please try again.";
-                    }
-                }else{
-                    $statusMsg = "Sorry, there was an error uploading your file.";
-                }
-            }else{
-                $statusMsg = "Sorry, only CSV XLSX files are allowed up be uploaded.";
-            }
-        }else{
-            $statusMsg = "Please select a file to upload.";
-        }
     }
 ?>
 <!DOCTYPE HTML>
@@ -75,7 +41,6 @@
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         <link rel="functions" href="../functions.php">
 
-
         <script>
             function formToggle(ID){
                 var element = document.getElementById(ID);
@@ -90,45 +55,45 @@
     <body>
     <?php include 'navbar.php'?>
     <h2>Student Retention Portal</h2>
-<!--        <div class="shadow-lg p-3 mb-5 bg-white rounded" style="margin-top: 0px; margin-bottom: 0px; width: 50%; margin: auto;">-->
-<!---->
-<!--            <div class="container">-->
-<!--                <div class="upfrm">-->
-<!--                    --><?php //if(!empty($statusMsg)){ ?>
-<!--                        <p class = "status-msg>--><?php //echo $statusMsg; ?><!-- </p>"-->
-<!--                    --><?php //} ?>
-<!--                    <form action="" method="post" enctype="multipart/form-data">-->
-<!--                        Select File to Upload:-->
-<!--                        <input type="file" name="file">-->
-<!--                        <input type="submit" name="submit" value="Upload">-->
-<!--                    </form>-->
-<!--                </div>-->
-<!---->
-<!--                <div class="gallery">-->
-<!--                    <div class="gcon">-->
-<!--                        <h2>Uploaded File</h2>-->
-<!--                        --><?php
-//                        include 'connection.php';
-//                        $query = $con->query("SELECT * FROM files ORDER BY uploaded_on DESC");
-//
-//                        if($query->num_rows >0){
-//                            while($row = $query->fetch_assoc()){
-//                                $fileURL = 'uploaded/'.$row["file_name"];
-//                        ?>
-<!--                        <img scr="--><?php //echo $fileURL; ?><!--" alt""/>-->
-<!--                        --><?php //}
-//                            }else{
-//                            ?>
-<!--                        <p>No Files Found...-->
-<!--                            --><?php
-//                        }
-//                        ?>
-<!--                    </div>-->
-<!--                </div>-->
-<!---->
-<!---->
-<!--            </div>-->
-<!--        </div>-->
+        <div class="shadow-lg p-3 mb-5 bg-white rounded" style="margin-top: 0px; margin-bottom: 0px; width: 50%; margin: auto;">
+
+            <div class="container">
+                <div class="upfrm">
+                    <?php if(!empty($statusMsg)){ ?>
+                        <p class = "status-msg"><?php echo $statusMsg; ?> </p>
+                    <?php } ?>
+                    <form action="" method="post" enctype="multipart/form-data">
+                        Select File to Upload:
+                        <input type="file" name="file">
+                        <input type="submit" name="submit" value="Upload">
+                    </form>
+                </div>
+
+                <div class="gallery">
+                    <div class="gcon">
+                        <h2>Uploaded Files</h2>
+                        <?php
+                        include 'connection.php';
+                        $query = $con->query("SELECT * FROM uploads ORDER BY uploaded_on DESC");
+
+                        if($query->num_rows >0){
+                            while($row = $query->fetch_assoc()){
+                                $fileURL = 'uploaded/'.$row["file_name"];
+                        ?>
+                        <img scr="<?php echo $fileURL; ?>" alt=""/>
+                        <?php }
+                            }else{
+                            ?>
+                            <p>No Files Found...</p>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
 
 
 
@@ -202,6 +167,86 @@
                     <?php
                         }
                         ?>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+
+
+
+
+    <div class="container">
+
+        <h2>List</h2>
+
+        <!-- Display Status Message-->
+
+        <?php if(!empty($statusMsg)){ ?>
+            <div class="col-xs-12">
+                <div class="alert <?php echo $statusType; ?>"><?php echo $statusMsg; ?></div>
+            </div>
+
+        <?php } ?>
+
+        <div class="row">
+            <!--Import Link-->
+            <div class="col-md-12 head">
+                <div class="float-right">
+                    <a href="javascript:void(0);" class="btn btn-success" onclick="formToggle('importFrm');"><i class="plus"></i>Import</a>
+                </div>
+            </div>
+
+            <!-- CSV file Upload -->
+            <div class="col-md-12" id="importFrm" style="display: none;">
+                <form action="importData.php" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file">
+                    <input type="submit" class="btn btn-primary" name="importSubmit" value="IMPORT">
+                </form>
+            </div>
+
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th>#ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Week 1</th>
+                    <th>Week 2</th>
+                    <th>Week 3</th>
+                    <th>Week 4</th>
+                    <th>Week 5</th>
+                    <th>Week 6</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $result = $con->query("SELECT * FROM reports ORDER BY id DESC");
+                if($result->num_rows > 0){
+                    while($row = $result ->fetch_assoc()){
+                        ?>
+                        <tr>
+                            <td><?php echo $row['id']; ?></td>
+                            <td><?php echo $row['name']; ?></td>
+                            <td><?php echo $row['email']; ?></td>
+                            <td><?php echo $row['week1']; ?></td>
+                            <td><?php echo $row['week2']; ?></td>
+                            <td><?php echo $row['week3']; ?></td>
+                            <td><?php echo $row['week4']; ?></td>
+                            <td><?php echo $row['week5']; ?></td>
+                            <td><?php echo $row['week6']; ?></td>
+                        </tr>
+                        <?php
+                    }
+                }else{
+
+                    ?>
+                    <tr><td colspan="5">No Members... found</td></tr>
+                    <?php
+                }
+                ?>
                 </tbody>
             </table>
 

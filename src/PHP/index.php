@@ -150,7 +150,76 @@
     </div>
 
 
-        <h2>View Previously Accessed Dashboards</h2>
+
+
+
+
+    <div class="container">
+        <h2>Read from CSV</h2>
+        <!-- Display Status Message-->
+        <?php if(!empty($statusMsg)){ ?>
+            <div class="col-xs-12">
+                <div class="alert <?php echo $statusType; ?>"><?php echo $statusMsg; ?></div>
+            </div>
+        <?php } ?>
+
+        <div class="row">
+            <!--Import Link-->
+            <div class="col-md-12 head">
+                <div class="float-right">
+                    <a href="javascript:void(0);" class="btn btn-success" onclick="formToggle('importFrm');"><i class="plus"></i>Import</a>
+                </div>
+            </div>
+
+            <!-- CSV file Upload -->
+            <div class="col-md-12" id="importFrm" style="display: none;">
+                <form action="importData.php" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file">
+                    <input type="submit" class="btn btn-primary" name="importSubmit" value="IMPORT">
+                </form>
+            </div>
+
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th>#ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $result = $con->query("SELECT * FROM uploads ORDER BY id DESC");
+                if($result->num_rows > 0){
+                    while($row = $result ->fetch_assoc()){
+                        ?>
+                        <tr>
+                            <td><?php echo $row['id']; ?></td>
+                            <td><?php echo $row['name']; ?></td>
+                            <td><?php echo $row['email']; ?></td>
+                        </tr>
+                        <?php
+                    }
+                }else{
+                    ?>
+                    <tr><td colspan="5">No Member(s)... found</td></tr>
+                    <?php
+                }
+                ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <h2>View Previously Accessed Dashboards</h2>
         <div class="row">
             <div class="column">
                 <h3>HDip in Computing - Databases</h3>

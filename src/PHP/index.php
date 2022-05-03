@@ -2,7 +2,7 @@
     session_start();
 	include("connection.php");
 	include("check_login.php");
-    include 'upload.php';
+    include 'importData.php';
 
     if(!empty($_GET['status'])){
         switch($_GET['status']){
@@ -52,10 +52,12 @@
         </script>
     </head>
     <body>
-    <?php include 'navbar.php'?>
-    <h2>Student Retention Portal</h2>
-        <div class="shadow-lg p-3 mb-5 bg-white rounded" style="margin-top: 0px; margin-bottom: 0px; width: 50%; margin: auto;">
+        <?php include 'navbar.php'?>
 
+        <div class="container">
+            <h2>Student List</h2>
+
+            <!-- Display Status Message-->
             <div class="container">
                 <div class="upfrm">
                     <?php if(!empty($statusMsg)){ ?>
@@ -68,158 +70,69 @@
                     </form>
                 </div>
             </div>
-        </div>
 
-
-
-    <div class="container">
-
-        <h2>List</h2>
-
-        <!-- Display Status Message-->
-
-        <?php if(!empty($statusMsg)){ ?>
-        <div class="col-xs-12">
-            <div class="alert <?php echo $statusType; ?>"><?php echo $statusMsg; ?></div>
-        </div>
-
-        <?php } ?>
-
-        <div class="row">
-        <!--Import Link-->
-            <div class="col-md-12 head">
-                <div class="float-right">
-                    <a href="javascript:void(0);" class="btn btn-success" onclick="formToggle('importFrm');"><i class="plus"></i>Import</a>
-                </div>
-            </div>
-
-            <!-- CSV file Upload -->
-            <div class="col-md-12" id="importFrm" style="display: none;">
-                <form action="importData.php" method="post" enctype="multipart/form-data">
-                    <input type="file" name="file">
-                    <input type="submit" class="btn btn-primary" name="importSubmit" value="IMPORT">
-                </form>
-            </div>
-
-            <table class="table table-striped table-bordered">
-                <thead class="thead-dark">
-                <tr>
-                    <th>#ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Week 1</th>
-                    <th>Week 2</th>
-                    <th>Week 3</th>
-                    <th>Week 4</th>
-                    <th>Week 5</th>
-                    <th>Week 6</th>
-
-                </tr>
-                </thead>
-                <tbody>
-                    <?php
-                        $result = $con->query("SELECT * FROM reports ORDER BY id DESC");
-                        if($result->num_rows > 0){
-                            while($row = $result ->fetch_assoc()){
-                            ?>
-                            <tr>
-                                <td><?php echo $row['id']; ?></td>
-                                <td><?php echo $row['name']; ?></td>
-                                <td><?php echo $row['email']; ?></td>
-                                <td><?php echo $row['week1']; ?></td>
-                                <td><?php echo $row['week2']; ?></td>
-                                <td><?php echo $row['week3']; ?></td>
-                                <td><?php echo $row['week4']; ?></td>
-                                <td><?php echo $row['week5']; ?></td>
-                                <td><?php echo $row['week6']; ?></td>
-                            </tr>
-                                <?php
-                            }
-                        }else{
-
-                        ?>
-                    <tr><td colspan="5">No Member(s)... found</td></tr>
-                    <?php
-                        }
-                        ?>
-                </tbody>
-            </table>
-
-
-        </div>
-    </div>
-
-
-
-
-
-
-    <div class="container">
-        <h2>Read from CSV</h2>
-        <!-- Display Status Message-->
-        <?php if(!empty($statusMsg)){ ?>
-            <div class="col-xs-12">
-                <div class="alert <?php echo $statusType; ?>"><?php echo $statusMsg; ?></div>
-            </div>
-        <?php } ?>
-
-        <div class="row">
+            <div class="row">
             <!--Import Link-->
-            <div class="col-md-12 head">
-                <div class="float-right">
-                    <a href="javascript:void(0);" class="btn btn-success" onclick="formToggle('importFrm');"><i class="plus"></i>Import</a>
+                <div class="col-md-12 head">
+                    <div class="float-right">
+                        <a href="javascript:void(0);" class="btn btn-success" onclick="formToggle('importFrm');"><i class="plus"></i>Import</a>
+                    </div>
                 </div>
-            </div>
 
-            <!-- CSV file Upload -->
-            <div class="col-md-12" id="importFrm" style="display: none;">
-                <form action="importData.php" method="post" enctype="multipart/form-data">
-                    <input type="file" name="file">
-                    <input type="submit" class="btn btn-primary" name="importSubmit" value="IMPORT">
-                </form>
-            </div>
+                <!-- CSV file Upload -->
+                <div class="col-md-12" id="importFrm" style="display: none;">
+                    <form action="importData.php" method="post" enctype="multipart/form-data">
+                        <input type="file" name="file">
+                        <input type="submit" class="btn btn-primary" name="importSubmit" value="IMPORT">
+                    </form>
+                </div>
 
-            <table class="table table-striped table-bordered">
-                <thead class="thead-dark">
-                <tr>
-                    <th>#ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                $result = $con->query("SELECT * FROM uploads ORDER BY id DESC");
-                if($result->num_rows > 0){
-                    while($row = $result ->fetch_assoc()){
-                        ?>
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
                         <tr>
-                            <td><?php echo $row['id']; ?></td>
-                            <td><?php echo $row['name']; ?></td>
-                            <td><?php echo $row['email']; ?></td>
+                            <th>#ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Week 1</th>
+                            <th>Week 2</th>
+                            <th>Week 3</th>
+                            <th>Week 4</th>
+                            <th>Week 5</th>
+                            <th>Week 6</th>
                         </tr>
+                    </thead>
+                    <tbody>
                         <?php
-                    }
-                }else{
-                    ?>
-                    <tr><td colspan="5">No Member(s)... found</td></tr>
-                    <?php
-                }
-                ?>
-                </tbody>
-            </table>
+                            $result = $con->query("SELECT * FROM reports ORDER BY id DESC");
+                            if($result->num_rows > 0){
+                                while($row = $result ->fetch_assoc()){
+                                ?>
+                                <tr>
+                                    <td><?php echo $row['id']; ?></td>
+                                    <td><?php echo $row['name']; ?></td>
+                                    <td><?php echo $row['email']; ?></td>
+                                    <td><?php echo $row['Week1']; ?></td>
+                                    <td><?php echo $row['Week2']; ?></td>
+                                    <td><?php echo $row['Week3']; ?></td>
+                                    <td><?php echo $row['Week4']; ?></td>
+                                    <td><?php echo $row['Week5']; ?></td>
+                                    <td><?php echo $row['Week6']; ?></td>
+                                </tr>
+                                    <?php
+                                }
+                            }else{
+
+                            ?>
+                        <tr><td colspan="5">No Member(s)... found</td></tr>
+                        <?php
+                            }
+                            ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 
-
-
-
-
-
-
-
-
-    <h2>View Previously Accessed Dashboards</h2>
+        <h2>View Previously Accessed Dashboards</h2>
         <div class="row">
             <div class="column">
                 <h3>HDip in Computing - Databases</h3>

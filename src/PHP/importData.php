@@ -9,17 +9,16 @@ $fileName = basename($_FILES["file"]["name"]);
 $targetFilePath = $targetDir . $fileName;
 $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
 
-
-
-if(isset($_POST['importSubmit'])){
+if(isset($_POST['importSubmit']) && !empty($_FILES["file"]["name"])){
     //Allow types
-    $csvMimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream',
+    $csvMimes = array( 'csv', 'xlsx', 'text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream',
         'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexel', 'text/plain');
 
     //Validating if file is CSV
     if(!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $csvMimes)){
         //If file is uploaded
         if(is_uploaded_file($_FILES['file']['tmp_name'])){
+
             //Open uploaded CSV
             $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
 
@@ -47,7 +46,7 @@ if(isset($_POST['importSubmit'])){
                     $con->query("UPDATE reports SET name = '".$name."'");
                 }else{
                     //Insert data into DB
-                    $con->query("INSERT INTO reports (name, email, created, week1, week2, week3, week4, week5, week6) VALUES ('".$name."', '".$email."', '".$created."', '".$week1."', '".$week2."', '".$week3."', '".$week4."', '".$week5."', '".$week6."')");
+                    $con->query("INSERT INTO reports (name, email, created, week1, week2, week3, week4, week5, week6) VALUES ('".$name."', '".$email."', '".$week1."', '".$week2."', '".$week3."', '".$week4."', '".$week5."', '".$week6."')");
                 }
             }
 
@@ -55,6 +54,20 @@ if(isset($_POST['importSubmit'])){
             fclose($csvFile);
 
             $qstring = '?status=succ';
+
+            //Upload File to Server & Save name in DB table
+            if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
+                // Insert file name into database
+                $insert = $con->query("INSERT into uploads (file_name, uploaded_on) VALUES ('".$fileName."', NOW())");
+                if($insert){
+                    $statusMsg = "The file ".$fileName. " has been uploaded successfully.";
+                }else{
+                    $statusMsg = "File upload failed, please try again.";
+                }
+            }else{
+                $statusMsg = "Sorry, there was an error uploading your file.";
+            }
+
         }else{
             $qstring = '?status=err';
         }

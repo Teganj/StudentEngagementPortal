@@ -2,32 +2,31 @@
     session_start();
     include("connection.php");
     include("check_login.php");
-    if($_SERVER['REQUEST_METHOD'] == "POST"){
-        //something was posted
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+    //something was posted
+    $user_name = $_POST['user_name'];
+    $password = $_POST['password'];
 
-        if(!empty($email) && !empty($password) && !is_numeric($email)){
-            //read from database
-            $query = "SELECT * FROM users WHERE email = '$email' limit 1";
-            $result = mysqli_query($con, $query);
-            if($result) {
-                if($result && mysqli_num_rows($result) > 0) {
-                    $user_data = mysqli_fetch_assoc($result);
-                    if($user_data['password'] === $password) {
-                        $_SESSION['email'] = $user_data['email'];
-                        $_SESSION['role_id'] = $user_data['role_id'];
-                        header("Location: index.php");
-                        die;
-                    }
+    if(!empty($user_name) && !empty($password) && !is_numeric($user_name)){
+        //read from database
+        $query = "select * from users where user_name = '$user_name' limit 1";
+        $result = mysqli_query($con, $query);
+        if($result) {
+            if($result && mysqli_num_rows($result) > 0) {
+                $user_data = mysqli_fetch_assoc($result);
+                if($user_data['password'] === $password) {
+                    $_SESSION['user_id'] = $user_data['user_id'];
+                    header("Location: index.php");
+                    die;
                 }
             }
-
-            echo "Wrong Email or Password!";
-        }else {
-            echo "Wrong Email or Password!!";
         }
-    }?>
+        echo "wrong username or password!";
+    }else {
+        echo "wrong username or password!";
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -54,8 +53,8 @@
             <form class="modal-content animate" method="post">
                 <div class ="container" style="font-size: 20px;margin: 10px">
 
-                <label><b>Email</b></label>
-                <input id="text" type="text" name="email" placeholder="Enter Email"><br><br>
+                <label><b>Username/Email</b></label>
+                <input id="text" type="text" name="user_name" placeholder="Enter Username/Email"><br><br>
 
                 <label><b>Password</b></label>
                 <input id="text" type="password" name="password" placeholder="Enter Password"><br><br>

@@ -95,7 +95,7 @@ function save_password($password)
 
     global $con;
 
-    $password = password_hash($password, PASSWORD_DEFAULT);
+    //$password = password_hash($password, PASSWORD_DEFAULT);
     $email = addslashes($_SESSION['forgot']['email']);
 
     $query = "update users set password = '$password' where email = '$email' limit 1";

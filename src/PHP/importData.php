@@ -48,6 +48,7 @@ if(isset($_POST['importSubmit']) && !empty($_FILES["file"]["name"])){
                     //Insert data into DB
                     $con->query("INSERT INTO reports (name, email, week1, week2, week3, week4, week5, week6) VALUES ('".$name."', '".$email."', '".$week1."', '".$week2."', '".$week3."', '".$week4."', '".$week5."', '".$week6."')");
                 }
+
             }
 
             //closed CSV

@@ -8,12 +8,30 @@
             if ($result && mysqli_num_rows($result) > 0) {
                 $user_data = mysqli_fetch_assoc($result);
                 return $user_data;
+                $result = mysqli_query($con, $query);
+
+
+                if ($row['password'] === $password) {
+                    $_SESSION['name'] = $row['name'];
+                    $_SESSION['user_id'] = $row['user_id'];
+                    $_SESSION['role'] = $row['role'];
+                    $_SESSION['user_name'] = $row['user_name'];
+
+                    header("Location: ../home.php");
+
+                }else {
+                    header("Location: ../index.php?error=Incorect User name or password");
+                }
+
             }
         }
         //redirect to login
         header("Location: login.php");
         die;
     }
+
+
+
 
     function random_num($length){
         $text = "";

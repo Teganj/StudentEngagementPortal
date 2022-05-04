@@ -59,27 +59,6 @@
     <body>
         <h2>Module Engagement Dashboard</h2>
 
-        <?php
-        $result = $con->query("SELECT * FROM uploads ORDER BY id DESC");
-        if(isset($_GET['id']) && is_int($_GET['id'])){
-        $id = $_GET['id'];
-
-        //run the query ...SELECT ... WHERE festival_id = $id
-        //get data and place into $row array.
-
-        }else{
-        //get the first record in the DB and use that
-        }
-        ?>
-
-        <h2>Report: <?php echo $row['file_name'];?></h2>
-        <p><?php echo $row['date'];?></p>
-        <p><?php echo $row['description'];?></p>
-
-
-
-
-
         <div id="chartContainer" style="height: 370px; width: 45%;"></div>
         <h2>Email Students</h2>
         <div class="container">

@@ -126,9 +126,6 @@
             </div>
         </div>
 
-
-<!--        --><?php //if($_SESSION['$role_id'] == '0') : ?>
-
         <h2>View Previously Accessed Dashboards</h2>
         <div class="row">
             <div class="column">
@@ -150,7 +147,5 @@
                 <br>
             </div>
         </div>
-
-<!--    --><?php //endif; ?>
     </body>
 </html>

@@ -22,12 +22,12 @@
                     }
                 }
             }
-            echo "wrong username or password!";
+
+            echo "Wrong Email or Password!";
         }else {
-            echo "wrong username or password!";
+            echo "Wrong Email or Password!!";
         }
-    }
-?>
+    }?>
 <!DOCTYPE html>
 <html>
     <head>

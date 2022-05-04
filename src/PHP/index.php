@@ -35,9 +35,6 @@
         <link rel="javascrip" href="../JavaScript/upload.js">
         <link rel="stylesheet" href="../CSS/login_style.css">
         <link rel="stylesheet" href="../CSS/style.css">
-        <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-        <link rel="functions" href="../functions.php">
 
         <script>
             function formToggle(ID){

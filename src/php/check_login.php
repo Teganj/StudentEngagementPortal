@@ -13,10 +13,10 @@ function check_login($con)
 
 
             if ($row['password'] === $password) {
-                $_SESSION['name'] = $row['name'];
-                $_SESSION['user_id'] = $row['user_id'];
-                $_SESSION['role'] = $row['role'];
-                $_SESSION['user_name'] = $row['user_name'];
+                $_SESSION['$name'] = $row['name'];
+                $_SESSION['$user_id'] = $row['user_id'];
+                $_SESSION['$role'] = $row['role'];
+                $_SESSION['$user_name'] = $row['user_name'];
 
                 header("Location: ../home.php");
 

@@ -74,7 +74,7 @@
                 <div class="col-md-12" id="importFrm" style="display: none;">
                     <form action="importData.php" method="post" enctype="multipart/form-data">
                         <input type="file" name="file">
-                        <input type="submit" class="btn btn-primary" name="importSubmit" value="Submit File">
+                        <input type="submit" class="btn btn-primary" name="importSubmit" value="Submit File" onclick="makePage" scr="../javascript/makePage.js">
                     </form>
                 </div>
 

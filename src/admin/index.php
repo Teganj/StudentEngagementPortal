@@ -31,10 +31,10 @@
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="../CSS/upload_style.css">
+        <link rel="stylesheet" href="../css/upload_style.css">
         <link rel="javascrip" href="../JavaScript/upload.js">
-        <link rel="stylesheet" href="../CSS/login_style.css">
-        <link rel="stylesheet" href="../CSS/style.css">
+        <link rel="stylesheet" href="../css/login_style.css">
+        <link rel="stylesheet" href="../css/style.css">
         <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         <link rel="functions" href="../functions.php">

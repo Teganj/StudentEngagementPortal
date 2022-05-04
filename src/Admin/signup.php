@@ -3,7 +3,10 @@
 	include("connection.php");
 	include("check_login.php");
 
-	if($_SERVER['REQUEST_METHOD'] == "POST") {
+    $user_data = check_login($con);
+
+
+if($_SERVER['REQUEST_METHOD'] == "POST") {
 		//something was posted
 		$user_name = $_POST['user_name'];
 		$password = $_POST['password'];

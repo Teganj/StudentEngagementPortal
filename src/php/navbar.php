@@ -1,11 +1,7 @@
 <?php
 $user_data = check_login($con);
 ?>
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <title>Student Engagement Portal</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -13,7 +9,7 @@ $user_data = check_login($con);
 </head>
 <body>
 <nav class="navbar navbar-icon-top navbar-expand-lg" style="background-color: #784794;">
-    <a class="navbar-brand" href="admin_index.php" style="color: white; font-weight: bold;">Student Engagement</a>
+    <a class="navbar-brand" href="#" style="color: white; font-weight: bold;">Student Engagement</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -37,4 +33,4 @@ $user_data = check_login($con);
     </div>
 </nav>
 </body>
-</html>
+

@@ -1,165 +1,138 @@
-<?php 
-    session_start();
-	include("connection.php");
-    include("check_login.php");
+<?php
+session_start();
+include("connection.php");
+include("check_login.php");
 
-    if(!empty($_GET['status'])){
-        switch($_GET['status']){
-            case 'succ':
-                $statusType = 'Alert-Success';
-                $statusMsg = "Report Information has been imported successfully";
-                break;
-            case 'err':
-                $statusType = 'Alert-danger';
-                $statusMsg = "Problem occurred, please try again";
-                break;
-            case 'invalid_file':
-                $statusType = 'Alert-danger';
-                $statusMsg = "Please upload a csv file.";
-                break;
-            default:
-                $statusType = '';
-                $statusMsg = '';
-        }
+
+$con = mysqli_connect("localhost", "root", "", "student_engagement_portal_db");
+$sql = "SELECT module_name FROM reports";
+$res = mysqli_query($con, $sql);
+
+
+if (!empty($_GET['status'])) {
+    switch ($_GET['status']) {
+        case 'succ':
+            $statusType = 'Alert-Success';
+            $statusMsg = "Report Information has been imported successfully";
+            break;
+        case 'err':
+            $statusType = 'Alert-danger';
+            $statusMsg = "Problem occurred, please try again";
+            break;
+        case 'invalid_file':
+            $statusType = 'Alert-danger';
+            $statusMsg = "Please upload a csv file.";
+            break;
+        default:
+            $statusType = '';
+            $statusMsg = '';
     }
+}
 ?>
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <title>Student Engagement Portal</title>
-        <script src="https://code.highcharts.com/highcharts.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../CSS/upload_style.css">
-        <link rel="javascrip" href="../JavaScript/upload.js">
-        <link rel="stylesheet" href="../CSS/login_style.css">
-        <link rel="stylesheet" href="../CSS/style.css">
+<head>
+    <title>Student Engagement Portal</title>
+    <script scr="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/login_style.css">
 
-        <script>
-            function formToggle(ID){
-                var element = document.getElementById(ID);
-                if(element.style.display === "none"){
-                    element.style.display = "block";
-                }else{
-                    element.style.display = "none";
-                }
+    <script>
+        function formToggle(ID) {
+            var element = document.getElementById(ID);
+            if (element.style.display === "none") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
             }
-        </script>
-    </head>
-    <body>
-        <?php include 'navbar.php'?>
+        }
+    </script>
+    <style>
+        table {
+            border: 1px solid;
+            border-collapse: collapse;
+            padding: 10px;
 
-        <div class="container">
-            <h2>Student List</h2>
-            <div class="row">
+        }
 
-                <!-- Display Status Message-->
-                <div class="container">
-                    <div class="upfrm">
-                        <?php if(!empty($statusMsg)){ ?>
-                            <p class = "status-msg"><?php echo $statusMsg; ?> </p>
-                        <?php } ?>
-                    </div>
-                </div>
+        td, td, tr {
+            border: 1px solid;
+        }
+    </style>
+</head>
 
-                <div class="row">
-                    <!-- Import link -->
-                    <div class="col-md-12 head">
-                        <div class="float-right">
-                            <a href="javascript:void(0);" class="btn btn-success" onclick="formToggle('importFrm');"><i class="plus"></i> Import</a>
-                        </div>
-                    </div>
-                    <!-- CSV file upload form -->
-                    <div class="col-md-12" id="importFrm" style="display: none;">
-                        <form action="importData.php" method="post" enctype="multipart/form-data">
-                            <input type="file" name="file" />
-                            <input type="submit" class="btn btn-primary" name="importSubmit" value="IMPORT">
-                        </form>
-                    </div>
+<body style="padding-bottom: 100px;">
 
-                <table class="table table-striped table-bordered">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>#ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Week 1</th>
-                            <th>Week 2</th>
-                            <th>Week 3</th>
-                            <th>Week 4</th>
-                            <th>Week 5</th>
-                            <th>Week 6</th>
-                            <th>Week 7</th>
-                            <th>Week 8</th>
-                            <th>Week 9</th>
-                            <th>Week 10</th>
-                            <th>Week 11</th>
-                            <th>Week 12</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            $result = $con->query("SELECT * FROM reports ORDER BY id DESC");
-                            if($result->num_rows > 0){
-                                while($row = $result ->fetch_assoc()){
-                                ?>
-                                <tr>
-                                    <td><?php echo $row['id']; ?></td>
-                                    <td><?php echo $row['name']; ?></td>
-                                    <td><?php echo $row['email']; ?></td>
+<!-- Display status message -->
+<?php if (!empty($statusMsg)) { ?>
+    <div class="col-xs-12">
+        <div class="alert <?php echo $statusType; ?>"><?php echo $statusMsg; ?></div>
+    </div>
+<?php } ?>
+<?php include 'navbar.php' ?>
 
-                                    //loops
-                                    <td><?php echo $row['Week1']; ?></td>
-                                    <td><?php echo $row['Week2']; ?></td>
-                                    <td><?php echo $row['Week3']; ?></td>
-                                    <td><?php echo $row['Week4']; ?></td>
-                                    <td><?php echo $row['Week5']; ?></td>
-                                    <td><?php echo $row['Week6']; ?></td>
-                                    <td><?php echo $row['Week7']; ?></td>
-                                    <td><?php echo $row['Week8']; ?></td>
-                                    <td><?php echo $row['Week9']; ?></td>
-                                    <td><?php echo $row['Week10']; ?></td>
-                                    <td><?php echo $row['Week11']; ?></td>
-                                    <td><?php echo $row['Week12']; ?></td>
-                                </tr>
-                                    <?php
-                                }
-                            }else{
+    <h2 style="text-align: center; margin-top: 5px;">Add a New Module</h2>
+    <div id="box" style="margin-top: 0px; margin-bottom: 0px;">
+        <form class="modal-content animate" method="post">
+            <div class="container" style="font-size: 20px; margin: 10px; padding: 10px">
 
-                            ?>
-                        <tr><td colspan="5">No Member(s)... found</td></tr>
-                        <?php
-                            }
-                            ?>
-                    </tbody>
-                </table>
+                <label for="course_name">Choose Course:</label><br>
+                <select id="course_name" name="course_name">
+                    <option value="certcomp">Certificate in Computing</option>
+                    <option value="hdipcomp">HDip in Computing</option>
+                    <option value="hdipda">HDip in Data Analytics</option>
+                    <option value="hdipwd">HDip in Web Design</option>
+                    <option value="hdipcs">HDip in Cyber Security</option>
+                    <option value="msccs">MSC in Cyber Security</option>
+                    <option value="mscda">MSC in Data Analytics</option>
+                </select>
+
+                <br>
+                <label><b>Enter Module Name:</b></label>
+                <input id="text" type="text" name="module_name" placeholder="Module Name eg. Software Development Jan22"><br><br>
+
+                <?php include 'csv_upload.php' ?><br>
+
+                <button id="button" type="submit" value="dashboard.php">Create Module</button>
+
             </div>
-        </div>
+        </form>
+    </div>
 
 
-        <?php if($_SESSION['$role'] == 'admin') : ?>
 
-        <h2>View Previously Accessed Dashboards</h2>
-        <div class="row">
-            <div class="column">
-                <h3>HDip in Computing - Databases</h3>
-                <br>
-                <button type="submit">View</button>
-                <br>
-            </div>
-            <div class="column">
-                <h3>HDip in Computing - Multimedia</h3>
-                <br>
-                <button type="submit">View</button>
-                <br>
-            </div>
-            <div class="column">
-                <h3>MSC in Cyber - PenTesting</h3>
-                <br>
-                <button type="submit">View</button>
-                <br>
-            </div>
-        </div>
 
-        <?php endif; ?>
-    </body>
+<h2 style="text-align: center; margin-top: 10px;">Quick View of a Module</h2>
+<div id="box" style="margin-top: 0px; margin-bottom: 0px;" class="modal-content animate">
+    <select id="module" onchange="selectModule()">
+        <?php while ($rows = mysqli_fetch_array($res)) {
+            ?>
+            <option value="<?php echo $rows['module_name']; ?> ">  <?php echo $rows['module_name']; ?> </option>
+            <?php
+        }
+        ?>
+    </select>
+    <table>
+        <thead>
+        <th>Student Name</th>
+        <th>Email</th>
+        <th>Week 1</th>
+        <th>Week 2</th>
+        <th>Week 3</th>
+        <th>Week 4</th>
+        <th>Week 5</th>
+        <th>Week 6</th>
+        </thead>
+        <tbody id="ans">
+        </tbody>
+    </table>
+</div>
+
+
+
+</body>
 </html>

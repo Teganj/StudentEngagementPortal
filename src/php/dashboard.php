@@ -39,39 +39,8 @@ $res = mysqli_query($con, $sql);
 </head>
 <body>
 <?php include 'navbar.php' ?>
-<body>
+<body style="padding-bottom: 50px;">
 <h2>Module Engagement Dashboard</h2>
-
-<div class="container">
-    <div class="row" style="width: 100%">
-            <h5> Select Module</h5>
-            <select id="module" onchange="selectModule()">
-                <?php while ($rows = mysqli_fetch_array($res)) {
-                    ?>
-                    <option value="<?php echo $rows['module_name']; ?> ">  <?php echo $rows['module_name']; ?> </option>
-                    <?php
-                }
-                ?>
-            </select>
-        <table>
-            <thead>
-            <th>Student Name</th>
-            <th>Email</th>
-            <th>Week 1</th>
-            <th>Week 2</th>
-            <th>Week 3</th>
-            <th>Week 4</th>
-            <th>Week 5</th>
-            <th>Week 6</th>
-            </thead>
-            <tbody id="ans">
-            </tbody>
-        </table>
-    </div>
-</div>
-
-
-
 
 <div class="container">
     <!-- Display status message -->
@@ -81,6 +50,7 @@ $res = mysqli_query($con, $sql);
         </div>
     <?php } ?>
 
+    <hr class="rounded" style="border-top: 8px solid #bbb; border-radius: 5px;">
     <div class="row">
         <div class="col-8-md">
         <!-- Import link -->

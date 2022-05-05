@@ -37,6 +37,11 @@ $res = mysqli_query($con, $sql);
         td, td, tr {
             border: 1px solid;
         }
+         .vl {
+             border-right: 6px solid #784794;
+             height: 500px;
+         }
+
     </style>
 </head>
 <body>
@@ -44,160 +49,104 @@ $res = mysqli_query($con, $sql);
 <body style="padding-bottom: 50px;">
 <h2>Module Engagement Dashboard</h2>
 
-<div class="container">
-    <!-- Display status message -->
-    <?php if (!empty($statusMsg)) { ?>
-        <div class="col-xs-12">
-            <div class="alert <?php echo $statusType; ?>"><?php echo $statusMsg; ?></div>
-        </div>
-    <?php } ?>
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-3 sidenav vl">
+            <div class="row">
+                <h3>Update the CSV here</h3>
+                <h4 style="font-weight: bold">This CSV was last updated on: <?php //echo $_GET['uploaded_on'] ?>
+                    <?php //echo $uploaded_data['uploaded_on']; ?></h4>
 
+                <?php include 'csv_upload.php' ?><br>
 
-    <div class="row">
-<!--        <h4>This CSV was last updated on --><?php //echo $_GET['uploaded_on'] ?><!--   --><?php //echo $uploaded_data['uploaded_on']; ?><!--</h4>-->
-        <h3>Update the CSV here</h3>
-        <?php include 'csv_upload.php' ?><br>
-
-    </div>
-    <hr class="rounded" style="border-top: 8px solid #bbb; border-radius: 5px;">
-    <div class="row">
-        <div class="col-8-md">
-            <!-- Data list table -->
-            <table class="table table-striped table-bordered">
-                <thead class="thead-dark">
-                <tr>
-                    <th>#ID</th>
-                    <th>Name</th>
-                    <th>Activity 1</th>
-                    <th>Activity 2</th>
-                    <th>Activity 3</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                // Get rows
-                $result = $con->query("SELECT * FROM reports ORDER BY id DESC");
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        ?>
-                        <tr>
-                            <td><?php echo $row['id']; ?></td>
-                            <td><?php echo $row['name']; ?></td>
-                            <td><?php echo $row['week1']; ?></td>
-                            <td><?php echo $row['week2']; ?></td>
-                            <td><?php echo $row['week3']; ?></td>
-                        </tr>
-                    <?php }
-                } else { ?>
-                    <tr>
-                        <td colspan="5">No member(s) found...</td>
-                    </tr>
-                <?php }
-                //lazily getting counts of each completed activity, realistically a loop should be used here
-                $result2 = $con->query("SELECT count(*) as total from reports where week1='Completed'");
-                $a1 = $result2->fetch_assoc();
-                //echo $a1['total'];
-                //echo "<br>";
-                $result2 = $con->query("SELECT count(*) as total from reports where week2='Completed'");
-                $a2 = $result2->fetch_assoc();
-                //echo $data['total'];
-                //echo "<br>";
-                $result2 = $con->query("SELECT count(*) as total from reports where week3='Completed'");
-                $a3 = $result2->fetch_assoc();
-                //echo $data['total'];
-                //echo "<br>";
-                $result2 = $con->query("SELECT count(*) as total from reports where week1='Not completed'");
-                $ai1 = $result2->fetch_assoc();
-                $result2 = $con->query("SELECT count(*) as total from reports where week2='Not completed'");
-                $ai2 = $result2->fetch_assoc();
-                $result2 = $con->query("SELECT count(*) as total from reports where week3='Not completed'");
-                $ai3 = $result2->fetch_assoc();
-                $result2 = $con->query("SELECT COUNT(*) FROM reports where week1='completed'");
-                if ($result->num_rows > 0) {
-                    ?>
-                    <figure class="highcharts-figure">
-                        <div id="container"></div>
-                    </figure>
-                    <?php
-                } else { ?>
-                    No Data exists!!
-                <?php }
-                ?>
-                </tbody>
-            </table>
-            <script>
-                Highcharts.chart('container', {
-                    chart: {
-                        type: 'bar'
-                    },
-                    title: {
-                        text: 'Activities by completion'
-                    },
-                    subtitle: {
-                        text: 'Indicates problem activities'
-                    },
-                    xAxis: {
-                        categories: ['Activity 1', 'Activity 2', 'Activity 3'],
-                        title: {
-                            text: null
-                        }
-                    },
-                    yAxis: {
-                        min: 0,
-                        title: {
-                            text: 'Completion (lessons)',
-                            align: 'high'
-                        },
-                        labels: {
-                            overflow: 'justify'
-                        }
-                    },
-                    tooltip: {
-                        valueSuffix: ' lessons'
-                    },
-                    plotOptions: {
-                        bar: {
-                            dataLabels: {
-                                enabled: true
-                            }
-                        }
-                    },
-                    legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'top',
-                        x: -40,
-                        y: 80,
-                        floating: true,
-                        borderWidth: 1,
-                        backgroundColor:
-                            Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
-                        shadow: true
-                    },
-                    credits: {
-                        enabled: false
-                    },
-                    series: [{
-                        name: 'Completed',
-                        data: [<?php echo $a1['total']?>, <?php echo $a2['total']?>, <?php echo $a3['total']?>]
-                    }, {
-                        name: 'Incomplete',
-                        data: [<?php echo $ai1['total']?>, <?php echo $ai2['total']?>, <?php echo $ai3['total']?>]
-                    }]
-                });
-            </script>
-        </div>
-        <div>
-            <?php include 'bar_chart.php' ?>
-        </div>
-        <div>
-            <?php include 'pie_chart.php' ?>
-        </div>
-        <div>
+                <!-- Display status message -->
+                <?php if (!empty($statusMsg)) { ?>
+                    <div class="col-xs-12">
+                        <div class="alert <?php echo $statusType; ?>"><?php echo $statusMsg; ?></div>
+                    </div>
+                <?php } ?>
+            </div>
+            <hr class="rounded" style="border-top: 8px solid #784794; border-radius: 5px;">
             <?php include 'email_students.php' ?>
+        </div>
+
+
+        <div class="col-sm-9">
+            <hr class="rounded" style="border-top: 8px solid #bbb; border-radius: 5px;">
+            <div class="row">
+                <div class="col-8-md">
+                    <!-- Data list table -->
+                    <table class="table table-striped table-bordered">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>Name</th>
+                            <th>Activity 1</th>
+                            <th>Activity 2</th>
+                            <th>Activity 3</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        // Get rows loops
+                        $result = $con->query("SELECT * FROM reports ORDER BY id DESC");
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                ?>
+                                <tr>
+                                    <td><?php echo $row['name']; ?></td>
+                                    <td><?php echo $row['week1']; ?></td>
+                                    <td><?php echo $row['week2']; ?></td>
+                                    <td><?php echo $row['week3']; ?></td>
+                                </tr>
+                            <?php }
+                        } else { ?>
+                            <tr>
+                                <td colspan="5">No member(s) found...</td>
+                            </tr>
+                        <?php }
+                        //lazily getting counts of each completed activity, realistically a loop should be used here
+                        $result2 = $con->query("SELECT count(*) as total from reports where week1='Completed'");
+                        $a1 = $result2->fetch_assoc();
+                        //echo $a1['total'];
+                        //echo "<br>";
+                        $result2 = $con->query("SELECT count(*) as total from reports where week2='Completed'");
+                        $a2 = $result2->fetch_assoc();
+                        //echo $data['total'];
+                        //echo "<br>";
+                        $result2 = $con->query("SELECT count(*) as total from reports where week3='Completed'");
+                        $a3 = $result2->fetch_assoc();
+                        //echo $data['total'];
+                        //echo "<br>";
+                        $result2 = $con->query("SELECT count(*) as total from reports where week1='Not completed'");
+                        $ai1 = $result2->fetch_assoc();
+                        $result2 = $con->query("SELECT count(*) as total from reports where week2='Not completed'");
+                        $ai2 = $result2->fetch_assoc();
+                        $result2 = $con->query("SELECT count(*) as total from reports where week3='Not completed'");
+                        $ai3 = $result2->fetch_assoc();
+                        $result2 = $con->query("SELECT COUNT(*) FROM reports where week1='completed'");
+                        if ($result->num_rows > 0) {
+                            ?>
+                            <figure class="highcharts-figure">
+                                <div id="container"></div>
+                            </figure>
+                            <?php
+                        } else { ?>
+                            No Data exists!!
+                        <?php }
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <?php include 'bar_chart.php' ?>
+                    <?php include 'pie_chart.php' ?>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+
 <!-- Show/hide CSV upload form -->
 <script>
     function formToggle(ID) {

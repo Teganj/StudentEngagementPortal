@@ -37,10 +37,9 @@ function send_student_email($email)
         background-color: rgba(150, 212, 212, 0.4);
     }
 </style>
-<hr class="rounded" style="border-top: 8px solid #784794; border-radius: 5px;">
 
 
-<div class="row" style="width: 100%">
+<div class="row" style="width: 100%; padding: 10px">
     <h2>Email Students</h2>
     <!-- Data list table -->
     <table class="table table-striped table-bordered">

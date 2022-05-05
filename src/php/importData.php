@@ -26,18 +26,31 @@ if(isset($_POST['importSubmit']) && !empty($_FILES["file"]["name"])){
             fgetcsv($csvFile);
 
             //Parsing data file by line
+            //print this out with boxes
             while(($line = fgetcsv($csvFile)) !== FALSE){
                 //Get Data rows
-                $name = $line[0];
-                $email = $line[1];
-                $week1 = $line[2];
-                $week2 = $line[3];
-                $week3 = $line[4];
-                $week4 = $line[5];
-                $week5 = $line[6];
-                $week6 = $line[7];
+                $course_name = $line[0];
+                $module_name = $line[1];
+                $lecturer = $line[2];
 
-                //Check if members exist in DB with email
+                //while loop to count rows that are not null or columns - new table for completit
+
+                $name = $line[3];
+                $email = $line[4];
+                $week1 = $line[5];
+                $week2 = $line[6];
+                $week3 = $line[7];
+                $week4 = $line[8];
+                $week5 = $line[9];
+                $week6 = $line[10];
+                $week7 = $line[11];
+                $week8 = $line[12];
+                $week9 = $line[13];
+                $week10 = $line[14];
+                $week11 = $line[15];
+                $week12 = $line[16];
+
+                //Check if course exist in DB with email
                 $prevQuery = "SELECT id FROM reports WHERE email = '".$line[1]."'";
                 $prevResult = $con->query($prevQuery);
 
@@ -46,7 +59,9 @@ if(isset($_POST['importSubmit']) && !empty($_FILES["file"]["name"])){
                     $con->query("UPDATE reports SET name = '".$name."'");
                 }else{
                     //Insert data into DB
-                    $con->query("INSERT INTO reports (name, email, week1, week2, week3, week4, week5, week6) VALUES ('".$name."', '".$email."', '".$week1."', '".$week2."', '".$week3."', '".$week4."', '".$week5."', '".$week6."')");
+                    $con->query("INSERT INTO reports (course_name, module_name, lecturer, name, email, week1,
+                        week2, week3, week4, week5, week6, week7, week8, week9, week10, week11, week12) 
+                     ALUES ('".$course_name."', '".$module_name."', '".$lecturer."', '".$name."', '".$email."', '".$week1."', '".$week2."', '".$week3."', '".$week4."', '".$week5."', '".$week6."', '".$week7."', '".$week8."', '".$week9."', '".$week10."', '".$week11."', '".$week12."')");
                 }
 
             }
@@ -77,6 +92,6 @@ if(isset($_POST['importSubmit']) && !empty($_FILES["file"]["name"])){
     }
 }
 
-header("Location: index.php".$qstring);
+header("Location: admin_index.php".$qstring);
 
 ?>

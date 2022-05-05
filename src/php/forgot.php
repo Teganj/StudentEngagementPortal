@@ -192,7 +192,6 @@ function is_code_correct($code)
                     <span style="font-size: 12px;color:red;">
 							<?php
                             foreach ($error as $err) {
-                                // code...
                                 echo $err . "<br>";
                             }
                             ?>

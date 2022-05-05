@@ -21,7 +21,7 @@ function check_login($con)
                 header("Location: ../home.php");
 
             } else {
-                header("Location: ../index.php?error=Incorect User name or password");
+                header("Location: ../admin_index.php?error=Incorect User name or password");
             }
 
         }
@@ -48,16 +48,16 @@ if (isset($_POST['user_name']) && isset($_POST['password']) && isset($_POST['rol
 }
 
 
-    function random_num($length){
-        $text = "";
-        if ($length < 5) {
-            $length = 5;
-        }
-        $len = rand(4, $length);
-        for ($i = 0; $i < $len; $i++) {
-            $text .= rand(0, 9);
-        }
-        return $text;
+function random_num($length){
+    $text = "";
+    if ($length < 5) {
+        $length = 5;
     }
+    $len = rand(4, $length);
+    for ($i = 0; $i < $len; $i++) {
+        $text .= rand(0, 9);
+    }
+    return $text;
+}
 
-    ?>
+?>

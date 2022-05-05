@@ -1,69 +1,71 @@
 <?php
-    session_start();
-    include("connection.php");
-    include("check_login.php");
-if($_SERVER['REQUEST_METHOD'] == "POST"){
+session_start();
+include("connection.php");
+include("check_login.php");
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
     //something was posted
     $user_name = $_POST['user_name'];
     $password = $_POST['password'];
 
-    if(!empty($user_name) && !empty($password) && !is_numeric($user_name)){
-        //read from database
+    if (!empty($user_name) && !empty($password) && !is_numeric($user_name)) {
+        //Read from database
         $query = "select * from users where user_name = '$user_name' limit 1";
         $result = mysqli_query($con, $query);
-        if($result) {
-            if($result && mysqli_num_rows($result) > 0) {
+        if ($result) {
+            if ($result && mysqli_num_rows($result) > 0) {
                 $user_data = mysqli_fetch_assoc($result);
-                if($user_data['password'] === $password) {
+                if ($user_data['password'] === $password) {
                     $_SESSION['user_id'] = $user_data['user_id'];
-                    header("Location: index.php");
-                    die;
+                    if ($user_data['role'] === 'admin') {
+                        header("Location: admin_index.php");
+                        die;
+                    } else {
+                        header("Location: user_choice.php");
+                        die;
+                    }
                 }
             }
         }
         echo "wrong username or password!";
-    }else {
+    } else {
         echo "wrong username or password!";
     }
 }
 ?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="../CSS/login_style.css">
-        <link rel="stylesheet" href="../CSS/style.css">
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/login_style.css">
+</head>
+<body>
+<nav class="navbar navbar-icon-top navbar-expand-lg" style="background-color: #784794;">
+    <a class="navbar-brand" href="#" style="color: white; font-weight: bold;">Student Engagement Portal</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>
 
-    </head>
-    <body>
-        <nav class="navbar navbar-icon-top navbar-expand-lg" style="background-color: #784794;">
-            <a class="navbar-brand" href="#" style="color: white; font-weight: bold;">Student Engagement Portal</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </nav>
+<h2 style="text-align: center; margin-top: 10px;">Student Retention Portal Login</h2>
+<div id="box" style="margin-top: 0px; margin-bottom: 0px;">
+    <form class="modal-content animate" method="post">
+        <div class="container" style="font-size: 20px;margin: 10px">
 
-        <h2 style="text-align: center; margin-top: 10px;">Student Retention Portal Login</h2>
+            <label><b>Username</b></label>
+            <input id="text" type="text" name="user_name" placeholder="Enter Username"><br><br>
 
+            <label><b>Password</b></label>
+            <input id="text" type="password" name="password" placeholder="Enter Password"><br><br>
 
-        <div id="box" style="margin-top: 0px; margin-bottom: 0px;" >
-            <form class="modal-content animate" method="post">
-                <div class ="container" style="font-size: 20px;margin: 10px">
+            <button id="button" type="submit" value="Login">Login</button>
 
-                <label><b>Username/Email</b></label>
-                <input id="text" type="text" name="user_name" placeholder="Enter Username/Email"><br><br>
-
-                <label><b>Password</b></label>
-                <input id="text" type="password" name="password" placeholder="Enter Password"><br><br>
-
-                    <button id="button" type="submit" value="Login">Login</button>
-
-                <a href="forgot.php">Forgot Password?  </a><br><br>
-            </form>
+            <a href="forgot.php">Forgot Password? </a><br><br>
         </div>
-        </div>
-    </body>
+    </form>
+</div>
+</body>
 </html>

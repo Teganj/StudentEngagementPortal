@@ -33,39 +33,38 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../css/login_style.css">
-    <link rel="stylesheet" href="../css/nav_style.css">
-
+    <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
-<nav class="navbar navbar-icon-top navbar-expand-lg" style="background-color: #784794;">
-    <a class="navbar-brand" href="#" style="color: white; font-weight: bold;">Student Engagement Portal</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</nav>
 
-<h2 style="text-align: center; margin-top: 10px;">Student Retention Portal Login</h2>
-    <form class="modal-content animate" method="post">
-        <div class="container" style="font-size: 20px;margin: 10px">
+    <div id="bg"></div>
+    <div style="margin: auto;">
+        <form class="modal-content animate" method="post">
+            <h1 style="font-weight: bold; margin: auto; padding-top: 50px;">Student Retention Portal Login</h1>
+            <hr class="rounded" style="border-top: 8px solid #47AB11; border-radius: 5px;">
 
-            <label><b>Username</b></label>
-            <input id="text" type="text" name="user_name" placeholder="Enter Username"><br><br>
+            <div class="row" style="font-size: 20px;margin: 10px;">
+                <h2><label><b>Username:</b></label></h2>
+                <input id="text" type="text" name="user_name" placeholder="Enter Username"><br><br>
 
-            <label><b>Password</b></label>
-            <input id="text" type="password" name="password" placeholder="Enter Password"><br><br>
 
-            <button id="button" type="submit" value="Login">Login</button>
+                <h2 style="padding-top: 50px;"><label><b>Password:</b></label></h2>
+                <input id="text" type="password" name="password" placeholder="Enter Password"><br><br>
 
-            <a href="forgot.php">Forgot Password? </a><br><br>
-        </div>
-    </form>
+
+                <button class="btn" style="margin: auto;" id="button" type="submit" value="Login">Login</button>
+
+                <a href="forgot.php">Forgot Password?</a><br><br>
+
+            </div>
+        </form>
+    </div>
+
 </body>
 </html>

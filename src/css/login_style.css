@@ -1,4 +1,11 @@
-body {font-family: Arial, Helvetica, sans-serif;}
+body {
+    background-image: linear-gradient(135deg, #FAB2FF 10%, #1904E5 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: "Open Sans", sans-serif;
+    color: #333333;
+}
 
 /* Full-width input fields */
 input[type=text], input[type=password] {
@@ -95,9 +102,20 @@ button:hover {
     border: 3px solid #784794;
     text-align: center;
     width: 100%;
+    margin: 3% auto 5% auto;
 }
 
 .h1{
     text-align: center ;
     font-size: 10em;
+}
+.box-form .right .remember-me--forget-password {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.box-form .right .remember-me--forget-password input {
+    margin: 0;
+    margin-right: 7px;
+    width: auto;
 }

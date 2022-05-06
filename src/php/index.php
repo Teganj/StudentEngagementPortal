@@ -63,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../css/login_style.css">
     <script type="text/javascript" scr="../javascript/dashboard.js"></script>
+    <script scr="js/jquery.min.js"
 
 
     <script>

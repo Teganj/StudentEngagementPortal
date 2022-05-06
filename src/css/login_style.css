@@ -28,7 +28,8 @@ button:hover {
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    margin: 3% auto 5% auto; /* 5% from the top, 15% from the bottom and centered */
+    margin-bottom: 0px;
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
 }
@@ -82,11 +83,9 @@ button:hover {
 #box{
     background-color: #784794;
     margin: auto;
-    margin-top: 0px;
-    margin-bottom: 0px;
     padding: 20px;
     height: 60%;
-    width: 80%;
+    width: 100%;
     border: 3px solid #784794;
     text-align: center;
 }

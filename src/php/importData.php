@@ -30,8 +30,6 @@ if(isset($_POST['importSubmit']) && !empty($_FILES["file"]["name"])){
             while(($line = fgetcsv($csvFile)) !== FALSE){
                 // Get row data
                 $id		= 1;//will need to be changed later
-                $course_name = $line[0];
-                $module_name = $line[1];
                 $name   = $line[2];
                 $email 	= $line[3];
                 $activity1  = $line[4];//hardcoding completion elements wont work,need to count them from db first, then loop
@@ -49,7 +47,7 @@ if(isset($_POST['importSubmit']) && !empty($_FILES["file"]["name"])){
 //                    $con->query("UPDATE reports SET name = '".$name."'");
 //                }else{
                     //Insert data into DB
-                    $con->query("INSERT INTO reports (course_name, module_name, name, email, activity1, activity2, activity3) VALUES ('".$course_name."', '".$module_name."','".$name."', '".$email."', '".$activity1."', '".$activity2."', '".$activity3."')");
+                    $con->query("INSERT INTO reports (name, email, activity1, activity2, activity3) VALUES ('".$name."', '".$email."', '".$activity1."', '".$activity2."', '".$activity3."')");
 //                }
 
             }
@@ -65,6 +63,11 @@ if(isset($_POST['importSubmit']) && !empty($_FILES["file"]["name"])){
                 $insert = $con->query("INSERT into uploads (file_name, uploaded_on) VALUES ('".$fileName."', NOW())");
                 if($insert){
                     $statusMsg = "The file ".$fileName. " has been uploaded successfully.";
+                    //Add a popup form to get Course and Module Name
+                    $course_name = $_POST['course_name'];
+                    $module_name = $_POST['module_name'];
+                    $con->query("UPDATE into uploads (course_name, module_name) VALUES ('".$course_name."', '".$module_name."' ");
+
                 }else{
                     $statusMsg = "File upload failed, please try again.";
                 }
@@ -88,3 +91,5 @@ if ($user_data['role'] === 'admin') {
 }
 
 ?>
+
+

@@ -28,6 +28,28 @@ if (!empty($_GET['status'])) {
             $statusMsg = '';
     }
 }
+
+
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    //something was posted
+    $course_name = $_POST['course_name'];
+    $module_name = $_POST['module_name'];
+
+    if (!empty($course_name) && !empty($module_name)) {
+
+            //Insert data into DB
+            $user_id = random_num(20);
+            $query = ("INSERT INTO reports (course_name, module_name) VALUES ('" . $course_name . "', '" . $module_name . "')");
+            $query = ("INSERT INTO uploads (course_name, module_name) VALUES ('" . $course_name . "', '" . $module_name . "')");
+
+            mysqli_query($con, $query);
+
+            header("Location: dashboard.php");
+            die;
+        }
+
+}
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -40,6 +62,8 @@ if (!empty($_GET['status'])) {
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../css/login_style.css">
+    <script type="text/javascript" scr="../javascript/dashboard.js"></script>
+
 
     <script>
         function formToggle(ID) {
@@ -77,7 +101,7 @@ if (!empty($_GET['status'])) {
 
 <h2 style="text-align: center; margin-top: 5px;">Add a New Module</h2>
 <form class="modal-content animate" method="post">
-    <div class="container" style="font-size: 20px; margin: 10px; padding: 10px">
+    <div class="row" style="font-size: 20px; margin: 10px; padding: 10px">
 
         <label for="course_name">Choose Course:</label><br>
         <select id="course_name" name="course_name">
@@ -104,16 +128,19 @@ if (!empty($_GET['status'])) {
 
 
 <h2 style="text-align: center; margin-top: 10px;">Quick View of a Module</h2>
-<div id="box" style="margin-top: 0px; margin-bottom: 0px;" class="modal-content animate">
-    <select id="module" onchange="selectModule()">
-        <?php while ($rows = mysqli_fetch_array($res)) {
+<div class="modal-content animate" style="margin-top: 5px; margin-bottom: 5px;">
+    <div class="row" style=" padding: 2%;">
+        <select id="module" onchange="selectModule()" style="width: 50%;">
+            <?php while ($rows = mysqli_fetch_array($res)) {
+                ?>
+                <option value="<?php echo $rows['module_name']; ?> ">  <?php echo $rows['module_name']; ?> </option>
+                <?php
+            }
             ?>
-            <option value="<?php echo $rows['module_name']; ?> ">  <?php echo $rows['module_name']; ?> </option>
-            <?php
-        }
-        ?>
-    </select>
-    <table>
+        </select>
+    </div>
+    <div class="row" style=" padding: 2%;">
+    <table style="padding-top: 20px; margin-top: 20px; width: 90%;">
         <thead>
         <th>Student Name</th>
         <th>Email</th>
@@ -127,6 +154,7 @@ if (!empty($_GET['status'])) {
         <tbody id="ans">
         </tbody>
     </table>
+</div>
 </div>
 
 

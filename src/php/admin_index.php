@@ -57,12 +57,35 @@
 
         <div class="container">
             <h2>Admin Controls</h2>
-            <div class="row">
 
+            <div class="row">
                 <a href="admin_addUser.php">
                     <button class="button button1">Add New User</button>
                 </a>
-
+            </div>
+            <br>
+            <div class="row">
+                <a href="admin_updateUser.php">
+                    <button class="button button1">Update an Existing User</button>
+                </a>
+            </div>
+            <br>
+            <div class="row">
+                <a href="admin_deleteUser.php">
+                    <button class="button button1">Delete an Existing User</button>
+                </a>
+            </div>
+            <br>
+            <div class="row">
+                <a href="admin_manageReports.php">
+                    <button class="button button1">Manage Module Reports</button>
+                </a>
+            </div>
+            <br>
+            <div class="row">
+                <a href="admin_createReports.php">
+                    <button class="button button1">Create Reports</button>
+                </a>
             </div>
         </div>
     </body>

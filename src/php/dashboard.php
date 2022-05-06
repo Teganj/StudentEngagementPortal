@@ -48,6 +48,12 @@ $res = mysqli_query($con, $sql);
          }
 
     </style>
+    <!-- Display status message -->
+    <?php if (!empty($statusMsg)) { ?>
+        <div class="col-xs-12">
+            <div class="alert <?php echo $statusType; ?>"><?php echo $statusMsg; ?></div>
+        </div>
+    <?php } ?>
 </head>
 <body>
 <?php include 'navbar.php' ?>
@@ -109,36 +115,7 @@ $res = mysqli_query($con, $sql);
                                 <td colspan="5">No member(s) found...</td>
                             </tr>
                         <?php }
-                        //lazily getting counts of each completed activity, realistically a loop should be used here
-                        $result2 = $con->query("SELECT count(*) as total from reports where activity1='Completed'");
-                        $a1 = $result2->fetch_assoc();
-                        //echo $a1['total'];
-                        //echo "<br>";
-                        $result2 = $con->query("SELECT count(*) as total from reports where activity2='Completed'");
-                        $a2 = $result2->fetch_assoc();
-                        //echo $data['total'];
-                        //echo "<br>";
-                        $result2 = $con->query("SELECT count(*) as total from reports where activity3='Completed'");
-                        $a3 = $result2->fetch_assoc();
-                        //echo $data['total'];
-                        //echo "<br>";
-                        $result2 = $con->query("SELECT count(*) as total from reports where activity1='Not completed'");
-                        $ai1 = $result2->fetch_assoc();
-                        $result2 = $con->query("SELECT count(*) as total from reports where activity2='Not completed'");
-                        $ai2 = $result2->fetch_assoc();
-                        $result2 = $con->query("SELECT count(*) as total from reports where activity3='Not completed'");
-                        $ai3 = $result2->fetch_assoc();
-                        $result2 = $con->query("SELECT COUNT(*) FROM reports where activity1='completed'");
-                        if ($result->num_rows > 0) {
-                            ?>
-                            <figure class="highcharts-figure">
-                                <div id="container"></div>
-                            </figure>
-                            <?php
-                        } else { ?>
-                            No Data exists!!
-                        <?php }
-                        ?>
+?>
                         </tbody>
                     </table>
                 </div>
@@ -154,6 +131,7 @@ $res = mysqli_query($con, $sql);
         </div>
     </div>
 </div>
+
 
 
 <!-- Show/hide CSV upload form -->

@@ -38,7 +38,7 @@ if ($result->num_rows > 0) {
     </figure>
     <?php
 } else { ?>
-    No Data exists!!
+    No Data found, Cannot Display Bar Chart!
 <?php }
 ?>
 <script>

@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 </head>
 <body>
-<?php include 'navbar.php' ?>
+<?php include 'admin_navbar.php' ?>
 <h2 style="text-align: center; margin-top: 10px;">Update User Information</h2>
 <form class="modal-content" method="post" style="margin-top: 0px;">
     <div class="container" style="font-size: 20px; margin: 10px; padding: 10px">

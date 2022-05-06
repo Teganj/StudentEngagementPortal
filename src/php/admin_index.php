@@ -53,7 +53,7 @@
 
     </head>
     <body>
-        <?php include 'navbar.php' ?>
+        <?php include 'admin_navbar.php' ?>
 
         <div class="container">
             <h2>Admin Controls</h2>

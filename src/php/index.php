@@ -120,12 +120,12 @@ if (!empty($_GET['status'])) {
         <thead>
         <th>Student Name</th>
         <th>Email</th>
-        <th>Week 1</th>
-        <th>Week 2</th>
-        <th>Week 3</th>
-        <th>Week 4</th>
-        <th>Week 5</th>
-        <th>Week 6</th>
+        <th>Activity 1</th>
+        <th>Activity 2</th>
+        <th>Activity 3</th>
+        <th>Activity 4</th>
+        <th>Activity 5</th>
+        <th>Activity 6</th>
         </thead>
         <tbody id="ans">
         </tbody>

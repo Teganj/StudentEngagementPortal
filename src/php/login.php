@@ -40,6 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../css/login_style.css">
+    <link rel="stylesheet" href="../css/nav_style.css">
+    <link rel="stylesheet" href="../css/admin_index.css">
+
 </head>
 <body>
 <nav class="navbar navbar-icon-top navbar-expand-lg" style="background-color: #784794;">

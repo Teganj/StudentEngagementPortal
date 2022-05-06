@@ -80,8 +80,20 @@ button:hover {
     border: none;
 }
 #box{
-    background-color: grey;
+    background-color: #784794;
     margin: auto;
     width: 300px;
     padding: 20px;
+}
+.container {
+    height: 60%;
+    position: relative;
+    border: 3px solid #784794;
+    text-align: center;
+    width: 100%;
+}
+
+.h1{
+    text-align: center ;
+    font-size: 10em;
 }

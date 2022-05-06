@@ -2,33 +2,33 @@
 
 
 //lazily getting counts of each completed activity, realistically a loop should be used here
-$result2 = $con->query("SELECT count(*) as total from reports where week1='Completed'");
+$result2 = $con->query("SELECT count(*) as total from reports where activity1='Completed'");
 $a1 = $result2->fetch_assoc();
 //echo $a1['total'];
 //echo "<br>";
-$result2 = $con->query("SELECT count(*) as total from reports where week2='Completed'");
+$result2 = $con->query("SELECT count(*) as total from reports where activity2='Completed'");
 $a2 = $result2->fetch_assoc();
 //echo $data['total'];
 //echo "<br>";
-$result2 = $con->query("SELECT count(*) as total from reports where week3='Completed'");
+$result2 = $con->query("SELECT count(*) as total from reports where activity3='Completed'");
 $a3 = $result2->fetch_assoc();
 //echo $data['total'];
 //echo "<br>";
-$result2 = $con->query("SELECT count(*) as total from reports where week1='Uncompleted'");
+$result2 = $con->query("SELECT count(*) as total from reports where activity1='Uncompleted'");
 $ai1 = $result2->fetch_assoc();
-$result2 = $con->query("SELECT count(*) as total from reports where week2='Uncompleted'");
+$result2 = $con->query("SELECT count(*) as total from reports where activity2='Uncompleted'");
 $ai2 = $result2->fetch_assoc();
-$result2 = $con->query("SELECT count(*) as total from reports where week3='Uncompleted'");
+$result2 = $con->query("SELECT count(*) as total from reports where activity3='Uncompleted'");
 $ai3 = $result2->fetch_assoc();
-$result2 = $con->query("SELECT COUNT(*) FROM reports where week1='completed'");
+$result2 = $con->query("SELECT COUNT(*) FROM reports where activity1='completed'");
 
-$result3 = $con->query("SELECT count(*) as total from reports where week1='Completed (achieved pass grade)'");
+$result3 = $con->query("SELECT count(*) as total from reports where activity1='Completed (achieved pass grade)'");
 $apg1 = $result3->fetch_assoc();
-$result3 = $con->query("SELECT count(*) as total from reports where week2='Completed (achieved pass grade)'");
+$result3 = $con->query("SELECT count(*) as total from reports where activity2='Completed (achieved pass grade)'");
 $apg2 = $result3->fetch_assoc();
-$result3 = $con->query("SELECT count(*) as total from reports where week3='Completed (achieved pass grade)'");
+$result3 = $con->query("SELECT count(*) as total from reports where activity3='Completed (achieved pass grade)'");
 $apg3 = $result3->fetch_assoc();
-$result3 = $con->query("SELECT COUNT(*) FROM reports where week1='completed'");
+$result3 = $con->query("SELECT COUNT(*) FROM reports where activity1='completed'");
 
 
 if ($result->num_rows > 0) {
@@ -41,8 +41,6 @@ if ($result->num_rows > 0) {
     No Data exists!!
 <?php }
 ?>
-</tbody>
-</table>
 <script>
     Highcharts.chart('container_barchart', {
         chart: {

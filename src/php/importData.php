@@ -1,6 +1,6 @@
 <?php
 include_once 'connection.php';
-
+include_once ("check_login.php");
 $statusMsg = '';
 
 // File upload path
@@ -28,41 +28,29 @@ if(isset($_POST['importSubmit']) && !empty($_FILES["file"]["name"])){
             //Parsing data file by line
             //print this out with boxes
             while(($line = fgetcsv($csvFile)) !== FALSE){
-                //Get Data rows
+                // Get row data
+                $id		= 1;//will need to be changed later
                 $course_name = $line[0];
                 $module_name = $line[1];
-                $lecturer = $line[2];
-
+                $name   = $line[2];
+                $email 	= $line[3];
+                $activity1  = $line[4];//hardcoding completion elements wont work,need to count them from db first, then loop
+                $activity2  = $line[5];
+                $activity3 = $line[6];
                 //while loop to count rows that are not null or columns - new table for completit
 
-                $name = $line[3];
-                $email = $line[4];
-                $week1 = $line[5];
-                $week2 = $line[6];
-                $week3 = $line[7];
-                $week4 = $line[8];
-                $week5 = $line[9];
-                $week6 = $line[10];
-                $week7 = $line[11];
-                $week8 = $line[12];
-                $week9 = $line[13];
-                $week10 = $line[14];
-                $week11 = $line[15];
-                $week12 = $line[16];
 
                 //Check if course exist in DB with email
                 $prevQuery = "SELECT id FROM reports WHERE email = '".$line[1]."'";
                 $prevResult = $con->query($prevQuery);
 
-                if($prevResult-> num_rows > 0){
-                    //Updating member data
-                    $con->query("UPDATE reports SET name = '".$name."'");
-                }else{
+//                if($prevResult-> num_rows > 0){
+//                    //Updating member data
+//                    $con->query("UPDATE reports SET name = '".$name."'");
+//                }else{
                     //Insert data into DB
-                    $con->query("INSERT INTO reports (course_name, module_name, lecturer, name, email, week1,
-                        week2, week3, week4, week5, week6, week7, week8, week9, week10, week11, week12) 
-                     ALUES ('".$course_name."', '".$module_name."', '".$lecturer."', '".$name."', '".$email."', '".$week1."', '".$week2."', '".$week3."', '".$week4."', '".$week5."', '".$week6."', '".$week7."', '".$week8."', '".$week9."', '".$week10."', '".$week11."', '".$week12."')");
-                }
+                    $con->query("INSERT INTO reports (course_name, module_name, name, email, activity1, activity2, activity3) VALUES ('".$course_name."', '".$module_name."','".$name."', '".$email."', '".$activity1."', '".$activity2."', '".$activity3."')");
+//                }
 
             }
 
@@ -91,7 +79,12 @@ if(isset($_POST['importSubmit']) && !empty($_FILES["file"]["name"])){
         $qstring = '?status=invalid_file';
     }
 }
-
-header("Location: admin_index.php".$qstring);
+if ($user_data['role'] === 'admin') {
+    header("Location: admin_index.php".$qstring);
+    die;
+} else {
+    header("Location: index.php".$qstring);
+    die;
+}
 
 ?>

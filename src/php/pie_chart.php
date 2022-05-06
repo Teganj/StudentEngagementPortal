@@ -1,20 +1,45 @@
 <?php
 
-?>
-<link rel="stylesheet" href="../css/pie_chart.css">
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+//lazily getting counts of each completed activity, realistically a loop should be used here
+$result2 = $con->query("SELECT count(*) as total from reports where activity1='Completed'");
+$a1 = $result2->fetch_assoc();
+//echo $a1['total'];
+//echo "<br>";
+$result2 = $con->query("SELECT count(*) as total from reports where activity2='Completed'");
+$a2 = $result2->fetch_assoc();
+//echo $data['total'];
+//echo "<br>";
+$result2 = $con->query("SELECT count(*) as total from reports where activity3='Completed'");
+$a3 = $result2->fetch_assoc();
+//echo $data['total'];
+//echo "<br>";
+$result2 = $con->query("SELECT count(*) as total from reports where activity1='Uncompleted'");
+$ai1 = $result2->fetch_assoc();
+$result2 = $con->query("SELECT count(*) as total from reports where activity2='Uncompleted'");
+$ai2 = $result2->fetch_assoc();
+$result2 = $con->query("SELECT count(*) as total from reports where activity3='Uncompleted'");
+$ai3 = $result2->fetch_assoc();
+$result2 = $con->query("SELECT COUNT(*) FROM reports where activity1='completed'");
 
-<figure class="highcharts-figure">
-    <div id="container_piechart"></div>
-    <p class="highcharts-description">
-        Pie charts are very popular for showing a compact overview of a
-        composition or comparison. While they can be harder to read than
-        column charts, they remain a popular choice for small datasets.
-    </p>
-</figure>
+$result3 = $con->query("SELECT count(*) as total from reports where activity1='Completed (achieved pass grade)'");
+$apg1 = $result3->fetch_assoc();
+$result3 = $con->query("SELECT count(*) as total from reports where activity2='Completed (achieved pass grade)'");
+$apg2 = $result3->fetch_assoc();
+$result3 = $con->query("SELECT count(*) as total from reports where activity3='Completed (achieved pass grade)'");
+$apg3 = $result3->fetch_assoc();
+$result3 = $con->query("SELECT COUNT(*) FROM reports where activity1='completed'");
+
+
+if ($result->num_rows > 0) {
+    ?>
+    <figure class="highcharts-figure-piechart">
+        <div id="container_piechart"></div>
+    </figure>
+    <?php
+} else { ?>
+    No Data exists!!
+<?php }
+?>
 
 <script>
     Highcharts.chart('container_piechart', {
@@ -25,7 +50,7 @@
             type: 'pie'
         },
         title: {
-            text: 'Browser market shares in January, 2018'
+            text: 'Total Course Completion'
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -46,37 +71,17 @@
             }
         },
         series: [{
-            name: 'Brands',
+            name: 'Completion',
             colorByPoint: true,
             data: [{
-                name: 'Chrome',
-                y: 61.41,
-                sliced: true,
-                selected: true
+                name: 'Completed',
+                data: [<?php echo $a1['total']?>]
             }, {
-                name: 'Internet Explorer',
-                y: 11.84
+                name: 'Uncompleted',
+                data: [<?php echo $ai1['total']?>]
             }, {
-                name: 'Firefox',
-                y: 10.85
-            }, {
-                name: 'Edge',
-                y: 4.67
-            }, {
-                name: 'Safari',
-                y: 4.18
-            }, {
-                name: 'Sogou Explorer',
-                y: 1.64
-            }, {
-                name: 'Opera',
-                y: 1.6
-            }, {
-                name: 'QQ',
-                y: 1.2
-            }, {
-                name: 'Other',
-                y: 2.61
+                name: 'Completed (achieved pass grade)',
+                data: [<?php echo $apg1['total']?>]
             }]
         }]
     });

@@ -26,6 +26,11 @@ $res = mysqli_query($con, $sql);
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <script type="text/javascript" scr="../javascript/dashboard.js"></script>
+    <link rel="stylesheet" href="../css/pie_chart.css">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <style>
         table {
             border: 1px solid;
@@ -94,9 +99,9 @@ $res = mysqli_query($con, $sql);
                                 ?>
                                 <tr>
                                     <td><?php echo $row['name']; ?></td>
-                                    <td><?php echo $row['week1']; ?></td>
-                                    <td><?php echo $row['week2']; ?></td>
-                                    <td><?php echo $row['week3']; ?></td>
+                                    <td><?php echo $row['activity1']; ?></td>
+                                    <td><?php echo $row['activity2']; ?></td>
+                                    <td><?php echo $row['activity3']; ?></td>
                                 </tr>
                             <?php }
                         } else { ?>
@@ -105,25 +110,25 @@ $res = mysqli_query($con, $sql);
                             </tr>
                         <?php }
                         //lazily getting counts of each completed activity, realistically a loop should be used here
-                        $result2 = $con->query("SELECT count(*) as total from reports where week1='Completed'");
+                        $result2 = $con->query("SELECT count(*) as total from reports where activity1='Completed'");
                         $a1 = $result2->fetch_assoc();
                         //echo $a1['total'];
                         //echo "<br>";
-                        $result2 = $con->query("SELECT count(*) as total from reports where week2='Completed'");
+                        $result2 = $con->query("SELECT count(*) as total from reports where activity2='Completed'");
                         $a2 = $result2->fetch_assoc();
                         //echo $data['total'];
                         //echo "<br>";
-                        $result2 = $con->query("SELECT count(*) as total from reports where week3='Completed'");
+                        $result2 = $con->query("SELECT count(*) as total from reports where activity3='Completed'");
                         $a3 = $result2->fetch_assoc();
                         //echo $data['total'];
                         //echo "<br>";
-                        $result2 = $con->query("SELECT count(*) as total from reports where week1='Not completed'");
+                        $result2 = $con->query("SELECT count(*) as total from reports where activity1='Not completed'");
                         $ai1 = $result2->fetch_assoc();
-                        $result2 = $con->query("SELECT count(*) as total from reports where week2='Not completed'");
+                        $result2 = $con->query("SELECT count(*) as total from reports where activity2='Not completed'");
                         $ai2 = $result2->fetch_assoc();
-                        $result2 = $con->query("SELECT count(*) as total from reports where week3='Not completed'");
+                        $result2 = $con->query("SELECT count(*) as total from reports where activity3='Not completed'");
                         $ai3 = $result2->fetch_assoc();
-                        $result2 = $con->query("SELECT COUNT(*) FROM reports where week1='completed'");
+                        $result2 = $con->query("SELECT COUNT(*) FROM reports where activity1='completed'");
                         if ($result->num_rows > 0) {
                             ?>
                             <figure class="highcharts-figure">
@@ -138,8 +143,12 @@ $res = mysqli_query($con, $sql);
                     </table>
                 </div>
                 <div class="row">
-                    <?php include 'bar_chart.php' ?>
-                    <?php include 'pie_chart.php' ?>
+                    <div class="col-4-sm">
+                        <?php include 'pie_chart.php' ?>
+                    </div>
+                    <div class="col-4-sm">
+                        <?php include 'bar_chart.php' ?>
+                    </div>
                 </div>
             </div>
         </div>

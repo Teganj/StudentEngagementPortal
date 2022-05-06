@@ -9,7 +9,7 @@ $user_data = check_login($con);
 </head>
 <body>
 <nav class="navbar navbar-icon-top navbar-expand-lg" style="background-color: #784794;">
-    <a class="navbar-brand" href="index.html" style="color: white; font-weight: bold;">Student Engagement</a>
+    <a class="navbar-brand" href="admin_index.html" style="color: white; font-weight: bold;">Student Engagement</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -17,7 +17,7 @@ $user_data = check_login($con);
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="index.html" id="navbarDropdown" role="button"
+                <a class="nav-link dropdown-toggle" href="admin_index.html" id="navbarDropdown" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
                     <i class="fa fa-home"></i><?php echo $user_data['name']; ?>
                 </a>
@@ -25,6 +25,12 @@ $user_data = check_login($con);
                     <a class="dropdown-item" href="dashboard.php">View Modules</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="index.php">Add Module</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="admin_addUser.php">Add User</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="admin_updateUser.php">Update User</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="admin_deleteUser.php">Delete User</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="logout.php">Logout</a>
                 </div>

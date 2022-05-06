@@ -75,35 +75,32 @@ if (!empty($_GET['status'])) {
 <?php } ?>
 <?php include 'navbar.php' ?>
 
-    <h2 style="text-align: center; margin-top: 5px;">Add a New Module</h2>
-    <div id="box" style="margin-top: 0px; margin-bottom: 0px;">
-        <form class="modal-content animate" method="post">
-            <div class="container" style="font-size: 20px; margin: 10px; padding: 10px">
+<h2 style="text-align: center; margin-top: 5px;">Add a New Module</h2>
+<form class="modal-content animate" method="post">
+    <div class="container" style="font-size: 20px; margin: 10px; padding: 10px">
 
-                <label for="course_name">Choose Course:</label><br>
-                <select id="course_name" name="course_name">
-                    <option value="certcomp">Certificate in Computing</option>
-                    <option value="hdipcomp">HDip in Computing</option>
-                    <option value="hdipda">HDip in Data Analytics</option>
-                    <option value="hdipwd">HDip in Web Design</option>
-                    <option value="hdipcs">HDip in Cyber Security</option>
-                    <option value="msccs">MSC in Cyber Security</option>
-                    <option value="mscda">MSC in Data Analytics</option>
-                </select>
+        <label for="course_name">Choose Course:</label><br>
+        <select id="course_name" name="course_name">
+            <option value="certcomp">Certificate in Computing</option>
+            <option value="hdipcomp">HDip in Computing</option>
+            <option value="hdipda">HDip in Data Analytics</option>
+            <option value="hdipwd">HDip in Web Design</option>
+            <option value="hdipcs">HDip in Cyber Security</option>
+            <option value="msccs">MSC in Cyber Security</option>
+            <option value="mscda">MSC in Data Analytics</option>
+        </select>
 
-                <br>
-                <label><b>Enter Module Name:</b></label>
-                <input id="text" type="text" name="module_name" placeholder="Module Name eg. Software Development Jan22"><br><br>
+        <br>
+        <label><b>Enter Module Name:</b></label>
+        <input id="text" type="text" name="module_name"
+               placeholder="Module Name eg. Software Development Jan22"><br><br>
 
-                <?php include 'csv_upload.php' ?><br>
+        <?php include 'csv_upload.php' ?><br>
 
-                <button id="button" type="submit" value="dashboard.php">Create Module</button>
+        <button id="button" type="submit" value="dashboard.php">Create Module</button>
 
-            </div>
-        </form>
     </div>
-
-
+</form>
 
 
 <h2 style="text-align: center; margin-top: 10px;">Quick View of a Module</h2>
@@ -131,7 +128,6 @@ if (!empty($_GET['status'])) {
         </tbody>
     </table>
 </div>
-
 
 
 </body>

@@ -43,6 +43,14 @@
                 }
             }
         </script>
+
+        <!-- Display status message -->
+        <?php if (!empty($statusMsg)) { ?>
+            <div class="col-xs-12">
+                <div class="alert <?php echo $statusType; ?>"><?php echo $statusMsg; ?></div>
+            </div>
+        <?php } ?>
+
     </head>
     <body>
         <?php include 'navbar.php' ?>
@@ -51,7 +59,7 @@
             <h2>Admin Controls</h2>
             <div class="row">
 
-                <a href="signup.php">
+                <a href="admin_addUser.php">
                     <button class="button button1">Add New User</button>
                 </a>
 

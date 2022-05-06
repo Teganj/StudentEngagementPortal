@@ -82,8 +82,13 @@ button:hover {
 #box{
     background-color: #784794;
     margin: auto;
-    width: 300px;
+    margin-top: 0px;
+    margin-bottom: 0px;
     padding: 20px;
+    height: 60%;
+    width: 80%;
+    border: 3px solid #784794;
+    text-align: center;
 }
 .container {
     height: 60%;

@@ -41,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../css/login_style.css">
     <link rel="stylesheet" href="../css/nav_style.css">
-    <link rel="stylesheet" href="../css/admin_index.css">
 
 </head>
 <body>
@@ -54,7 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </nav>
 
 <h2 style="text-align: center; margin-top: 10px;">Student Retention Portal Login</h2>
-<div id="box" style="margin-top: 0px; margin-bottom: 0px;">
     <form class="modal-content animate" method="post">
         <div class="container" style="font-size: 20px;margin: 10px">
 
@@ -69,6 +67,5 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <a href="forgot.php">Forgot Password? </a><br><br>
         </div>
     </form>
-</div>
 </body>
 </html>

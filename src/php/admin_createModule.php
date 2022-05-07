@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         mysqli_query($con, $query);
 
-        header("Location: dashboard.php");
+        header("Location: admin_index.php");
         die;
     }
 
@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
 <h1 style="text-align: center; font-weight: bold; margin: auto; padding-top: 50px;">Add a New Module</h1>
-<form class="modal-content animate"  enctype="multipart/form-data" method="post" action="importModuleData.php">
+<form class="modal-content animate"  enctype="multipart/form-data" method="post" action="importData.php">
     <div class="row" style="font-size: 20px; margin: 10px; padding: 10px">
         <?php if (!empty($statusMsg)) { ?>
             <div class="col-xs-12">
@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <input for="module_name" id="module_name" type="text" name="module_name"
                placeholder="Module Name eg. Software Development Jan22"><br><br>
         <input type="file" name="file"/>
-        <input value="Create Module" id="button" style="margin: 10px; width: 30%;" type="submit" value="dashboard.php" name="addToUpload">
+        <input value="Create Module" id="button" style="margin: 10px; width: 30%;" type="submit" value="admin_index.php" name="addToUpload">
     </div>
 </form>
 </body>

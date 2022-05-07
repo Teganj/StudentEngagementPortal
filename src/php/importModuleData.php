@@ -12,7 +12,7 @@ $fileName = basename($_FILES["file"]["name"]);
 $targetFilePath = $targetDir . $fileName;
 $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
-if (isset($_POST["addToUpload"]) && !empty($_FILES["file"]["name"])) {
+if (isset($_POST["addToUpload"]) && !empty($_FILES["file"]["name"]) && !empty($_POST['course_name']) && !empty($_POST['module_name'])) {
 
     $allowTypes = array('csv', 'xlsx', 'text/x-comma-separated-values', 'text/comma-separated-values', 'text/csv');
 
@@ -24,10 +24,10 @@ if (isset($_POST["addToUpload"]) && !empty($_FILES["file"]["name"])) {
                  $module_name = $_POST['module_name'];
                  $user_id = $user_data['id'];
 
-
                  $insert = $con->query("INSERT into uploads (user_id, file_name, course_name, module_name, uploaded_on) VALUES ('" . $user_id . "', '" . $fileName . "', '" . $course_name . "', '" . $module_name . "', NOW())");
+
                  if ($insert) {
-                     $statusMsg = "The file " . $fileName . " has been uploaded successfully.";
+                     $qstring = '?status=succ';
 
                      if($user_data['role'] === 'admin') {
                          header("Location: admin_index.php" . $qstring);
@@ -38,16 +38,15 @@ if (isset($_POST["addToUpload"]) && !empty($_FILES["file"]["name"])) {
                      }
 
                  } else {
-                     $statusMsg = "File upload failed, please try again.";
+                     $qstring = '?status=err';
                  }
              } else {
-                 $statusMsg = "Sorry, there was an error uploading your file.";
+                 $qstring = '?status=err';
              }
          } else {
-             $statusMsg = 'Sorry, only CSV or xlsx files are allowed to upload.';
+             $qstring = '?status=invalid_file';
          }
 } else {
-    $statusMsg = 'Please select a file to upload.';
+    $qstring = '?status=err';
 }
-echo $statusMsg;
 ?>

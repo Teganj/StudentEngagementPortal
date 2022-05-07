@@ -83,8 +83,8 @@
             </div>
             <br>
             <div class="row">
-                <a href="admin_createReports.php">
-                    <button class="button button1">Create Reports</button>
+                <a href="admin_createModule.php">
+                    <button class="button button1">Add Module Report</button>
                 </a>
             </div>
         </div>

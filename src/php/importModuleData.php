@@ -1,4 +1,8 @@
 <?php
+session_start();
+include("connection.php");
+include("check_login.php");
+
 $user_data = check_login($con);
 $statusMsg = '';
 

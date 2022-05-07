@@ -1,6 +1,5 @@
 <?php
-include_once 'connection.php';
-include_once("check_login.php");
+$user_data = check_login($con);
 $statusMsg = '';
 
 //File upload path
@@ -19,8 +18,10 @@ if (isset($_POST["addToUpload"]) && !empty($_FILES["file"]["name"])) {
                  // Insert file name into database
                  $course_name = $_POST['course_name'];
                  $module_name = $_POST['module_name'];
+                 $user_id = $user_data['id'];
 
-                 $insert = $con->query("INSERT into uploads (file_name, course_name, module_name, uploaded_on) VALUES ('" . $fileName . "', '" . $course_name . "', '" . $module_name . "', NOW())");
+
+                 $insert = $con->query("INSERT into uploads (user_id, file_name, course_name, module_name, uploaded_on) VALUES ('" . $user_id . "', '" . $fileName . "', '" . $course_name . "', '" . $module_name . "', NOW())");
                  if ($insert) {
                      $statusMsg = "The file " . $fileName . " has been uploaded successfully.";
 

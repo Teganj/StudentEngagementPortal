@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if ($result && mysqli_num_rows($result) > 0) {
                 $user_data = mysqli_fetch_assoc($result);
                 if ($user_data['password'] === $password) {
-                    $_SESSION['user_id'] = $user_data['user_id'];
+                    $_SESSION['id'] = $user_data['id'];
                     if ($user_data['role'] === 'admin') {
                         header("Location: admin_index.php");
                         die;

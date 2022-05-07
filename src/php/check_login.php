@@ -1,9 +1,9 @@
 <?php
 function check_login($con)
 {
-    if (isset($_SESSION['user_id'])) {
-        $id = $_SESSION['user_id'];
-        $query = "select * from users where user_id = '$id' limit 1";
+    if (isset($_SESSION['id'])) {
+        $user_id = $_SESSION['id'];
+        $query = "select * from users where id = '$user_id' limit 1";
 
         $result = mysqli_query($con, $query);
         if ($result && mysqli_num_rows($result) > 0) {
@@ -14,7 +14,7 @@ function check_login($con)
 
             if ($row['password'] === $password) {
                 $_SESSION['$name'] = $row['name'];
-                $_SESSION['$user_id'] = $row['user_id'];
+                $_SESSION['$id'] = $row['id'];
                 $_SESSION['$role'] = $row['role'];
                 $_SESSION['$user_name'] = $row['user_name'];
 

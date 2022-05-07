@@ -3,51 +3,29 @@ session_start();
 include("connection.php");
 include("check_login.php");
 
-
 $con = mysqli_connect("localhost", "root", "", "student_engagement_portal_db");
 $sql = "SELECT module_name FROM reports";
 $res = mysqli_query($con, $sql);
 
-
+//Get status message
 if (!empty($_GET['status'])) {
     switch ($_GET['status']) {
         case 'succ':
-            $statusType = 'Alert-Success';
-            $statusMsg = "Report Information has been imported successfully";
+            $statusType = 'alert-success';
+            $statusMsg = 'Members data has been imported successfully.';
             break;
         case 'err':
-            $statusType = 'Alert-danger';
-            $statusMsg = "Problem occurred, please try again";
+            $statusType = 'alert-danger';
+            $statusMsg = 'Some problem occurred, please try again.';
             break;
         case 'invalid_file':
-            $statusType = 'Alert-danger';
-            $statusMsg = "Please upload a csv file.";
+            $statusType = 'alert-danger';
+            $statusMsg = 'Please upload a valid CSV file.';
             break;
         default:
             $statusType = '';
             $statusMsg = '';
     }
-}
-
-
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    //something was posted
-    $course_name = $_POST['course_name'];
-    $module_name = $_POST['module_name'];
-
-    if (!empty($course_name) && !empty($module_name)) {
-
-        //Insert data into DB
-        $user_id = random_num(20);
-        $query = ("INSERT INTO reports (course_name, module_name) VALUES ('" . $course_name . "', '" . $module_name . "')");
-        $query = ("INSERT INTO uploads (course_name, module_name) VALUES ('" . $course_name . "', '" . $module_name . "')");
-
-        mysqli_query($con, $query);
-
-        header("Location: admin_index.php");
-        die;
-    }
-
 }
 ?>
 <!DOCTYPE HTML>
@@ -92,10 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <body style="padding-bottom: 100px;">
 <?php include 'admin_navbar.php' ?>
 
-
-
 <h1 style="text-align: center; font-weight: bold; margin: auto; padding-top: 50px;">Add a New Module</h1>
-<form class="modal-content animate"  enctype="multipart/form-data" method="post" action="importModuleData.php">
+<form class="modal-content animate"  enctype="multipart/form-data" method="post" action="importData.php">
     <div class="row" style="font-size: 20px; margin: 10px; padding: 10px">
         <?php if (!empty($statusMsg)) { ?>
             <div class="col-xs-12">

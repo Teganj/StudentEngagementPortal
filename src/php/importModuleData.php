@@ -28,7 +28,6 @@ if (isset($_POST["addToUpload"]) && !empty($_FILES["file"]["name"]) && !empty($_
 
                  if ($insert) {
                      $qstring = '?status=succ';
-
                      if($user_data['role'] === 'admin') {
                          header("Location: admin_index.php" . $qstring);
                          die;
@@ -43,6 +42,7 @@ if (isset($_POST["addToUpload"]) && !empty($_FILES["file"]["name"]) && !empty($_
              } else {
                  $qstring = '?status=err';
              }
+
          } else {
              $qstring = '?status=invalid_file';
          }

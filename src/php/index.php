@@ -87,63 +87,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             border: 1px solid;
         }
     </style>
-    <!-- Display status message -->
-    <?php if (!empty($statusMsg)) { ?>
-        <div class="col-xs-12">
-            <div class="alert <?php echo $statusType; ?>"><?php echo $statusMsg; ?></div>
-        </div>
-    <?php } ?>
-
 </head>
 
 <body style="padding-bottom: 100px;">
 <?php include 'navbar.php' ?>
+
+
+
 <h1 style="text-align: center; font-weight: bold; margin: auto; padding-top: 50px;">Add a New Module</h1>
-<form class="modal-content animate" method="post">
-    <div class="row" style="font-size: 20px; margin: 10px; padding: 10px">
-
-        <label for="course_name">Choose Course:</label><br>
-        <select id="course_name" name="course_name">
-            <option value="certcomp">Certificate in Computing</option>
-            <option value="hdipcomp">HDip in Computing</option>
-            <option value="hdipda">HDip in Data Analytics</option>
-            <option value="hdipwd">HDip in Web Design</option>
-            <option value="hdipcs">HDip in Cyber Security</option>
-            <option value="msccs">MSC in Cyber Security</option>
-            <option value="mscda">MSC in Data Analytics</option>
-        </select>
-
-        <br>
-        <label><b>Enter Module Name:</b></label>
-        <input for="module_name" id="module_name" type="text" name="module_name"
-               placeholder="Module Name eg. Software Development Jan22"><br><br>
-
-        <div class="row">
-            <!-- Import link -->
-            <div class="col-md-12 head">
-                <div class="float-right">
-                    <a href="javascript:void(0);" class="btn btn-success" onclick="formToggle('importFrm');"><i
-                                class="plus"></i> Import</a>
-                </div>
-            </div>
-            <!-- CSV file upload form -->
-            <div class="col-md-12" id="importFrm" style="display: none;">
-                <form action="importData.php" method="post" enctype="multipart/form-data">
-                    <input type="file" name="file"/>
-                    <input type="submit" class="btn btn-primary" name="importSubmit" value="IMPORT">
-                </form>
-            </div>
-
-            <button id="button" type="submit" value="dashboard.php">Create Module</button>
-
-        </div>
-</form>
-
-
-<h1 style="text-align: center; font-weight: bold; margin: auto; padding-top: 50px;">Test a New Module</h1>
 <form class="modal-content animate"  enctype="multipart/form-data" method="post" action="importModuleData.php">
     <div class="row" style="font-size: 20px; margin: 10px; padding: 10px">
-
+        <?php if (!empty($statusMsg)) { ?>
+            <div class="col-xs-12">
+                <div class="alert <?php echo $statusMsg; ?>"><?php echo $statusMsg; ?></div>
+            </div>
+        <?php } ?>
         <label for="course_name">Choose Course:</label><br>
         <select id="course_name" name="course_name">
             <option value="certcomp">Certificate in Computing</option>
@@ -156,11 +114,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </select>
 
         <br>
-        <label><b>Enter Module Name:</b></label>
+        <label for="module_name" style="padding-top: 20px; padding-bottom: 0px; "><b>Enter Module Name:</b></label>
         <input for="module_name" id="module_name" type="text" name="module_name"
                placeholder="Module Name eg. Software Development Jan22"><br><br>
         <input type="file" name="file"/>
-        <input value="Create Module" id="button" type="submit" value="dashboard.php" name="addToUpload">
+        <input value="Create Module" id="button" style="margin: 10px; width: 30%;" type="submit" value="dashboard.php" name="addToUpload">
     </div>
 </form>
 

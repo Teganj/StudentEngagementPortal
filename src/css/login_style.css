@@ -78,7 +78,8 @@ button:hover {
 }
 #button{
     padding: 10px;
-    width: 100px;
+    width: 30%;
+    margin: 5%;
     color: white;
     background-color: lightblue;
     border: none;

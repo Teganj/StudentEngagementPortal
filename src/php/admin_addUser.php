@@ -28,10 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             //Insert data into DB
             $user_id = random_num(20);
             $query = ("INSERT INTO users (user_name, name, email, password, role) VALUES ('" . $user_name . "', '" . $name . "','" . $email . "', '" . $password . "', '" . $role . "')");
-            $statusMsg = "User has been created successfully";
-            mysqli_query($con, $query);
 
+            mysqli_query($con, $query);
             header("Location: admin_index.php");
+            $statusMsg = "User has been created successfully";
             die;
         }
 

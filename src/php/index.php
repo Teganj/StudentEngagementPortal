@@ -85,14 +85,19 @@ if (!empty($_GET['status'])) {
 <form class="modal-content animate" enctype="multipart/form-data" method="post" action="importData.php">
     <div class="row" style="font-size: 20px; margin: 10px; padding: 10px">
         <label for="course_name">Choose Course:</label><br>
+
+        <?php
+        $query = "select course_name from courses";
+        $data = mysqli_query($con, $query);
+        $array=[];
+        while ($row = mysqli_fetch_array($data)) {
+            $array[] = $row['course_name'];
+        }
+        ?>
         <select id="course_name" name="course_name">
-            <option value="certcomp">Certificate in Computing</option>
-            <option value="hdipcomp">HDip in Computing</option>
-            <option value="hdipda">HDip in Data Analytics</option>
-            <option value="hdipwd">HDip in Web Design</option>
-            <option value="hdipcs">HDip in Cyber Security</option>
-            <option value="msccs">MSC in Cyber Security</option>
-            <option value="mscda">MSC in Data Analytics</option>
+            <?php foreach ($array as $arr) { ?>
+                <option value = "<?php echo $row['course_id'] ?>" > <?php print($arr); ?></option>
+            <?php } ?>
         </select>
 
         <br>

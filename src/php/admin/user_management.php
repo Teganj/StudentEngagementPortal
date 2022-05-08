@@ -32,14 +32,13 @@ $res=mysqli_query($con,$sql);
 			 <div class="card">
 				<div class="card-body">
 				   <h4 class="box-title">USER MANAGEMENT </h4>
-				   <h4 class="box-link"><a href="manage_user_management.php">ADD USER</a> </h4>
+				   <h4 class="box-link"><a href="manage_user_management.php">Add User</a> </h4>
 				</div>
 				<div class="card-body--">
 				   <div class="table-stats order-table ov-h">
 					  <table class="table ">
 						 <thead>
 							<tr>
-							   <th class="serial">#</th>
 							   <th width="2%">ID</th>
 							   <th width="20%">Username</th>
 							   <th width="20%">Email</th>
@@ -53,7 +52,6 @@ $res=mysqli_query($con,$sql);
 							$i=1;
 							while($row=mysqli_fetch_assoc($res)){?>
 							<tr>
-							   <td class="serial"><?php echo $i?></td>
 							   <td><?php echo $row['id']?></td>
 							   <td><?php echo $row['user_name']?></td>
 							   <td><?php echo $row['email']?></td>

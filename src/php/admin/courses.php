@@ -31,7 +31,7 @@ $res=mysqli_query($con,$sql);
 		  <div class="col-xl-12">
 			 <div class="card">
 				<div class="card-body">
-				   <h4 class="box-title">Courses</h4>
+				   <h4 class="box-title">COURSES</h4>
 				   <h4 class="box-link"><a href="manage_courses.php">Add a Course</a> </h4>
 				</div>
 				<div class="card-body--">
@@ -39,7 +39,6 @@ $res=mysqli_query($con,$sql);
 					  <table class="table ">
 						 <thead>
 							<tr>
-							   <th class="serial">#</th>
 							   <th>ID</th>
 							   <th>Course Name</th>
                                 <th>Course Code</th>
@@ -51,7 +50,6 @@ $res=mysqli_query($con,$sql);
 							$i=1;
 							while($row=mysqli_fetch_assoc($res)){?>
 							<tr>
-							   <td class="serial"><?php echo $i?></td>
 							   <td><?php echo $row['id']?></td>
 							   <td><?php echo $row['course_name']?></td>
                                 <td><?php echo $row['course_code']?></td>

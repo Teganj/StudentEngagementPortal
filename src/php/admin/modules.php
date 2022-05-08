@@ -20,29 +20,27 @@ $res=mysqli_query($con,$sql);
 		  <div class="col-xl-12">
 			 <div class="card">
 				<div class="card-body">
-				   <h4 class="box-title">Modules</h4>
-				   <h4 class="box-link"><a href="manage_coupon_master.php">Add Module</a> </h4>
+				   <h4 class="box-title">MODULES</h4>
+				   <h4 class="box-link"><a href="manage_modules.php">Add Module</a> </h4>
 				</div>
 				<div class="card-body--">
 				   <div class="table-stats order-table ov-h">
 					  <table class="table ">
 						 <thead>
 							<tr>
-							   <th class="serial">#</th>
 							   <th width="2%">ID</th>
-							   <th width="20%">Course Name</th>
+							   <th width="20%">Course Code</th>
 							   <th width="20%">Module Name</th>
 							   <th width="26%"></th>
 							</tr>
 						 </thead>
 						 <tbody>
-							<?php 
+							<?php
 							$i=1;
 							while($row=mysqli_fetch_assoc($res)){?>
 							<tr>
-							   <td class="serial"><?php echo $i?></td>
 							   <td><?php echo $row['id']?></td>
-							   <td><?php echo $row['course_id']?></td>
+							   <td><?php echo $row['course_code']?></td>
 							   <td><?php echo $row['module_name']?></td>
 							  
 							   <td>
@@ -52,7 +50,7 @@ $res=mysqli_query($con,$sql);
 								}else{
 									echo "<span class='badge badge-pending'><a href='?type=status&operation=active&id=".$row['id']."'>Deactive</a></span>&nbsp;";
 								}
-								echo "<span class='badge badge-edit'><a href='manage_coupon_master.php?id=".$row['id']."'>Edit</a></span>&nbsp;";
+								echo "<span class='badge badge-edit'><a href='manage_modules.php?id=".$row['id']."'>Edit</a></span>&nbsp;";
 								
 								echo "<span class='badge badge-delete'><a href='?type=delete&id=".$row['id']."'>Delete</a></span>";
 								
@@ -69,6 +67,3 @@ $res=mysqli_query($con,$sql);
 	   </div>
 	</div>
 </div>
-<?php
-require('footer.inc.php');
-?>

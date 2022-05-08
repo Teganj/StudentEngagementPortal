@@ -55,7 +55,7 @@ if (isset($_POST['submit'])) {
             $update_sql = "update users set user_name='$user_name', name='$name', password='$password',email='$email',role='$role' where id='$id'";
             mysqli_query($con, $update_sql);
         } else {
-            mysqli_query($con, "insert into users(username, name, password, email, role, status) values('$user_name', '$name', '$password','$email','$role',1)");
+            mysqli_query($con, "insert into users(user_name, name, password, email, role, status) values('$user_name', '$name', '$password','$email','$role',1)");
         }
         header('location:user_management.php');
         die();
@@ -73,8 +73,8 @@ if (isset($_POST['submit'])) {
 
 
                             <div class="form-group">
-                                <label for="username" class=" form-control-label">Username</label>
-                                <input type="text" name="username" placeholder="Enter username" class="form-control"
+                                <label for="user_name" class=" form-control-label">Username</label>
+                                <input type="text" name="user_name" placeholder="Enter username" class="form-control"
                                        required value="<?php echo $user_name ?>">
                             </div>
 

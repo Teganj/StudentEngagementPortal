@@ -52,7 +52,7 @@ function send_student_email($email)
         <tbody>
         <?php
         // Get rows
-        $result = $con->query("SELECT * FROM reports ORDER BY id DESC");
+        $result = $con->query("SELECT * FROM reports ORDER BY upload_id DESC");
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 ?>

@@ -33,6 +33,7 @@ if (isset($_POST['addToUpload']) && !empty($_FILES["file"]["name"]) && !empty($_
             //Parse data from CSV file line by line
             while(($line = fgetcsv($csvFile)) !== FALSE) {
                 // Get row data
+                $upload_id = 1;
                 $user_id = $user_data['id'];
                 $course_name = $_POST['course_name'];
                 $module_name = $_POST['module_name'];
@@ -62,7 +63,7 @@ if (isset($_POST['addToUpload']) && !empty($_FILES["file"]["name"]) && !empty($_
 //                    $con->query("UPDATE reports SET name = '" . $name . "', email = '" . $email . "', activity1 = '" . $activity1 . "', activity2 = '" . $activity2 . "', activity3 = '" . $activity3 . "', activity4 = '" . $activity4 . "', activity5 = '" . $activity5 . "', activity6 = '" . $activity6 . "', activity7 = '" . $activity7 . "', activity8 = '" . $activity8 . "', activity9 = '" . $activity9 . "', activity10 = '" . $activity10 . "', activity11 = '" . $activity11 . "', activity12 = '" . $activity12 . "'  WHERE email = '" . $module_name . "'");
 //                } else {
                     //Insert module data in the database
-                    $con->query("INSERT INTO reports (user_id, course_name, module_name, name, email, activity1, activity2, activity3 , activity4, activity5, activity6 , activity7, activity8, activity9 , activity10, activity11, activity12) VALUES ('" . $user_id . "', '" . $course_name . "', '" . $module_name . "', '" . $name . "', '" . $email . "', '" . $activity1 . "','" . $activity2 . "','" . $activity3 . "' , '" . $activity4 . "','" . $activity5 . "','" . $activity6 . "', '" . $activity7 . "','" . $activity8 . "','" . $activity9 . "' , '" . $activity10 . "','" . $activity11 . "','" . $activity12 . "' )");
+                    $con->query("INSERT INTO reports (upload_id, user_id, course_name, module_name, name, email, activity1, activity2, activity3 , activity4, activity5, activity6 , activity7, activity8, activity9 , activity10, activity11, activity12) VALUES ('" . $upload_id . "', '" . $user_id . "', '" . $course_name . "', '" . $module_name . "', '" . $name . "', '" . $email . "', '" . $activity1 . "','" . $activity2 . "','" . $activity3 . "' , '" . $activity4 . "','" . $activity5 . "','" . $activity6 . "', '" . $activity7 . "','" . $activity8 . "','" . $activity9 . "' , '" . $activity10 . "','" . $activity11 . "','" . $activity12 . "' )");
 //                }
             }
 

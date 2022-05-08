@@ -39,7 +39,7 @@ $user_data = check_login($con);
             <div class="w3-container w3-center w3-animate-left">
 <!--                <img class="card-img-top" src="../img/viewModulesImg.jpg" alt="View Modules" style="width: 100%;">-->
                 <div class="card-body">
-                    <a href="dashboard.php" class="btn btn-primary"><h5 class="card-title">View Module</h5></a>
+                    <a href="viewModuleChoice.php" class="btn btn-primary"><h5 class="card-title">View Module</h5></a>
                 </div>
             </div>
         </div>

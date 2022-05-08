@@ -51,7 +51,7 @@ $res = mysqli_query($con, $sql);
     <!-- Display status message -->
     <?php if (!empty($statusMsg)) { ?>
         <div class="col-xs-12">
-            <div class="alert <?php echo $statusType; ?>"><?php echo $statusMsg; ?></div>
+            <div class="alert <?php echo $statusMsg; ?>"><?php echo $statusMsg; ?></div>
         </div>
     <?php } ?>
 </head>
@@ -68,7 +68,9 @@ $res = mysqli_query($con, $sql);
                 <h4 style="font-weight: bold">This CSV was last updated on: <?php //echo $_GET['uploaded_on'] ?>
                     <?php //echo $uploaded_data['uploaded_on']; ?></h4>
 
-                <?php include 'csv_upload.php' ?><br>
+                <input type="file" name="file"/>
+                <input value="Update Module" id="button" style="margin: 10px; width: 30%;" type="submit" value="dashboard.php"
+                       name="addToUpload">
 
                 <!-- Display status message -->
                 <?php if (!empty($statusMsg)) { ?>
@@ -82,7 +84,15 @@ $res = mysqli_query($con, $sql);
         </div>
 
 
-        <div class="col-sm-9">
+<div class="col-sm-9"
+        <div class="col-4-sm" style="width: 50% ">
+            <?php include 'bar_chart.php' ?>
+        </div>
+    </div>
+</div>
+
+
+        <div class="col-sm-9" style="float: left">
             <hr class="rounded" style="border-top: 8px solid #bbb; border-radius: 5px;">
             <div class="row">
                 <div class="col-8-md">
@@ -99,7 +109,7 @@ $res = mysqli_query($con, $sql);
                         <tbody>
                         <?php
                         // Get rows loops
-                        $result = $con->query("SELECT * FROM reports ORDER BY id DESC");
+                        $result = $con->query("SELECT * FROM reports ORDER BY upload_id DESC");
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
                                 ?>
@@ -123,10 +133,7 @@ $res = mysqli_query($con, $sql);
                     <div class="col-4-sm">
                         <?php include 'pie_chart.php' ?>
                     </div>
-                    <div class="col-4-sm">
-                        <?php include 'bar_chart.php' ?>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -134,17 +141,6 @@ $res = mysqli_query($con, $sql);
 
 
 
-<!-- Show/hide CSV upload form -->
-<script>
-    function formToggle(ID) {
-        var element = document.getElementById(ID);
-        if (element.style.display === "none") {
-            element.style.display = "block";
-        } else {
-            element.style.display = "none";
-        }
-    }
-</script>
 
 </body>
 </html>

@@ -14,11 +14,11 @@ $result2 = $con->query("SELECT count(*) as total from reports where activity3='C
 $a3 = $result2->fetch_assoc();
 //echo $data['total'];
 //echo "<br>";
-$result2 = $con->query("SELECT count(*) as total from reports where activity1='Uncompleted'");
+$result2 = $con->query("SELECT count(*) as total from reports where activity1='Not completed'");
 $ai1 = $result2->fetch_assoc();
-$result2 = $con->query("SELECT count(*) as total from reports where activity2='Uncompleted'");
+$result2 = $con->query("SELECT count(*) as total from reports where activity2='Not completed'");
 $ai2 = $result2->fetch_assoc();
-$result2 = $con->query("SELECT count(*) as total from reports where activity3='Uncompleted'");
+$result2 = $con->query("SELECT count(*) as total from reports where activity3='Not completed'");
 $ai3 = $result2->fetch_assoc();
 $result2 = $con->query("SELECT COUNT(*) FROM reports where activity1='completed'");
 
@@ -97,7 +97,7 @@ if ($result->num_rows > 0) {
             name: 'Completed',
             data: [<?php echo $a1['total']?>, <?php echo $a2['total']?>, <?php echo $a3['total']?>]
         }, {
-            name: 'Uncompleted',
+            name: 'Not completed',
             data: [<?php echo $ai1['total']?>, <?php echo $ai2['total']?>, <?php echo $ai3['total']?>]
         }, {
             name: 'Completed (achieved pass grade)',

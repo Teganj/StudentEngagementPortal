@@ -22,7 +22,7 @@ $user_data = check_login($con);
                     <i class="fa fa-home"></i><?php echo $user_data['name']; ?>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="dashboard.php">View Modules</a>
+                    <a class="dropdown-item" href="viewModuleChoice.php">View Modules</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="index.php">Add Module</a>
                     <div class="dropdown-divider"></div>

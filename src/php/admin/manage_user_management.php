@@ -27,7 +27,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
 }
 
 if (isset($_POST['submit'])) {
-    $username = get_safe_value($con, $_POST['user_name']);
+    $user_name = get_safe_value($con, $_POST['user_name']);
     $name = get_safe_value($con, $_POST['name']);
     $email = get_safe_value($con, $_POST['email']);
     $password = get_safe_value($con, $_POST['password']);
@@ -55,7 +55,7 @@ if (isset($_POST['submit'])) {
             $update_sql = "update users set user_name='$user_name', name='$name', password='$password',email='$email',role='$role' where id='$id'";
             mysqli_query($con, $update_sql);
         } else {
-            mysqli_query($con, "insert into users(username, name, password, email, role, status) values('$username', '$name', '$password','$email','$role',1)");
+            mysqli_query($con, "insert into users(username, name, password, email, role, status) values('$user_name', '$name', '$password','$email','$role',1)");
         }
         header('location:user_management.php');
         die();

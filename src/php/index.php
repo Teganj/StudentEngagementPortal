@@ -73,7 +73,7 @@ if (!empty($_GET['status'])) {
 
 
 <h1 style="text-align: center; font-weight: bold; margin: auto; padding-top: 50px;">Add a New Module</h1>
-<form class="modal-content animate"  enctype="multipart/form-data" method="post" action="importModuleData.php">
+<form class="modal-content animate"  enctype="multipart/form-data" method="post" action="importData.php">
     <div class="row" style="font-size: 20px; margin: 10px; padding: 10px">
         <?php if (!empty($statusMsg)) { ?>
             <div class="col-xs-12">

@@ -77,7 +77,7 @@
             </div>
             <br>
             <div class="row">
-                <a href="admin_manageReports.php">
+                <a href="">
                     <button class="button button1">Manage Module Reports</button>
                 </a>
             </div>
@@ -87,6 +87,7 @@
                     <button class="button button1">Add Module Report</button>
                 </a>
             </div>
+            <br>
         </div>
     </body>
 </html>

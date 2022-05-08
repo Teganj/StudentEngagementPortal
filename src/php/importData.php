@@ -75,11 +75,10 @@ if (isset($_POST['addToUpload']) && !empty($_FILES["file"]["name"]) && !empty($_
                 $user_id = $user_data['id'];
 
                 $insert = $con->query("INSERT into uploads (user_id, file_name, course_name, module_name, uploaded_on) VALUES ('" . $user_id . "', '" . $fileName . "', '" . $course_name . "', '" . $module_name . "', NOW())");
-
                 if ($insert) {
                     $qstring = '?status=succ';
                     if($user_data['role'] === 'admin') {
-                        header("Location: admin_index.php" . $qstring);
+                        header("Location: admin/admin_index.php" . $qstring);
                         die;
                     } else {
                         header("Location: dashboard.php" . $qstring);

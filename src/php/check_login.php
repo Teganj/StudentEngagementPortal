@@ -21,7 +21,7 @@ function check_login($con)
                 header("Location: ../home.php");
 
             } else {
-                header("Location: ../admin_index.php?error=Incorect User name or password");
+                header("Location: ../admin_index.php?error=Incorrect User name or password");
             }
 
         }

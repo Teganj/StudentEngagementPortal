@@ -61,7 +61,7 @@ $res = mysqli_query($con, $sql);
 <?php include 'navbar.php' ?>
 
 
-<h1 style="text-align: center; font-weight: bold; margin: auto; padding-top: 50px;padding-bottom: 50px;">Quick View of a Module</h1>
+<h1 style="text-align: center; font-weight: bold; margin: auto; padding-top: 50px;padding-bottom: 50px;">Choose a Module to View</h1>
 <div class="modal-content animate" style="margin-top: 5px; margin-bottom: 5px; padding: 2%">
     <select id="module" onchange="selectModule()" style="width: 50%; padding: 10px; margin: auto;">
         <?php while ($rows = mysqli_fetch_array($res)) {

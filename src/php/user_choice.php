@@ -48,7 +48,7 @@ $user_data = check_login($con);
             <div class="w3-container w3-center w3-animate-right">
 <!--                <img class="card-img-top" src="../img/addModuleImg.jpg" alt="Add a Module"  style="width: 100%;">-->
                 <div class="card-body">
-                    <a href="index.php" class="btn btn-primary"><h5 class="card-title">Add a Module</h5></a>
+                    <a href="admin_index.php" class="btn btn-primary"><h5 class="card-title">Add a Module</h5></a>
                 </div>
             </div>
         </div>

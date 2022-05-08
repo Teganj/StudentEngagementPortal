@@ -65,6 +65,11 @@ if (!empty($_GET['status'])) {
             border: 1px solid;
         }
     </style>
+    <?php if (!empty($statusMsg)) { ?>
+        <div class="col-xs-12">
+            <div class="alert <?php echo $statusMsg; ?>"><?php echo $statusMsg; ?></div>
+        </div>
+    <?php } ?>
 </head>
 
 <body style="padding-bottom: 100px;">
@@ -75,11 +80,6 @@ if (!empty($_GET['status'])) {
 <h1 style="text-align: center; font-weight: bold; margin: auto; padding-top: 50px;">Add a New Module</h1>
 <form class="modal-content animate"  enctype="multipart/form-data" method="post" action="importData.php">
     <div class="row" style="font-size: 20px; margin: 10px; padding: 10px">
-        <?php if (!empty($statusMsg)) { ?>
-            <div class="col-xs-12">
-                <div class="alert <?php echo $statusMsg; ?>"><?php echo $statusMsg; ?></div>
-            </div>
-        <?php } ?>
         <label for="course_name">Choose Course:</label><br>
         <select id="course_name" name="course_name">
             <option value="certcomp">Certificate in Computing</option>
@@ -100,38 +100,38 @@ if (!empty($_GET['status'])) {
     </div>
 </form>
 
-<!---->
-<!--<h1 style="text-align: center; font-weight: bold; margin: auto; padding-top: 50px;padding-bottom: 50px;">Quick View of a-->
-<!--    Module</h1>-->
-<!--<div class="modal-content animate" style="margin-top: 5px; margin-bottom: 5px;">-->
-<!--    <div class="row" style=" padding: 2%;">-->
-<!--        <select id="module" onchange="selectModule()" style="width: 50%;">-->
-<!--            --><?php //while ($rows = mysqli_fetch_array($res)) {
-//                ?>
-<!--                <option value="--><?php //echo $rows['module_name']; ?><!-- ">  -->
-<?php //echo $rows['module_name']; ?><!-- </option>-->
-<!--                --><?php
-//            }
-//            ?>
-<!--        </select>-->
-<!--    </div>-->
-<!--    <div class="row" style=" padding: 2%;">-->
-<!--        <table style="padding-top: 20px; margin-top: 20px; width: 90%;">-->
-<!--            <thead>-->
-<!--            <th>Student Name</th>-->
-<!--            <th>Email</th>-->
-<!--            <th>Activity 1</th>-->
-<!--            <th>Activity 2</th>-->
-<!--            <th>Activity 3</th>-->
-<!--            <th>Activity 4</th>-->
-<!--            <th>Activity 5</th>-->
-<!--            <th>Activity 6</th>-->
-<!--            </thead>-->
-<!--            <tbody id="ans">-->
-<!--            </tbody>-->
-<!--        </table>-->
-<!--    </div>-->
-<!--</div>-->
+
+<h1 style="text-align: center; font-weight: bold; margin: auto; padding-top: 50px;padding-bottom: 50px;">Quick View of a
+    Module</h1>
+<div class="modal-content animate" style="margin-top: 5px; margin-bottom: 5px;">
+    <div class="row" style=" padding: 2%;">
+        <select id="module" onchange="selectModule()" style="width: 50%;">
+            <?php while ($rows = mysqli_fetch_array($res)) {
+                ?>
+                <option value="<?php echo $rows['module_name']; ?> ">
+<?php echo $rows['module_name']; ?> </option>
+                <?php
+            }
+            ?>
+        </select>
+    </div>
+    <div class="row" style=" padding: 2%;">
+        <table style="padding-top: 20px; margin-top: 20px; width: 90%;">
+            <thead>
+            <th>Student Name</th>
+            <th>Email</th>
+            <th>Activity 1</th>
+            <th>Activity 2</th>
+            <th>Activity 3</th>
+            <th>Activity 4</th>
+            <th>Activity 5</th>
+            <th>Activity 6</th>
+            </thead>
+            <tbody id="ans">
+            </tbody>
+        </table>
+    </div>
+</div>
 
 
 </body>

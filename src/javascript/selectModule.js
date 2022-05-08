@@ -1,17 +1,15 @@
 function selectModule(){
-    alert("Select Module");
+    var x =document.getElementById("module").value;
 
-    // var x =document.getElementById("module").value;
-    //
-    // $.ajax({
-    //     url:"../php/showModule.php",
-    //     method: "POST",
-    //     data: {
-    //         id : x
-    //     },
-    //     success: function(data){
-    //         $("#ans").html(data);
-    //     }
-    // })
+    $.ajax({
+        url:"../php/showModule.php",
+        method: "POST",
+        data: {
+            id : x
+        },
+        success: function(data){
+            $("#ans").html(data);
+        }
+    })
 
 }

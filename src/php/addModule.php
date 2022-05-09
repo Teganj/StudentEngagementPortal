@@ -1,164 +1,107 @@
 <?php
+require('top.inc.php');
 include("connection.php");
 include("check_login.php");
-require('top.inc.php');
 
-$con = mysqli_connect("localhost", "root", "", "student_engagement_portal_db");
-$sql = "SELECT  DISTINCT module_name FROM reports";
-$res = mysqli_query($con, $sql);
+$user_data = check_login($con);
 
-//Get status message
-if (!empty($_GET['status'])) {
-    switch ($_GET['status']) {
-        case 'succ':
-            $statusType = 'alert-success';
-            $statusMsg = 'Members data has been imported successfully.';
-            break;
-        case 'err':
-            $statusType = 'alert-danger';
-            $statusMsg = 'Some problem occurred, please try again.';
-            break;
-        case 'invalid_file':
-            $statusType = 'alert-danger';
-            $statusMsg = 'Please upload a valid CSV file.';
-            break;
-        default:
-            $statusType = '';
-            $statusMsg = '';
+isAdmin();
+$module_name = '';
+$module_id = '';
+$course = '';
+$user_id = $user_data['id'];
+
+$msg = '';
+if (isset($_GET['id']) && $_GET['id'] != '') {
+    $id = get_safe_value($con, $_GET['id']);
+    $res = mysqli_query($con, "select * from modules where id='$id'");
+    $check = mysqli_num_rows($res);
+    if ($check > 0) {
+        $row = mysqli_fetch_assoc($res);
+        $module_name = $row['module_name'];
+    } else {
+        header('location:modules.php');
+        die();
+    }
+}
+
+if (isset($_POST['submit'])) {
+    $module_name = get_safe_value($con, $_POST['module_name']);
+    $module_id = get_safe_value($con, $_POST['module_id']);
+
+    $res = mysqli_query($con, "select * from modules where module_name='$module_name'");
+    $check = mysqli_num_rows($res);
+    if ($check > 0) {
+        if (isset($_GET['id']) && $_GET['id'] != '') {
+            $getData = mysqli_fetch_assoc($res);
+            if ($id == $getData['id']) {
+
+            } else {
+                $msg = "Module Already Exists 1";
+            }
+        } else {
+            $msg = "Module Already Exists 2";
+        }
+    }
+
+
+    if ($msg == '') {
+        if (isset($_GET['id']) && $_GET['id'] != '') {
+            mysqli_query($con, "update modules set user_id='$user_id', course='$course', module_name='$module_name', module_id='$module_id' where id='$id'");
+        } else {
+            mysqli_query($con, "INSERT INTO modules(user_id, course, module_name, module_id, status) VALUES ('" . $user_id . "', '" . $course . "', '" . $module_name . "', '" . $module_id . "', 1)");
+        }
+        header('location:modules.php');
+        die();
     }
 }
 ?>
-<!DOCTYPE HTML>
-<html>
-<head>
-    <title>Add Module</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../css/login_style.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <script type="text/javascript" scr="../javascript/selectModule.js"></script>
-    <script scr="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script scr="js/jquery.min.js"
-
-    <script>
-        function selectModule() {
-            var x = document.getElementById("module").value;
-
-            $.ajax({
-                url: "showModule.php",
-                method: "POST",
-                data: {
-                    id: x
-                },
-                success: function (data) {
-                    $("#ans").html(data);
-                }
-            })
-
-        }
-    </script>
-    <script>
-        function formToggle(ID) {
-            var element = document.getElementById(ID);
-            if (element.style.display === "none") {
-                element.style.display = "block";
-            } else {
-                element.style.display = "none";
-            }
-        }
-    </script>
-    <?php if (!empty($statusMsg)) { ?>
-        <div class="col-xs-12">
-            <div class="alert <?php echo $statusMsg; ?>"><?php echo $statusMsg; ?></div>
-        </div>
-    <?php } ?>
-</head>
-
-<body style="padding-bottom: 100px;">
-
-
 <div class="content pb-0">
-    <div class="orders">
+    <div class="animated fadeIn">
         <div class="row">
-            <div class="col-xl-12">
+            <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-body--">
-                        <h1 style="text-align: center; font-weight: bold; margin: auto; padding-top: 50px;">Add a New
-                            Module</h1>
-                        <form class="modal-content animate" enctype="multipart/form-data" method="post"
-                              action="importData.php">
-                            <div class="row" style="font-size: 20px; margin: 10px; padding: 10px">
-                                <label for="course_name">Choose Course:</label><br>
+                    <div class="card-header"><strong>MODULE FORM</strong><small> </small></div>
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="card-body card-block">
 
-                                <?php
-                                $query = "select course_name from courses";
-                                $data = mysqli_query($con, $query);
-                                $array = [];
-                                while ($row = mysqli_fetch_array($data)) {
-                                    $array[] = $row['course_name'];
-                                }
-                                ?>
-                                <select id="course_name" name="course_name">
-                                    <?php foreach ($array as $arr) { ?>
-                                        <option value="<?php echo $row['course_id'] ?>"> <?php print($arr); ?></option>
-                                    <?php } ?>
+                            <div class="form-group">
+                                <label for="course">Choose Course:</label><br>
+                                <select id="course" name="course">
+                                    <option value="certcomp">Certificate in Computing</option>
+                                    <option value="hdipcomp">HDip in Computing</option>
+                                    <option value="hdipda">HDip in Data Analytics</option>
+                                    <option value="hdipwd">HDip in Web Design</option>
+                                    <option value="hdipcs">HDip in Cyber Security</option>
+                                    <option value="msccs">MSC in Cyber Security</option>
+                                    <option value="mscda">MSC in Data Analytics</option>
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="module_name" class=" form-control-label">Module Name</label>
+                                <input type="text" name="module_name" placeholder="Enter Module Name"
+                                       class="form-control" required value="<?php echo $module_name ?>">
+                            </div>
 
-                                <br>
-                                <label for="module_name" style="padding-top: 20px; padding-bottom: 0px; "><b>Enter
-                                        Module Name:</b></label>
-                                <input for="module_name" id="module_name" type="text" name="module_name"
-                                       placeholder="Module Name eg. Software Development Jan22"><br><br>
+                            <div class="form-group">
+                                <label for="module_id" class=" form-control-label">Module ID</label>
+                                <input type="text" name="module_id" placeholder="Enter Module ID" class="form-control"
+                                       required value="<?php echo $module_id ?>">
+                            </div>
+
+                            <div class="form-group">
                                 <input type="file" name="file"/>
-                                <input value="Create Module" id="button" style="margin: 10px; width: 30%;" type="submit"
-                                       value="dashboard.php"
-                                       name="addToUpload">
                             </div>
-                        </form>
 
-
-                        <h1 style="text-align: center; font-weight: bold; margin: auto; padding-top: 50px;padding-bottom: 50px;">
-                            Quick View of a Module</h1>
-                        <div class="modal-content animate" style="margin-top: 5px; margin-bottom: 5%; padding: 2%">
-                            <select id="module" onchange="selectModule()" style="width: 50%; padding: 10px;">
-                                <?php while ($rows = mysqli_fetch_array($res)) {
-                                    ?>
-                                    <option value="<?php echo $rows['module_name']; ?> ">
-                                        <?php echo $rows['module_name']; ?> </option>
-                                    <?php
-                                }
-                                ?>
-                            </select>
-                            <div class="row" style=" padding: 2%;">
-                                <table style="padding-top: 20px; margin-top: 20px; width: 90%;" id="quickModuleView">
-                                    <thead>
-                                    <th>Student Name</th>
-                                    <th>Activity 1</th>
-                                    <th>Activity 2</th>
-                                    <th>Activity 3</th>
-                                    <th>Activity 4</th>
-                                    <th>Activity 5</th>
-                                    <th>Activity 6</th>
-                                    <th>Activity 7</th>
-                                    <th>Activity 8</th>
-                                    <th>Activity 9</th>
-                                    <th>Activity 10</th>
-                                    <th>Activity 11</th>
-                                    <th>Activity 12</th>
-                                    </thead>
-                                    <tbody id="ans">
-                                    </tbody>
-                                </table>
-                            </div>
+                            <button id="payment-button" name="submit" type="submit"
+                                    class="btn btn-lg btn-info btn-block">
+                                <span id="payment-button-amount">SUBMIT</span>
+                            </button>
+                            <div class="field_error"><?php echo $msg ?></div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</body>
-</html>

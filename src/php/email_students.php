@@ -39,8 +39,8 @@ function send_student_email($email)
 </style>
 
 
-<div class="row" style="width: 100%; padding: 10px; overflow-x:auto; height: 400px;">
-    <h2>Email Students</h2>
+<div style="width: 100%; overflow-x:auto; height: 100%; margin-top: 10px;">
+    <h3>Email Students</h3>
     <!-- Data list table -->
     <table class="table table-striped table-bordered" style="height: 250px;">
         <thead class="thead-dark">
@@ -52,7 +52,7 @@ function send_student_email($email)
         <tbody>
         <?php
         // Get rows
-        $result = $con->query("SELECT * FROM reports ORDER BY upload_id DESC");
+        $result = $con->query("SELECT * FROM reports ORDER BY module_id DESC");
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 ?>

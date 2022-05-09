@@ -33,10 +33,10 @@ if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_LOGIN']!=''){
                <ul class="nav navbar-nav">
                   <li class="menu-title">USER MENU</li>
 				  <li class="menu-item-has-children dropdown">
-                     <a href="dashboard.php" > Reports </a>
+                     <a href="index.php" > Dashboards </a>
                   </li>
 				  <li class="menu-item-has-children dropdown">
-                     <a href="addModule.php" > Modules </a>
+                     <a href="addModule.php" > Add A Module </a>
                   </li>
                       <li class="menu-item dropdown">
                           <a href="logout.php" > Logout </a>

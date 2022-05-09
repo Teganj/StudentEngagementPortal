@@ -25,7 +25,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
     }
 }
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['addToUpload'])) {
     $module_name = get_safe_value($con, $_POST['module_name']);
     $module_id = get_safe_value($con, $_POST['module_id']);
 
@@ -47,9 +47,9 @@ if (isset($_POST['submit'])) {
 
     if ($msg == '') {
         if (isset($_GET['id']) && $_GET['id'] != '') {
-            mysqli_query($con, "update modules set user_id='$user_id', course='$course', module_name='$module_name', module_id='$module_id' where id='$id'");
+            mysqli_query($con, "update modules set course='$course', user_id='$user_id', module_name='$module_name', module_id='$module_id' where id='$id'");
         } else {
-            mysqli_query($con, "INSERT INTO modules(user_id, course, module_name, module_id, status) VALUES ('" . $user_id . "', '" . $course . "', '" . $module_name . "', '" . $module_id . "', 1)");
+            mysqli_query($con, "INSERT INTO modules(course, user_id, module_name, module_id, status) VALUES ('" . $user_id . "', '" . $course . "', '" . $module_name . "', '" . $module_id . "', 1)");
         }
         header('location:modules.php');
         die();
@@ -62,34 +62,24 @@ if (isset($_POST['submit'])) {
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header"><strong>MODULE FORM</strong><small> </small></div>
-                    <form method="post" enctype="multipart/form-data">
+                    <form method="post" enctype="multipart/form-data" action="importData.php">
                         <div class="card-body card-block">
 
 
-<!--                            <div class="form-group">-->
-<!--                                <label for="course" class=" form-control-label">Course Name</label>-->
-<!---->
-<!--                                --><?php
-//                                $query = "select course_name from courses";
-//                                $data = mysqli_query($con, $query);
-//                                $array = [];
-//                                while ($row = mysqli_fetch_array($data)) {
-//                                    $array[] = $row['course_name'];
-//                                }
-//                                ?>
-<!---->
-<!--                                <select name="course">-->
-<!--                                    --><?php //foreach ($array as $arr) { ?>
-<!--                                        <option value="--><?php //echo $course ?><!--"> --><?php //print($arr); ?><!--</option>-->
-<!--                                    --><?php //} ?>
-<!--                                </select>-->
-<!--                            </div>-->
-                            <div class="form-group">
-                                <label for="course" class=" form-control-label">Couse Name</label>
-                                <input type="text" name="course" placeholder="Enter Course Name"
-                                       class="form-control" required value="<?php echo $course ?>">
-                            </div>
 
+                            <div class="form-group">
+
+                                <label for="course">Choose Course:</label><br>
+                                <select id="course" name="course">
+                                    <option value="certcomp">Certificate in Computing</option>
+                                    <option value="hdipcomp">HDip in Computing</option>
+                                    <option value="hdipda">HDip in Data Analytics</option>
+                                    <option value="hdipwd">HDip in Web Design</option>
+                                    <option value="hdipcs">HDip in Cyber Security</option>
+                                    <option value="msccs">MSC in Cyber Security</option>
+                                    <option value="mscda">MSC in Data Analytics</option>
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label for="module_name" class=" form-control-label">Module Name</label>
                                 <input type="text" name="module_name" placeholder="Enter Module Name"
@@ -102,7 +92,11 @@ if (isset($_POST['submit'])) {
                                        required value="<?php echo $module_id ?>">
                             </div>
 
-                            <button id="payment-button" name="submit" type="submit"
+                            <div class="form-group">
+                                <input type="file" name="file"/>
+                            </div>
+
+                            <button id="payment-button" name="addToUpload" type="submit"
                                     class="btn btn-lg btn-info btn-block">
                                 <span id="payment-button-amount">SUBMIT</span>
                             </button>

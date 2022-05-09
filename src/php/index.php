@@ -10,6 +10,15 @@ $id = $user_data['id'];
 $sql="select * from modules where user_id='$id' order by id desc";
 $res=mysqli_query($con,$sql);
 
+if(isset($_GET['type']) && $_GET['type']!=''){
+    $type=get_safe_value($con,$_GET['type']);
+
+    if($type=='delete'){
+        $id=get_safe_value($con,$_GET['id']);
+        $delete_sql="delete from modules where id='$id'";
+        mysqli_query($con,$delete_sql);
+    }
+}
 
 ?>
 <!DOCTYPE HTML>
@@ -22,19 +31,6 @@ $res=mysqli_query($con,$sql);
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <style>
-        #addModuleImg{
-            background-image: url("../img/viewModulesImg.jpg");
-            position: relative;
-            background-size: cover;
-        }
-        #viewModuleImg{
-            background-image: url("../img/addModuleImg.jpg");
-            position: relative;
-            background-size: cover;
-        }
-
-    </style>
 </head>
 <body>
 
@@ -50,7 +46,7 @@ $res=mysqli_query($con,$sql);
                                             <div class="card">
                                                 <div class="card-body" style="padding-bottom: 100px;">
                                                     <h1 class="box-title">Welcome, <?php echo $user_data['name']; ?></h1>
-                                                    <h4 class="box-link"><a href="manage_modules.php">Add Module</a> </h4>
+                                                    <h4 class="box-link"><a href="addModule.php">Add Module</a> </h4>
 
 
                                                 <div class="card-body--">
@@ -79,9 +75,9 @@ $res=mysqli_query($con,$sql);
 
                                                                     <td>
                                                                         <?php
-                                                                        echo "<span class='badge badge-success'><a href='view_module.php?id=".$row['id']."'>View</a></span>&nbsp;";
+                                                                        echo "<span class='badge badge-success'><a href='viewModule.php?id=".$row['id']."'>View</a></span>&nbsp;";
 
-                                                                        echo "<span class='badge badge-edit'><a href='manage_modules.php?id=".$row['id']."'>Edit</a></span>&nbsp;";
+                                                                        echo "<span class='badge badge-edit'><a href='editModule.php?id=".$row['id']."'>Edit</a></span>&nbsp;";
 
                                                                         echo "<span class='badge badge-delete'><a href='?type=delete&id=".$row['id']."'>Delete</a></span>";
 

@@ -65,31 +65,18 @@ if (isset($_POST['submit'])) {
                     <form method="post" enctype="multipart/form-data">
                         <div class="card-body card-block">
 
-
-<!--                            <div class="form-group">-->
-<!--                                <label for="course" class=" form-control-label">Course Name</label>-->
-<!---->
-<!--                                --><?php
-//                                $query = "select course_name from courses";
-//                                $data = mysqli_query($con, $query);
-//                                $array = [];
-//                                while ($row = mysqli_fetch_array($data)) {
-//                                    $array[] = $row['course_name'];
-//                                }
-//                                ?>
-<!---->
-<!--                                <select name="course">-->
-<!--                                    --><?php //foreach ($array as $arr) { ?>
-<!--                                        <option value="--><?php //echo $course ?><!--"> --><?php //print($arr); ?><!--</option>-->
-<!--                                    --><?php //} ?>
-<!--                                </select>-->
-<!--                            </div>-->
                             <div class="form-group">
-                                <label for="course" class=" form-control-label">Couse Name</label>
-                                <input type="text" name="course" placeholder="Enter Course Name"
-                                       class="form-control" required value="<?php echo $course ?>">
+                                <label for="course">Choose Course:</label><br>
+                                <select id="course" name="course">
+                                    <option value="certcomp">Certificate in Computing</option>
+                                    <option value="hdipcomp">HDip in Computing</option>
+                                    <option value="hdipda">HDip in Data Analytics</option>
+                                    <option value="hdipwd">HDip in Web Design</option>
+                                    <option value="hdipcs">HDip in Cyber Security</option>
+                                    <option value="msccs">MSC in Cyber Security</option>
+                                    <option value="mscda">MSC in Data Analytics</option>
+                                </select>
                             </div>
-
                             <div class="form-group">
                                 <label for="module_name" class=" form-control-label">Module Name</label>
                                 <input type="text" name="module_name" placeholder="Enter Module Name"
@@ -100,6 +87,10 @@ if (isset($_POST['submit'])) {
                                 <label for="module_id" class=" form-control-label">Module ID</label>
                                 <input type="text" name="module_id" placeholder="Enter Module ID" class="form-control"
                                        required value="<?php echo $module_id ?>">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="file" name="file"/>
                             </div>
 
                             <button id="payment-button" name="submit" type="submit"

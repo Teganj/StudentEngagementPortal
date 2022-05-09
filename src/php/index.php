@@ -5,6 +5,12 @@ include("check_login.php");
 require('top.inc.php');
 
 $user_data = check_login($con);
+$id = $user_data['id'];
+
+$sql="select * from modules where user_id='$id' order by id desc";
+$res=mysqli_query($con,$sql);
+
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -31,41 +37,71 @@ $user_data = check_login($con);
     </style>
 </head>
 <body>
-<div class="content pb-0">
-    <div class="orders">
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-body--">
-                        <h1 style="text-align: center; font-weight: bold; margin: auto; padding-top: 50px;">Welcome, <?php echo $user_data['name']; ?> <br> Please choose an option below!</h1>
 
-                        <div class="container"style="padding-bottom: 100px;">
-                            <div class="row" style="padding-top: 50px;">
 
-                                <div class="card" id="addModuleImg" style="width: 40%; float: left; border: 5px solid #784794; padding: 10%; margin: auto;">
-                                    <div class="w3-container w3-center w3-animate-left">
-                                        <div class="card-body">
-                                            <a href="viewModuleChoice.php" class="btn btn-primary"><h5 class="card-title">View Module</h5></a>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="card" id="viewModuleImg" style="width: 40%; float: right; border: 5px solid #784794; padding: 10%; margin: auto;">
-                                    <div class="w3-container w3-center w3-animate-right">
-                                        <div class="card-body">
-                                            <a href="addModule.php" class="btn btn-primary"><h5 class="card-title">Add a Module</h5></a>
+
+
+
+                            <div class="content pb-0">
+                                <div class="orders">
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="card">
+                                                <div class="card-body" style="padding-bottom: 100px;">
+                                                    <h1 class="box-title">Welcome, <?php echo $user_data['name']; ?></h1>
+                                                    <h4 class="box-link"><a href="manage_modules.php">Add Module</a> </h4>
+
+
+                                                <div class="card-body--">
+                                                    <h3 style="text-align: center; font-weight: bold; margin: auto; padding: 50px;">Your Modules</h3>
+                                                    <div class="table-stats order-table ov-h">
+
+                                                        <table class="table ">
+                                                            <thead>
+                                                            <tr>
+                                                                <th width="2%">ID</th>
+                                                                <th width="20%">Course Code</th>
+                                                                <th width="20%">Module Name</th>
+                                                                <th width="20%">Module ID</th>
+                                                                <th width="26%"></th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <?php
+                                                            $i=1;
+                                                            while($row=mysqli_fetch_assoc($res)){?>
+                                                                <tr>
+                                                                    <td><?php echo $row['id']?></td>
+                                                                    <td><?php echo $row['course']?></td>
+                                                                    <td><?php echo $row['module_name']?></td>
+                                                                    <td><?php echo $row['module_id']?></td>
+
+                                                                    <td>
+                                                                        <?php
+                                                                        echo "<span class='badge badge-success'><a href='view_module.php?id=".$row['id']."'>View</a></span>&nbsp;";
+
+                                                                        echo "<span class='badge badge-edit'><a href='manage_modules.php?id=".$row['id']."'>Edit</a></span>&nbsp;";
+
+                                                                        echo "<span class='badge badge-delete'><a href='?type=delete&id=".$row['id']."'>Delete</a></span>";
+
+                                                                        ?>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php } ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+
+
+
 </body>
 </html>

@@ -1,14 +1,32 @@
 <?php
-session_start();
 include("connection.php");
 include("check_login.php");
 require('top.inc.php');
-
 
 $con = mysqli_connect("localhost", "root", "", "student_engagement_portal_db");
 $sql = "SELECT  DISTINCT module_name FROM reports";
 $res = mysqli_query($con, $sql);
 
+//Get status message
+if (!empty($_GET['status'])) {
+    switch ($_GET['status']) {
+        case 'succ':
+            $statusType = 'alert-success';
+            $statusMsg = 'Members data has been imported successfully.';
+            break;
+        case 'err':
+            $statusType = 'alert-danger';
+            $statusMsg = 'Some problem occurred, please try again.';
+            break;
+        case 'invalid_file':
+            $statusType = 'alert-danger';
+            $statusMsg = 'Please upload a valid CSV file.';
+            break;
+        default:
+            $statusType = '';
+            $statusMsg = '';
+    }
+}
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -26,16 +44,16 @@ $res = mysqli_query($con, $sql);
     <script scr="js/jquery.min.js"
 
     <script>
-        function selectModule(){
-            var x =document.getElementById("module").value;
+        function selectModule() {
+            var x = document.getElementById("module").value;
 
             $.ajax({
-                url:"../php/showModule.php",
+                url: "showModule.php",
                 method: "POST",
                 data: {
-                    id : x
+                    id: x
                 },
-                success: function(data){
+                success: function (data) {
                     $("#ans").html(data);
                 }
             })
@@ -60,16 +78,52 @@ $res = mysqli_query($con, $sql);
 </head>
 
 <body style="padding-bottom: 100px;">
+
+
 <div class="content pb-0">
     <div class="orders">
         <div class="row">
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-body--">
-                        <h1 style="text-align: center; font-weight: bold; margin: auto; padding-top: 50px;">Choose a Module to View</h1>
+                        <h1 style="text-align: center; font-weight: bold; margin: auto; padding-top: 50px;">Add a New
+                            Module</h1>
+                        <form class="modal-content animate" enctype="multipart/form-data" method="post"
+                              action="importData.php">
+                            <div class="row" style="font-size: 20px; margin: 10px; padding: 10px">
+                                <label for="course_name">Choose Course:</label><br>
 
-                        <div class="modal-content animate" style="margin-top: 5px; margin-bottom: 50px; padding: 2%">
-                            <select id="module" onchange="selectModule()" style="width: 50%; padding: 10px; margin: auto;">
+                                <?php
+                                $query = "select course_name from courses";
+                                $data = mysqli_query($con, $query);
+                                $array = [];
+                                while ($row = mysqli_fetch_array($data)) {
+                                    $array[] = $row['course_name'];
+                                }
+                                ?>
+                                <select id="course_name" name="course_name">
+                                    <?php foreach ($array as $arr) { ?>
+                                        <option value="<?php echo $row['course_id'] ?>"> <?php print($arr); ?></option>
+                                    <?php } ?>
+                                </select>
+
+                                <br>
+                                <label for="module_name" style="padding-top: 20px; padding-bottom: 0px; "><b>Enter
+                                        Module Name:</b></label>
+                                <input for="module_name" id="module_name" type="text" name="module_name"
+                                       placeholder="Module Name eg. Software Development Jan22"><br><br>
+                                <input type="file" name="file"/>
+                                <input value="Create Module" id="button" style="margin: 10px; width: 30%;" type="submit"
+                                       value="dashboard.php"
+                                       name="addToUpload">
+                            </div>
+                        </form>
+
+
+                        <h1 style="text-align: center; font-weight: bold; margin: auto; padding-top: 50px;padding-bottom: 50px;">
+                            Quick View of a Module</h1>
+                        <div class="modal-content animate" style="margin-top: 5px; margin-bottom: 5%; padding: 2%">
+                            <select id="module" onchange="selectModule()" style="width: 50%; padding: 10px;">
                                 <?php while ($rows = mysqli_fetch_array($res)) {
                                     ?>
                                     <option value="<?php echo $rows['module_name']; ?> ">
@@ -78,7 +132,6 @@ $res = mysqli_query($con, $sql);
                                 }
                                 ?>
                             </select>
-
                             <div class="row" style=" padding: 2%;">
                                 <table style="padding-top: 20px; margin-top: 20px; width: 90%;" id="quickModuleView">
                                     <thead>
@@ -101,13 +154,11 @@ $res = mysqli_query($con, $sql);
                                 </table>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 </body>
 </html>

@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         header("Location: admin/admin_index.php");
                         die;
                     } else {
-                        header("Location: user_choice.php");
+                        header("Location: index.php");
                         die;
                     }
                 }

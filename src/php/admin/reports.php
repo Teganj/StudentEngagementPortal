@@ -30,7 +30,7 @@ $res=mysqli_query($con,$sql);
                                 <th>User ID</th>
                                <th>Course Name</th>
 							   <th>Module Name</th>
-							   <th>Date</th>
+							   <th>Date Created</th>
 							   <th></th>
 							</tr>
 						 </thead>

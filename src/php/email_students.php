@@ -39,10 +39,10 @@ function send_student_email($email)
 </style>
 
 
-<div class="row" style="width: 100%; padding: 10px">
+<div class="row" style="width: 100%; padding: 10px; overflow-x:auto; height: 400px;">
     <h2>Email Students</h2>
     <!-- Data list table -->
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered" style="height: 250px;">
         <thead class="thead-dark">
         <tr>
             <th>Name</th>

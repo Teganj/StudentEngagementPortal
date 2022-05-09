@@ -59,7 +59,6 @@ if(isset($_GET['type']) && $_GET['type']!=''){
                                                                 <th width="2%">ID</th>
                                                                 <th width="20%">Course Code</th>
                                                                 <th width="20%">Module Name</th>
-                                                                <th width="20%">Module ID</th>
                                                                 <th width="26%"></th>
                                                             </tr>
                                                             </thead>
@@ -69,9 +68,8 @@ if(isset($_GET['type']) && $_GET['type']!=''){
                                                             while($row=mysqli_fetch_assoc($res)){?>
                                                                 <tr>
                                                                     <td><?php echo $row['id']?></td>
-                                                                    <td><?php echo $row['course']?></td>
+                                                                    <td><?php echo $row['course_id']?></td>
                                                                     <td><?php echo $row['module_name']?></td>
-                                                                    <td><?php echo $row['module_id']?></td>
 
                                                                     <td>
                                                                         <?php

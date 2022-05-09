@@ -31,7 +31,6 @@ $res=mysqli_query($con,$sql);
 							   <th width="2%">ID</th>
 							   <th width="20%">Course Code</th>
 							   <th width="20%">Module Name</th>
-                                <th width="20%">Module ID</th>
 							   <th width="26%"></th>
 							</tr>
 						 </thead>
@@ -43,8 +42,7 @@ $res=mysqli_query($con,$sql);
 							   <td><?php echo $row['id']?></td>
 							   <td><?php echo $row['course']?></td>
 							   <td><?php echo $row['module_name']?></td>
-                                <td><?php echo $row['module_id']?></td>
-							  
+
 							   <td>
 								<?php
 								if($row['status']==1){

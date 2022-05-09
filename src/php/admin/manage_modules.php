@@ -7,7 +7,6 @@ $user_data = check_login($con);
 
 isAdmin();
 $module_name = '';
-$module_id = '';
 $course = '';
 $user_id = $user_data['id'];
 
@@ -27,9 +26,8 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
 
 if (isset($_POST['submit'])) {
     $module_name = get_safe_value($con, $_POST['module_name']);
-    $module_id = get_safe_value($con, $_POST['module_id']);
 
-    $res = mysqli_query($con, "select * from modules where module_name='$module_name'");
+    $res = mysqli_query($con, "select * from  where module_name='$module_name'");
     $check = mysqli_num_rows($res);
     if ($check > 0) {
         if (isset($_GET['id']) && $_GET['id'] != '') {
@@ -47,9 +45,9 @@ if (isset($_POST['submit'])) {
 
     if ($msg == '') {
         if (isset($_GET['id']) && $_GET['id'] != '') {
-            mysqli_query($con, "update modules set user_id='$user_id', course='$course', module_name='$module_name', module_id='$module_id' where id='$id'");
+            mysqli_query($con, "update modules set user_id='$user_id', course_id='$course_id', module_name='$module_name' where id='$id'");
         } else {
-            mysqli_query($con, "INSERT INTO modules(user_id, course, module_name, module_id, status) VALUES ('" . $user_id . "', '" . $course . "', '" . $module_name . "', '" . $module_id . "', 1)");
+            mysqli_query($con, "INSERT INTO modules(user_id, course_id, module_name, status) VALUES ('" . $user_id . "', '" . $course . "', '" . $module_name . "', 1)");
         }
         header('location:modules.php');
         die();
@@ -81,12 +79,6 @@ if (isset($_POST['submit'])) {
                                 <label for="module_name" class=" form-control-label">Module Name</label>
                                 <input type="text" name="module_name" placeholder="Enter Module Name"
                                        class="form-control" required value="<?php echo $module_name ?>">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="module_id" class=" form-control-label">Module ID</label>
-                                <input type="text" name="module_id" placeholder="Enter Module ID" class="form-control"
-                                       required value="<?php echo $module_id ?>">
                             </div>
 
                             <div class="form-group">

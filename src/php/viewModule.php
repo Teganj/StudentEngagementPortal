@@ -10,6 +10,8 @@ $module_name = '';
 $module_id = '';
 $course = '';
 $user_id = $user_data['id'];
+$id = $user_data['id'];
+
 
 $msg = '';
 if (isset($_GET['id']) && $_GET['id'] != '') {
@@ -66,17 +68,12 @@ if (isset($_POST['submit'])) {
                             <div class="col-sm-3 sidenav vl">
                                 <div>
                                     <h3>Update the CSV here!</h3><br>
-                                    <input type="file" name="file"/><br>
-                                    <input value="Update Module" id="button" style="margin-top: 10px; width: 50%;"
-                                           type="submit" value="dashboard.php"
-                                           name="addToUpload">
-
-                                    <!-- Display status message -->
-                                    <?php if (!empty($statusMsg)) { ?>
-                                        <div class="col-xs-12">
-                                            <div class="alert <?php echo $statusMsg; ?>"><?php echo $statusMsg; ?></div>
-                                        </div>
-                                    <?php } ?>
+                                    <?php
+                                    $i=1;
+                                    while($row=mysqli_fetch_assoc($res)){?>
+                                                <?php
+                                                echo "<span class='badge badge-edit'><a href='user_manage_modules.php?id=".$row['id']."'>Update</a></span>&nbsp;";}?>
+                                </div>
                                 </div>
                                 <?php include 'email_students.php' ?>
                             </div>

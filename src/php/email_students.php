@@ -59,7 +59,9 @@ function send_student_email($email)
                 <tr>
                     <td><?php echo $row['name']; ?></td>
                     <td>
-                        <button onclick="send_student_email()">Email</button>
+                        <input type="submit" value="Next">
+
+                        <button onclick="send_student_email($email)">Email</button>
                     </td>
                 </tr>
             <?php }

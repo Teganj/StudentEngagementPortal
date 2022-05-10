@@ -46,7 +46,7 @@ if(isset($_GET['type']) && $_GET['type']!=''){
                                             <div class="card">
                                                 <div class="card-body" style="padding-bottom: 100px;">
                                                     <h1 class="box-title">Welcome, <?php echo $user_data['name']; ?></h1>
-                                                    <h4 class="box-link"><a href="addModule.php">Add Module</a> </h4>
+                                                    <h4 class="box-link"><a href="user_manage_modules.php">Add Module</a> </h4>
 
 
                                                 <div class="card-body--">
@@ -75,7 +75,7 @@ if(isset($_GET['type']) && $_GET['type']!=''){
                                                                         <?php
                                                                         echo "<span class='badge badge-success'><a href='viewModule.php?id=".$row['id']."'>View</a></span>&nbsp;";
 
-                                                                        echo "<span class='badge badge-edit'><a href='editModule.php?id=".$row['id']."'>Edit</a></span>&nbsp;";
+                                                                        echo "<span class='badge badge-edit'><a href='user_manage_modules.php?id=".$row['id']."'>Edit</a></span>&nbsp;";
 
                                                                         echo "<span class='badge badge-delete'><a href='?type=delete&id=".$row['id']."'>Delete</a></span>";
 

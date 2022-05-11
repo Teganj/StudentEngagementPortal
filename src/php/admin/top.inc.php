@@ -39,8 +39,8 @@ if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_LOGIN']!=''){
 				  <li class="menu-item-has-children dropdown">
                      <a href="courses.php" > Courses </a>
                   </li>
-				
-                  
+
+
 				  <li class="menu-item-has-children dropdown">
                      <a href="reports.php" > Report Management </a>
                   </li>
@@ -57,19 +57,16 @@ if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_LOGIN']!=''){
       </aside>
       <div id="right-panel" class="right-panel" >
          <header id="header" class="header" style="background-color: #784794;">
-             <a class="navbar-brand" href="admin_index.php" style="color: white; font-weight: bold;">Student Engagement</a>
+             <a class="navbar-brand" href="admin_index.php" style="color: white; font-weight: bold;">Student Engagement Dashboard</a>
              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                  <span class="navbar-toggler-icon"></span>
              </button>
 
-            <div class="top-right">
-               <div class="header-menu">
-                  <div class="user-area dropdown float-right">
-                     <div class="user-menu dropdown-menu">
-                        <a class="nav-link" href="../logout.php"><i class="fa fa-power-off"></i>LOGOUT</a>
+             <div class="top-right">
+                 <div class="header-menu">
+                     <div class="user-area dropdown float-right">
                      </div>
-                  </div>
-               </div>
-            </div>
+                 </div>
+             </div>
          </header>

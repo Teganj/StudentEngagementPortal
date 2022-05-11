@@ -17,7 +17,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
     }
 }
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit']) && !empty($_POST['course_name']) && !empty($_POST['course_code'])) {
     $course_name = get_safe_value($con, $_POST['course_name']);
     $course_code = get_safe_value($con, $_POST['course_code']);
 

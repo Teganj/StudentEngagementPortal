@@ -39,10 +39,10 @@ function send_student_email($email)
 </style>
 
 
-<div style="width: 100%; overflow-x:auto; height: 100%; margin-top: 10px;">
+<div style="width: 100%; overflow-x:auto; height: 300px; margin-top: 10px;">
     <h3>Email Students</h3>
     <!-- Data list table -->
-    <table class="table table-striped table-bordered" style="height: 250px;">
+    <table class="table table-striped table-bordered" style="height: 250px; overflow-x:auto; ">
         <thead class="thead-dark">
         <tr>
             <th>Name</th>
@@ -52,16 +52,14 @@ function send_student_email($email)
         <tbody>
         <?php
         // Get rows
-        $result = $con->query("SELECT * FROM reports ORDER BY module_id DESC");
+        $result = $con->query("SELECT * FROM reports ORDER BY id DESC");
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 ?>
                 <tr>
                     <td><?php echo $row['name']; ?></td>
                     <td>
-                        <input type="submit" value="Next">
-
-                        <button onclick="send_student_email($email)">Email</button>
+                        <button type="submit" value="Next"onclick="send_student_email()">Email</button>
                     </td>
                 </tr>
             <?php }

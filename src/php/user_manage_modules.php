@@ -6,16 +6,16 @@ include("check_login.php");
 $user_data = check_login($con);
 
 isAdmin();
+$msg = '';
 $module_name = '';
 $course = '';
-$course_id = '';
 $user_id = $user_data['id'];
-$get_module_id = "SELECT id FROM `modules`";
-$modules = mysqli_query($con,$get_module_id);
 
-$msg = '';
 $sql = "SELECT * FROM `courses`";
 $all_courses = mysqli_query($con,$sql);
+
+$get_module_id = "SELECT id FROM `modules`";
+$modules = mysqli_query($con,$get_module_id);
 
 
 if (isset($_GET['id']) && $_GET['id'] != '') {
@@ -80,6 +80,7 @@ if (isset($_POST['submit'])) {
 
                         mysqli_query($con, "UPDATE reports set user_id='$user_id', module_id='$module_id', name='$name', email='$email', activity1='$activity1', activity2='$activity2', activity3='$activity3', activity4='$activity4', activity5='$activity5', activity6='$activity6' , activity7='$activity7', activity8='$activity8', activity9='$activity9', activity10='$activity10', activity11='$activity11', activity12='$activity12'");
                     }
+
                     fclose($csvFile);
 
                     $msg = 'Module Imported Successfully';
@@ -112,8 +113,6 @@ if (isset($_POST['submit'])) {
                     $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
                     fgetcsv($csvFile);
                     while (($line = fgetcsv($csvFile)) !== FALSE) {
-                        $user_id = $user_data['id'];
-                        $module_id = $modules['id'];
                         $name = $line[0];
                         $email = $line[1];
                         //hardcoding completion elements wont work,need to count them from db first, then loop
@@ -133,6 +132,7 @@ if (isset($_POST['submit'])) {
                         mysqli_query($con,"INSERT INTO reports (user_id, module_id name, email, activity1, activity2, activity3, activity4, activity5, activity6 , activity7, activity8, activity9 , activity10, activity11, activity12) VALUES ('" . $user_id . "', '" . $module_id . "', '" . $name . "', '" . $email . "', '" . $activity1 . "','" . $activity2 . "','" . $activity3 . "' , '" . $activity4 . "','" . $activity5 . "','" . $activity6 . "', '" . $activity7 . "','" . $activity8 . "','" . $activity9 . "' , '" . $activity10 . "','" . $activity11 . "','" . $activity12 . "')");
                     }
                     fclose($csvFile);
+
 
                     $msg = 'Module Imported Successfully';
                 } else {
@@ -174,11 +174,8 @@ if (isset($_POST['submit'])) {
                                     while ($courses = mysqli_fetch_array(
                                         $all_courses,MYSQLI_ASSOC)):;
                                         ?>
-
-                                        <option value="<?php echo $courses["course_name"];
-                                        ?>">
-                                            <?php echo $courses["course_name"];
-                                            ?>
+                                        <option value="<?php echo $courses["course_name"];?>">
+                                            <?php echo $courses["course_name"];?>
                                         </option>
                                     <?php
                                     endwhile;

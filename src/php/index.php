@@ -6,7 +6,7 @@ require('top.inc.php');
 
 $user_data = check_login($con);
 $id = $user_data['id'];
-$sql="select * from modules where user_id='$id' order by id desc";
+$sql="select * from modules order by id desc";
 $res=mysqli_query($con,$sql);
 
 if(isset($_GET['type']) && $_GET['type']!=''){

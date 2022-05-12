@@ -6,21 +6,16 @@ include("../check_login.php");
 $user_data = check_login($con);
 
 isAdmin();
+$msg = '';
 $module_name = '';
-$course_id = '';
-$course_id = '';
+$course = '';
 $user_id = $user_data['id'];
 
-$msg = '';
 $sql = "SELECT * FROM `courses`";
 $all_courses = mysqli_query($con,$sql);
 
-//File upload path
-$targetDir = "../uploads/";
-$fileName = basename($_FILES["file"]["name"]);
-$targetFilePath = $targetDir . $fileName;
-$fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
-isAdmin();
+$get_module_id = "SELECT id FROM `modules`";
+$modules = mysqli_query($con,$get_module_id);
 
 
 if (isset($_GET['id']) && $_GET['id'] != '') {
@@ -85,18 +80,7 @@ if (isset($_POST['submit'])) {
                         mysqli_query($con, "UPDATE reports set user_id='$user_id', name='$name', email='$email', activity1='$activity1', activity2='$activity2', activity3='$activity3', activity4='$activity4', activity5='$activity5', activity6='$activity6' , activity7='$activity7', activity8='$activity8', activity9='$activity9', activity10='$activity10', activity11='$activity11', activity12='$activity12'");
                     }
 
-                    //Upload File to Server & Save name in DB table
-                    if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
-                        // Insert file name into database
-                        $course_name = $_POST['course_name'];
-                        $module_name = $_POST['module_name'];
-                        $user_id = $user_data['id'];
 
-                        $con->query("UPDATE uploads set user_id='$user_id', file_name='$fileName', course_name='$course_name', module_name='$module_name', uploaded_on='NOW()')");
-
-                    } else {
-                        $msg = 'An Error has occurred, please try again.';
-                    }
                     fclose($csvFile);
 
                     $msg = 'Module Imported Successfully';

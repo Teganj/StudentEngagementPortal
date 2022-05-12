@@ -1,13 +1,14 @@
 <?php
 require('top.inc.php');
-include("../connection.php");
-include("../check_login.php");
+include("connection.php");
+include("check_login.php");
 
 $user_data = check_login($con);
 
 isAdmin();
 $msg = '';
 $module_name = '';
+$module_id ='';
 $course = '';
 $user_id = $user_data['id'];
 
@@ -33,6 +34,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
 
 if (isset($_POST['submit'])) {
     $module_name = get_safe_value($con, $_POST['module_name']);
+    $course = get_safe_value($con, $_POST['course']);
     $res = mysqli_query($con, "select * from modules where module_name='$module_name'");
     $check = mysqli_num_rows($res);
 
@@ -61,6 +63,7 @@ if (isset($_POST['submit'])) {
                     fgetcsv($csvFile);
                     while (($line = fgetcsv($csvFile)) !== FALSE) {
                         $user_id = $user_data['id'];
+                        $module_id = $modules['id'];
                         $name = $line[0];
                         $email = $line[1];
                         //hardcoding completion elements wont work,need to count them from db first, then loop
@@ -77,9 +80,8 @@ if (isset($_POST['submit'])) {
                         $activity11 = $line[12];
                         $activity12 = $line[13];
 
-                        mysqli_query($con, "UPDATE reports set user_id='$user_id', name='$name', email='$email', activity1='$activity1', activity2='$activity2', activity3='$activity3', activity4='$activity4', activity5='$activity5', activity6='$activity6' , activity7='$activity7', activity8='$activity8', activity9='$activity9', activity10='$activity10', activity11='$activity11', activity12='$activity12'");
+                        mysqli_query($con, "UPDATE reports set user_id='$user_id', module_id='$module_id', name='$name', email='$email', activity1='$activity1', activity2='$activity2', activity3='$activity3', activity4='$activity4', activity5='$activity5', activity6='$activity6' , activity7='$activity7', activity8='$activity8', activity9='$activity9', activity10='$activity10', activity11='$activity11', activity12='$activity12'");
                     }
-
 
                     fclose($csvFile);
 
@@ -98,13 +100,8 @@ if (isset($_POST['submit'])) {
 
 
 
-        }else{
+        }else {
             mysqli_query($con, "INSERT INTO modules(user_id, course, module_name, uploaded_on, status) VALUES ('" . $user_id . "', '" . $course . "', '" . $module_name . "', NOW(), 1)");
-
-
-
-
-
 
 
             $allowTypes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
@@ -114,6 +111,7 @@ if (isset($_POST['submit'])) {
                     fgetcsv($csvFile);
                     while (($line = fgetcsv($csvFile)) !== FALSE) {
                         $user_id = $user_data['id'];
+                        $module_id = 1;
                         $name = $line[0];
                         $email = $line[1];
                         //hardcoding completion elements wont work,need to count them from db first, then loop
@@ -130,21 +128,10 @@ if (isset($_POST['submit'])) {
                         $activity11 = $line[12];
                         $activity12 = $line[13];
 
-                        mysqli_query($con,"INSERT INTO reports (user_id, name, email, activity1, activity2, activity3, activity4, activity5, activity6 , activity7, activity8, activity9 , activity10, activity11, activity12) VALUES ('" . $user_id . "', '" . $name . "', '" . $email . "', '" . $activity1 . "','" . $activity2 . "','" . $activity3 . "' , '" . $activity4 . "','" . $activity5 . "','" . $activity6 . "', '" . $activity7 . "','" . $activity8 . "','" . $activity9 . "' , '" . $activity10 . "','" . $activity11 . "','" . $activity12 . "')");
-                    }
-                    //Upload File to Server & Save name in DB table
-                    if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
-                        // Insert file name into database
-                        $course_name = $_POST['course_name'];
-                        $module_name = $_POST['module_name'];
-                        $user_id = $user_data['id'];
-
-                        $con->query("INSERT into uploads (user_id, file_name, course_name, module_name, uploaded_on) VALUES ('" . $user_id . "', '" . $fileName . "', '" . $course_name . "', '" . $module_name . "', NOW())");
-
-                    } else {
-                        $msg = 'An Error has occurred, please try again.';
+                        mysqli_query($con, "INSERT INTO reports (user_id,  module_id, name, email, activity1, activity2, activity3, activity4, activity5, activity6 , activity7, activity8, activity9, activity10, activity11, activity12) VALUES ('" . $user_id . "', '" . $module_id . "', '" . $name . "', '" . $email . "', '" . $activity1 . "','" . $activity2 . "','" . $activity3 . "' , '" . $activity4 . "','" . $activity5 . "','" . $activity6 . "', '" . $activity7 . "','" . $activity8 . "','" . $activity9 . "' , '" . $activity10 . "','" . $activity11 . "','" . $activity12 . "')");
                     }
                     fclose($csvFile);
+
 
                     $msg = 'Module Imported Successfully';
                 } else {
@@ -179,18 +166,15 @@ if (isset($_POST['submit'])) {
                                 <input type="text" name="module_name" placeholder="Enter Module Name" class="form-control" required value="<?php echo $module_name?>">
                             </div>
                             <div class="form-group">
-                                <label for="course_id" class=" form-control-label">Course ID</label>
-                                <select class="form-control" name="course_id" required>
+                                <label for="course" class=" form-control-label">Course ID</label>
+                                <select class="form-control" name="course" required>
                                     <option value=''>Select</option>
                                     <?php
                                     while ($courses = mysqli_fetch_array(
                                         $all_courses,MYSQLI_ASSOC)):;
                                         ?>
-
-                                        <option value="<?php echo $courses["id"];
-                                        ?>">
-                                            <?php echo $courses["course_name"];
-                                            ?>
+                                        <option value="<?php echo $courses["course_name"];?>">
+                                            <?php echo $courses["course_name"];?>
                                         </option>
                                     <?php
                                     endwhile;

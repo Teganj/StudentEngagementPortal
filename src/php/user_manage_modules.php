@@ -8,6 +8,7 @@ $user_data = check_login($con);
 isAdmin();
 $msg = '';
 $module_name = '';
+$module_id ='';
 $course = '';
 $user_id = $user_data['id'];
 
@@ -33,6 +34,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
 
 if (isset($_POST['submit'])) {
     $module_name = get_safe_value($con, $_POST['module_name']);
+    $course = get_safe_value($con, $_POST['course']);
     $res = mysqli_query($con, "select * from modules where module_name='$module_name'");
     $check = mysqli_num_rows($res);
 
@@ -98,60 +100,57 @@ if (isset($_POST['submit'])) {
 
 
 
-        }else{
-            mysqli_query($con, "INSERT INTO modules(user_id, course, module_name, uploaded_on, status) VALUES ('" . $user_id . "', '" . $course . "', '" . $module_name . "', NOW(), 1)");
+        }else {
+    mysqli_query($con, "INSERT INTO modules(user_id, course, module_name, uploaded_on, status) VALUES ('" . $user_id . "', '" . $course . "', '" . $module_name . "', NOW(), 1)");
 
 
+    $allowTypes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
+    if (!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $allowTypes)) {
+        if (is_uploaded_file($_FILES['file']['tmp_name'])) {
+            $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
+            fgetcsv($csvFile);
+            while (($line = fgetcsv($csvFile)) !== FALSE) {
+                $user_id = $user_data['id'];
+                $module_id = 1;
+                $name = $line[0];
+                $email = $line[1];
+                //hardcoding completion elements wont work,need to count them from db first, then loop
+                $activity1 = $line[2];
+                $activity2 = $line[3];
+                $activity3 = $line[4];
+                $activity4 = $line[5];
+                $activity5 = $line[6];
+                $activity6 = $line[7];
+                $activity7 = $line[8];
+                $activity8 = $line[9];
+                $activity9 = $line[10];
+                $activity10 = $line[11];
+                $activity11 = $line[12];
+                $activity12 = $line[13];
 
-
-
-
-
-            $allowTypes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
-            if (!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $allowTypes)) {
-                if (is_uploaded_file($_FILES['file']['tmp_name'])) {
-                    $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
-                    fgetcsv($csvFile);
-                    while (($line = fgetcsv($csvFile)) !== FALSE) {
-                        $name = $line[0];
-                        $email = $line[1];
-                        //hardcoding completion elements wont work,need to count them from db first, then loop
-                        $activity1 = $line[2];
-                        $activity2 = $line[3];
-                        $activity3 = $line[4];
-                        $activity4 = $line[5];
-                        $activity5 = $line[6];
-                        $activity6 = $line[7];
-                        $activity7 = $line[8];
-                        $activity8 = $line[9];
-                        $activity9 = $line[10];
-                        $activity10 = $line[11];
-                        $activity11 = $line[12];
-                        $activity12 = $line[13];
-
-                        mysqli_query($con,"INSERT INTO reports (user_id, module_id name, email, activity1, activity2, activity3, activity4, activity5, activity6 , activity7, activity8, activity9 , activity10, activity11, activity12) VALUES ('" . $user_id . "', '" . $module_id . "', '" . $name . "', '" . $email . "', '" . $activity1 . "','" . $activity2 . "','" . $activity3 . "' , '" . $activity4 . "','" . $activity5 . "','" . $activity6 . "', '" . $activity7 . "','" . $activity8 . "','" . $activity9 . "' , '" . $activity10 . "','" . $activity11 . "','" . $activity12 . "')");
-                    }
-                    fclose($csvFile);
-
-
-                    $msg = 'Module Imported Successfully';
-                } else {
-                    $msg = 'An Error has occurred, please try again.';
-                }
-            } else {
-                $msg = 'Please Upload a CSV file.';
+                mysqli_query($con, "INSERT INTO reports (user_id,  module_id, name, email, activity1, activity2, activity3, activity4, activity5, activity6 , activity7, activity8, activity9, activity10, activity11, activity12) VALUES ('" . $user_id . "', '" . $module_id . "', '" . $name . "', '" . $email . "', '" . $activity1 . "','" . $activity2 . "','" . $activity3 . "' , '" . $activity4 . "','" . $activity5 . "','" . $activity6 . "', '" . $activity7 . "','" . $activity8 . "','" . $activity9 . "' , '" . $activity10 . "','" . $activity11 . "','" . $activity12 . "')");
             }
+            fclose($csvFile);
 
 
-
-
-
-
-
+            $msg = 'Module Imported Successfully';
+        } else {
+            $msg = 'An Error has occurred, please try again.';
         }
-        header('location:index.php');
-        die();
+    } else {
+        $msg = 'Please Upload a CSV file.';
     }
+
+
+
+
+
+
+
+}
+header('location:index.php');
+die();
+}
 }
 ?>
 <div class="content pb-0">

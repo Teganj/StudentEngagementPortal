@@ -63,35 +63,41 @@ if (isset($_POST['submit'])) {
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header"><strong><h3>Module Engagement Dashboard</h3></strong><small></small></div>
-                    <div class="row content" style="width: 100%;">
-                        <div class="col-sm-3 sidenav vl" style="float: left;">
+
+                    <div class="card-body" style="padding-bottom: 100px;">
+                        <h1 class="box-title">Module Engagement Dashboard for: <?php echo $module_name; ?></h1>
+                        <?php
+                        $i = 1;
+                        while ($row = mysqli_fetch_assoc($res)) {
+                            ?>
                             <div>
-                                <h3>Update the CSV here!</h3><br>
                                 <?php
-                                $i=1;
-                                while($row=mysqli_fetch_assoc($res)){?>
-                                    <?php
-                                    echo "<span class='badge badge-edit'><a href='user_manage_modules.php?id=".$row['id']."'>Update</a></span>&nbsp;";}?>
+                                echo "<h4 class='box-link'><a href='user_manage_modules.php?id=" . $row['id'] . "'>Update Module</a></h4>
+";
+                                ?>
                             </div>
+                        <?php } ?>
+
+                        <div class="row row col-lg-12">
                             <?php include 'email_students.php' ?>
+                            <div class="col-sm-8"
+                                 style="width:50%; padding-top: 20px; float: right; border: black solid 3px; background-color: #0c5460; height: 250px;">
+                                <?php include 'pie_chart.php' ?>
+                            </div>
                         </div>
+                    </div>
 
-                    </div>
-                    <div class="col-sm-8" style="padding-top: 20px; float: right; border: black solid 3px; background-color: #0c5460">
-                        <?php include 'pie_chart.php' ?>
-                    </div>
-                </div>
-                <div style="padding:20px;">
-                    <div class="row col-lg-12" style="border: black solid 3px; margin: auto;">
-                        <?php include 'bar_chart.php' ?>
-                    </div>
-                </div>
 
-                <div class="row col-lg-12" style="overflow-x:auto; padding: 20px; margin: auto;">
-                    <!-- Data list table -->
-                    <table class="table table-striped table-bordered">
-                        <thead class="thead-dark">
+                    <div style="padding:20px;">
+                        <div class="row col-lg-12" style="border: black solid 3px; margin: auto;">
+                            <?php include 'bar_chart.php' ?>
+                        </div>
+                    </div>
+
+                    <div class="row col-lg-12" style="overflow-x:auto; padding: 20px; margin: auto;">
+                        <!-- Data list table -->
+                        <table class="table table-striped table-bordered">
+                            <thead class="thead-dark">
                             <tr>
                                 <th>Name</th>
                                 <th>Activity 1</th>
@@ -107,42 +113,42 @@ if (isset($_POST['submit'])) {
                                 <th>Activity 11</th>
                                 <th>Activity 12</th>
                             </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        // Get rows loops
-                        $result = $con->query("SELECT * FROM reports ORDER BY module_id DESC");
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                ?>
-                                <tr>
-                                    <td><?php echo $row['name']; ?></td>
-                                    <td><?php echo $row['activity1']; ?></td>
-                                    <td><?php echo $row['activity2']; ?></td>
-                                    <td><?php echo $row['activity3']; ?></td>
-                                    <td><?php echo $row['activity4']; ?></td>
-                                    <td><?php echo $row['activity5']; ?></td>
-                                    <td><?php echo $row['activity6']; ?></td>
-                                    <td><?php echo $row['activity7']; ?></td>
-                                    <td><?php echo $row['activity8']; ?></td>
-                                    <td><?php echo $row['activity9']; ?></td>
-                                    <td><?php echo $row['activity10']; ?></td>
-                                    <td><?php echo $row['activity11']; ?></td>
-                                    <td><?php echo $row['activity12']; ?></td>
-                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            // Get rows loops
+                            $result = $con->query("SELECT * FROM reports ORDER BY module_id DESC");
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $row['name']; ?></td>
+                                        <td><?php echo $row['activity1']; ?></td>
+                                        <td><?php echo $row['activity2']; ?></td>
+                                        <td><?php echo $row['activity3']; ?></td>
+                                        <td><?php echo $row['activity4']; ?></td>
+                                        <td><?php echo $row['activity5']; ?></td>
+                                        <td><?php echo $row['activity6']; ?></td>
+                                        <td><?php echo $row['activity7']; ?></td>
+                                        <td><?php echo $row['activity8']; ?></td>
+                                        <td><?php echo $row['activity9']; ?></td>
+                                        <td><?php echo $row['activity10']; ?></td>
+                                        <td><?php echo $row['activity11']; ?></td>
+                                        <td><?php echo $row['activity12']; ?></td>
+                                    </tr>
 
-                            <?php }
+                                <?php }
                             } else { ?>
-                            <tr>
-                                <td colspan="5">No data found...</td>
-                            </tr>
-                        <?php }
-                        ?>
-                        </tbody>
-                    </table>
+                                <tr>
+                                    <td colspan="5">No data found...</td>
+                                </tr>
+                            <?php }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 

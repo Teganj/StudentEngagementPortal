@@ -3,6 +3,13 @@ include_once 'connection.php';
 $error = array();
 require "mailer.php";
 
+
+$sql = "SELECT * FROM `courses`";
+$all_courses = mysqli_query($con,$sql);
+
+$module_email = "";
+$email_list = mysqli_query($con,$sql);
+
 function send_student_email($email)
 {
     global $con;
@@ -38,37 +45,37 @@ function send_student_email($email)
     }
 </style>
 
+<div class="card-body--">
+    <h1 class="box-title">Email Students</h1>
 
-<div style="width: 100%; overflow-x:auto; height: 300px; margin-top: 10px;">
-    <h3>Email Students</h3>
-    <!-- Data list table -->
-    <table class="table table-striped table-bordered" style="height: 250px; overflow-x:auto; ">
-        <thead class="thead-dark">
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php
-        // Get rows
-        $result = $con->query("SELECT * FROM reports ORDER BY id DESC");
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                ?>
-                <tr>
-                    <td><?php echo $row['name']; ?></td>
-                    <td>
-                        <button type="submit" value="Next"onclick="send_student_email()">Email</button>
-                    </td>
-                </tr>
-            <?php }
-        } else { ?>
+    <div class="table-stats order-table ov-h">
+        <table class="table " style="height: 250px; overflow-x:auto; width: 40%; float: left;">
+            <thead>
             <tr>
-                <td colspan="5">No student(s) found...</td>
+                <th width="20%">Student Name</th>
+                <th width="10%">Email</th>
             </tr>
-        <?php }
-        ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <?php
+            // Get rows
+            $result = $con->query("SELECT * FROM reports where module_id='$id' ORDER BY id DESC");
+            if ($result->num_rows > 0) {
+                $i=1;
+                while($row=mysqli_fetch_assoc($res)){?>
+                    <tr>
+                        <td><?php echo $row['name']?></td>
+                        <td>
+                            <button type="submit" value="Next"onclick="send_student_email()">Email</button>
+                        </td>
+                    </tr>
+                <?php }
+            } else { ?>
+                <tr>
+                    <td colspan="5">No student(s) found...</td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+    </div>
 </div>

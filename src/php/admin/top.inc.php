@@ -42,7 +42,7 @@ if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_LOGIN']!=''){
 
 
 				  <li class="menu-item-has-children dropdown">
-                     <a href="reports.php" > Report Management </a>
+                     <a href="reports.php" > Dashboard Management </a>
                   </li>
 				  <li class="menu-item-has-children dropdown">
                      <a href="modules.php" > Modules </a>

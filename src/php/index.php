@@ -5,10 +5,9 @@ include("check_login.php");
 require('top.inc.php');
 
 $user_data = check_login($con);
-
+$id = $user_data['id'];
 $sql="select * from modules where user_id='$id' order by id desc";
-$res=mysqli_query($con,$sql);$id = $user_data['id'];
-
+$res=mysqli_query($con,$sql);
 
 if(isset($_GET['type']) && $_GET['type']!=''){
     $type=get_safe_value($con,$_GET['type']);
@@ -50,7 +49,7 @@ if(isset($_GET['type']) && $_GET['type']!=''){
                                         <thead>
                                             <tr>
                                                 <th width="2%">ID</th>
-                                                <th width="20%">Course Code</th>
+                                                <th width="20%">Course</th>
                                                 <th width="20%">Module Name</th>
                                                 <th width="26%"></th>
                                             </tr>
@@ -61,7 +60,7 @@ if(isset($_GET['type']) && $_GET['type']!=''){
                                         while($row=mysqli_fetch_assoc($res)){?>
                                             <tr>
                                                 <td><?php echo $row['id']?></td>
-                                                <td><?php echo $row['course_id']?></td>
+                                                <td><?php echo $row['course']?></td>
                                                 <td><?php echo $row['module_name']?></td>
                                                 <td>
                                                     <?php

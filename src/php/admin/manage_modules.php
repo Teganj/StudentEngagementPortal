@@ -15,6 +15,13 @@ $msg = '';
 $sql = "SELECT * FROM `courses`";
 $all_courses = mysqli_query($con,$sql);
 
+//File upload path
+$targetDir = "../uploads/";
+$fileName = basename($_FILES["file"]["name"]);
+$targetFilePath = $targetDir . $fileName;
+$fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+isAdmin();
+
 
 if (isset($_GET['id']) && $_GET['id'] != '') {
     $id = get_safe_value($con, $_GET['id']);
@@ -50,7 +57,7 @@ if (isset($_POST['submit'])) {
 
     if($msg==''){
         if(isset($_GET['id']) && $_GET['id']!=''){
-            mysqli_query($con, "update modules set user_id='$user_id', course_id='$course_id', module_name='$module_name', uploaded_on='NOW()' where id='$id'");
+            mysqli_query($con, "update modules set user_id='$user_id', course='$course', module_name='$module_name', uploaded_on='NOW()' where id='$id'");
 
             $allowTypes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
             if (!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $allowTypes)) {
@@ -77,6 +84,19 @@ if (isset($_POST['submit'])) {
 
                         mysqli_query($con, "UPDATE reports set user_id='$user_id', name='$name', email='$email', activity1='$activity1', activity2='$activity2', activity3='$activity3', activity4='$activity4', activity5='$activity5', activity6='$activity6' , activity7='$activity7', activity8='$activity8', activity9='$activity9', activity10='$activity10', activity11='$activity11', activity12='$activity12'");
                     }
+
+                    //Upload File to Server & Save name in DB table
+                    if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
+                        // Insert file name into database
+                        $course_name = $_POST['course_name'];
+                        $module_name = $_POST['module_name'];
+                        $user_id = $user_data['id'];
+
+                        $con->query("UPDATE uploads set user_id='$user_id', file_name='$fileName', course_name='$course_name', module_name='$module_name', uploaded_on='NOW()')");
+
+                    } else {
+                        $msg = 'An Error has occurred, please try again.';
+                    }
                     fclose($csvFile);
 
                     $msg = 'Module Imported Successfully';
@@ -95,7 +115,7 @@ if (isset($_POST['submit'])) {
 
 
         }else{
-            mysqli_query($con, "INSERT INTO modules(user_id, course_id, module_name, uploaded_on, status) VALUES ('" . $user_id . "', '" . $course_id . "', '" . $module_name . "', NOW(), 1)");
+            mysqli_query($con, "INSERT INTO modules(user_id, course, module_name, uploaded_on, status) VALUES ('" . $user_id . "', '" . $course . "', '" . $module_name . "', NOW(), 1)");
 
 
 
@@ -127,6 +147,18 @@ if (isset($_POST['submit'])) {
                         $activity12 = $line[13];
 
                         mysqli_query($con,"INSERT INTO reports (user_id, name, email, activity1, activity2, activity3, activity4, activity5, activity6 , activity7, activity8, activity9 , activity10, activity11, activity12) VALUES ('" . $user_id . "', '" . $name . "', '" . $email . "', '" . $activity1 . "','" . $activity2 . "','" . $activity3 . "' , '" . $activity4 . "','" . $activity5 . "','" . $activity6 . "', '" . $activity7 . "','" . $activity8 . "','" . $activity9 . "' , '" . $activity10 . "','" . $activity11 . "','" . $activity12 . "')");
+                    }
+                    //Upload File to Server & Save name in DB table
+                    if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
+                        // Insert file name into database
+                        $course_name = $_POST['course_name'];
+                        $module_name = $_POST['module_name'];
+                        $user_id = $user_data['id'];
+
+                        $con->query("INSERT into uploads (user_id, file_name, course_name, module_name, uploaded_on) VALUES ('" . $user_id . "', '" . $fileName . "', '" . $course_name . "', '" . $module_name . "', NOW())");
+
+                    } else {
+                        $msg = 'An Error has occurred, please try again.';
                     }
                     fclose($csvFile);
 

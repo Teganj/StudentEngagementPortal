@@ -1,7 +1,7 @@
 <?php
 require('top.inc.php');
-include("connection.php");
-include("check_login.php");
+include("../connection.php");
+include("../check_login.php");
 
 $user_data = check_login($con);
 
@@ -72,7 +72,7 @@ if (isset($_POST['submit'])) {
                         $activity10 = $line[11];
                         $activity11 = $line[12];
                         $activity12 = $line[13];
-                        mysqli_query($con, "UPDATE reports set user_id='$user_id', module_name='$module_name', name='$name', email='$email', activity1='$activity1', activity2='$activity2', activity3='$activity3', activity4='$activity4', activity5='$activity5', activity6='$activity6' , activity7='$activity7', activity8='$activity8', activity9='$activity9', activity10='$activity10', activity11='$activity11', activity12='$activity12'");
+                        mysqli_query($con, "UPDATE reports set user_id='$user_id', module_name='$module_name', name='$name', email='$email', activity1='$activity1', activity2='$activity2', activity3='$activity3', activity4='$activity4', activity5='$activity5', activity6='$activity6' , activity7='$activity7', activity8='$activity8', activity9='$activity9', activity10='$activity10', activity11='$activity11', activity12='$activity12' where module_name='$module_name'");
                     }
                     fclose($csvFile);
                     $msg = 'Module Imported Successfully';

@@ -1,81 +1,111 @@
 <?php
 include_once 'connection.php';
-$error = array();
 require "mailer.php";
+$error = array();
 
-
-$sql = "SELECT * FROM `courses`";
-$all_courses = mysqli_query($con,$sql);
-
-$module_email = "";
-$email_list = mysqli_query($con,$sql);
-
-function send_student_email($email)
-{
-    global $con;
-    // the message
-    $email = addslashes($email);
-    $msg = "Dear student,\nAccording to your Moodle records, there are items outstanding 
-           due to be completed.\nPlease ensure you address these items before class. \n
-           Please note that each week of live classes relies directly on the Moodle content 
-           labelled for that week, and therefore it is easy to get left behind in class if 
-           you do not keep up on Moodle\nIf you need help catching up, please reach out and 
-           speak to Computing Support as soon as possible. Their email is computingsupport@ncirl.ie.
-           They will be happy to help you catch up.\nKind regards,\nOnline Learning Support Team";
-
-    // use wordwrap() if lines are longer than 70 characters
-    $msg = wordwrap($msg, 70);
-
-    // send email
-    send_mail($row['email'], "Reminder - Incomplete Lesson/Lab", $msg);
-
-    echo 'Email Sent.';
-
-}
-
+$query = "select * from reports";
+$statement = $con->prepare($query);
+$statement->execute();
+$result = $statement->fetch();
 ?>
-
-<style>
-    tr:nth-child(even) {
-        background-color: rgba(150, 212, 212, 0.4);
-    }
-
-    th:nth-child(even), td:nth-child(even) {
-        background-color: rgba(150, 212, 212, 0.4);
-    }
-</style>
-
-<div class="card-body--">
-    <h1 class="box-title">Email Students</h1>
-
-    <div class="table-stats order-table ov-h">
-        <table class="table " style="height: 250px; overflow-x:auto; width: 40%; float: left;">
-            <thead>
+<script scr="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+<div class="container">
+    <h3 class="box-title" align="center">Email Students</h3>
+    <br/>
+    <div class="table-responsive" style="width: 100%">
+        <table class="table table-bordered table-striped">
             <tr>
-                <th width="20%">Student Name</th>
-                <th width="10%">Email</th>
+                <th>Student Name</th>
+                <th>Email</th>
+                <th>Select</th>
+                <th>Action</th>
             </tr>
-            </thead>
-            <tbody>
+
             <?php
-            // Get rows
-            $result = $con->query("SELECT * FROM reports where module_id='$id' ORDER BY id DESC");
-            if ($result->num_rows > 0) {
-                $i=1;
-                while($row=mysqli_fetch_assoc($res)){?>
+            $count = 0;
+            if (is_array($result) || is_object($result)) {
+                foreach ($result as $row) {
+                    $count = $count + 1;
+                    ?>
                     <tr>
-                        <td><?php echo $row['name']?></td>
+                        <td><?php echo $row['name']; ?></td>
+                        <td><?php echo $row['email']; ?></td>
                         <td>
-                            <button type="submit" value="Next"onclick="send_student_email()">Email</button>
+                            <input type="checkbox" name="single_select" class="single_select" data-email="$row['email']"
+                            data-name="$row['name']"/>
                         </td>
+                        <td>
+                            <button type="button" name="email_button" class="btn btn-info btn-xs email_button"
+                                    id="'.$count.'" data-email="$row['email']" data-name="$row['name']" data-action="single">Send Single</button></td>
+
                     </tr>
-                <?php }
-            } else { ?>
-                <tr>
-                    <td colspan="5">No student(s) found...</td>
-                </tr>
-            <?php } ?>
-            </tbody>
+                    <?php
+                }
+
+            }
+
+            ?>
+            <tr>
+                <td colspan="3"></td>
+                <td>
+                    <button type="button" name="bulk_email" class="btn btn-info" id="bulk_email" data-action="bulk">Send
+                        Bulk
+                    </button>
+                </td>
+            </tr>
         </table>
     </div>
+
+
 </div>
+<script>
+    $(document).ready(function () {
+
+        $(".email_button").click(function () {
+            $(this).attr('disabled', 'disabled');
+            var id = $(this).attr("id");
+            var action = $(this).attr("action");
+            var email_data = [];
+            if (action == 'single') {
+                email_data.push({
+                    email: $(this).data("email"),
+                    name: $(this).data("name")
+                });
+            } else {
+                $('.single_select').each(function ())
+                {
+                    if ($(this).prop("checked") == true) {
+                        email_data.push({
+                            email: $(this).data("email"),
+                            name: $(this).data("name")
+                        });
+                    }
+                }
+            )
+                ;
+            }
+            $.ajax({
+                url: "send_reminder.php",
+                method: "POST",
+                data: {email_data: email_data},
+                beforeSend: function () {
+                    $('#' + id).html('Sending...');
+                    $('#' + id).addClass('btn-danger');
+                },
+                success: function (data) {
+                    if (data == 'ok') {
+                        $('#' + id).text('Success');
+                        $('#' + id).removeClass('btn-danger');
+                        $('#' + id).removeClass('btn-info');
+                        $('#' + id).addClass('btn-success');
+                    } else {
+                        $('#' + id).text(data);
+                    }
+                    $('#' + id).attr('disabled', false);
+                }
+            })
+        });
+    });
+</script>

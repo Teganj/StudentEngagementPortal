@@ -49,7 +49,7 @@ require('functions.inc.php');
       </aside>
       <div id="right-panel" class="right-panel" >
          <header id="header" class="header" style="background-color: #784794;">
-             <a class="navbar-brand" href="admin_index.php" style="color: white; font-weight: bold;">Student Engagement Dashboard</a>
+             <a class="navbar-brand" href="index.php" style="color: white; font-weight: bold;">Student Engagement Dashboard</a>
              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                  <span class="navbar-toggler-icon"></span>

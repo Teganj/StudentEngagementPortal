@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 if ($user_data['password'] === $password) {
                     $_SESSION['user_id'] = $user_data['user_id'];
                     if ($user_data['role'] === 'admin') {
-                        header("Location: admin/admin_index.php");
+                        header("Location: admin/index.php");
                         die;
                     } else {
                         header("Location: index.php");
@@ -59,10 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
             <button class="btn" style="margin: auto;" id="button" type="submit" value="Login">Login</button>
-                <a href="forgot.php">Forgot Password?</a><br><br>
-        </div>
-        <a href="signup.php"><h5>Admin Signup</h5></a>
 
+            <a href="forgot.php">Forgot Password?</a><br><br>
+
+        </div>
     </form>
 </div>
 

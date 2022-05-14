@@ -1,5 +1,4 @@
 <?php
-session_start();
 include("connection.php");
 include("check_login.php");
 require('top.inc.php');

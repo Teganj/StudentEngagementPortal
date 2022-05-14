@@ -9,6 +9,7 @@ $targetDir = "../uploads/";
 $fileName = basename($_FILES["file"]["name"]);
 $targetFilePath = $targetDir . $fileName;
 $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+isAdmin();
 $module_name = '';
 $module_id = '';
 $course = '';
@@ -128,7 +129,7 @@ if (isset($_POST['addToUpload']) && !empty($_FILES["file"]["name"]) && !empty($_
 //
 //// Redirect to the listing page
 //if($user_data['role'] === 'admin') {
-//    header("Location: admin/admin_index.php");
+//    header("Location: admin/index.php");
 //    die;
 //} else {
 //    header("Location: viewModule.php");

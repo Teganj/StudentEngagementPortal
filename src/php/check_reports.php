@@ -1,6 +1,8 @@
 <?php
 function check_reports($con)
 {
+function check_reports($con)
+{
     if (isset($_SESSION['id'])) {
         $user_id = $_SESSION['id'];
         $query = "select * from modules where id = '$user_id' limit 1";
@@ -21,7 +23,7 @@ function check_reports($con)
                 header("Location: ../home.php");
 
             } else {
-                header("Location: ../admin_index.php?error=Incorrect User name or password");
+                header("Location: ../index.php?error=Incorrect User name or password");
             }
 
         }
@@ -69,7 +71,7 @@ function check_login($con)
                 header("Location: ../home.php");
 
             } else {
-                header("Location: ../admin_index.php?error=Incorrect User name or password");
+                header("Location: ../index.php?error=Incorrect User name or password");
             }
 
         }
@@ -77,7 +79,7 @@ function check_login($con)
     //redirect to login
     header("Location: login.php");
     die;
-
+}
 }
 
 ?>

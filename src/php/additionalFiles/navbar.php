@@ -24,7 +24,7 @@ $user_data = check_login($con);
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="viewModuleChoice.php">View Modules</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="admin_index.php">Add Module</a>
+                    <a class="dropdown-item" href="index.php">Add Module</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="logout.php">Logout</a>
                 </div>

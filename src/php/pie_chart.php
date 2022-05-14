@@ -37,7 +37,7 @@ if ($result->num_rows > 0) {
     </figure>
     <?php
 } else { ?>
-    No Data found, Cannot Display Pie Chart!
+    No Data exists!!
 <?php }
 ?>
 

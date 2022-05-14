@@ -1,5 +1,4 @@
 <?php
-$result = $con->query("SELECT * FROM reports ORDER BY id DESC");
 
 
 //lazily getting counts of each completed activity, realistically a loop should be used here

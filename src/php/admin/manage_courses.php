@@ -1,6 +1,5 @@
 <?php
 require('top.inc.php');
-isAdmin();
 $course_name = '';
 $course_code = '';
 $msg = '';

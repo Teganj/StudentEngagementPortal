@@ -1,6 +1,5 @@
 <?php
 require('top.inc.php');
-isAdmin();
 
 $sql="select * from modules order by id desc";
 $res=mysqli_query($con,$sql);

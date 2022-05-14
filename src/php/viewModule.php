@@ -5,13 +5,12 @@ include("check_login.php");
 
 $user_data = check_login($con);
 
-isAdmin();
 $module_name = '';
 $module_id = '';
 $course = '';
 $user_id = $user_data['id'];
 $id = $user_data['id'];
-
+$modules_id = "SELECT id from modules where module_name='$module_name'";
 
 $msg = '';
 if (isset($_GET['id']) && $_GET['id'] != '') {
@@ -31,7 +30,7 @@ if (isset($_POST['submit'])) {
     $module_name = get_safe_value($con, $_POST['module_name']);
     $module_id = get_safe_value($con, $_POST['module_id']);
 
-    $res = mysqli_query($con, "select * from modules where module_name='$module_name'");
+    $res = mysqli_query($con, "select * from modules where id='$modules_id'");
     $check = mysqli_num_rows($res);
     if ($check > 0) {
         if (isset($_GET['id']) && $_GET['id'] != '') {
@@ -70,32 +69,21 @@ if (isset($_POST['submit'])) {
                 <div class="card">
 
                     <div class="card-body" style="padding-bottom: 100px;">
-                        <h1 class="box-title"  style="margin-bottom: 20px">Module Engagement Dashboard for: <?php echo $module_name; ?></h1>
-                        <?php
-                        $i = 1;
-                        while ($row = mysqli_fetch_assoc($res)) {
-                            ?>
-                            <div>
-                                <?php
-                                echo "<h4 class='box-link'><a href='user_manage_modules.php?id=" . $row['id'] . "'>Update Module</a></h4>
-";
-                                ?>
+                        <h1 class="box-title" style="margin-bottom: 20px">Module Engagement Dashboard
+                            for: <?php echo $module_name; ?></h1>
+                        <div class="row col-lg-12"
+                             style="width:100%; padding: 20px; float: right; border: black solid 3px; background-color: #0c5460; height: 30%;">
+                            <div class="col-md-6"
+                                 style="width:45%; padding-top: 20px; float: right; border: black solid 3px;padding: 20px; background-color: #888888; height: 90%;">
+                                <?php include 'bar_chart.php' ?>
                             </div>
-                        <?php } ?>
-                        <div class="row col-lg-12"
-                             style="width:50%; padding-top: 20px; float: right; border: black solid 3px; background-color: #0c5460; height: 250px;">
-
-
-
-                                <div class="row col-lg-12" style="width:45%; border: black solid 3px; margin: auto; padding:20px;">
-                                    <?php include 'bar_chart.php' ?>
-                                </div>
+                            <div class="col-md-6"
+                                 style="width:45%; border: black solid 3px; margin: auto; padding:20px; height: 90%;">
+                                <?php include 'pie_chart.php' ?>
+                            </div>
                         </div>
 
-                        <div class="row col-lg-12"
-                             style="width:45%; padding-top: 20px; float: right; border: black solid 3px; background-color: #888888; height: 250px;">
-                            <?php include 'pie_chart.php' ?>
-                        </div>
+
                         <div class="row col-lg-12">
                             <?php include 'email_students.php' ?>
 
@@ -104,7 +92,7 @@ if (isset($_POST['submit'])) {
 
                         <div class="row col-lg-12" style="overflow-x:auto; padding: 20px; margin: auto;">
                             <!-- Data list table -->
-                            <table class="table table-striped table-bordered">
+                            <table class="table table-striped table-bordered" style="height: 20%; overflow-y: auto">
                                 <thead class="thead-dark">
                                 <tr>
                                     <th>Name</th>
@@ -124,8 +112,7 @@ if (isset($_POST['submit'])) {
                                 </thead>
                                 <tbody>
                                 <?php
-                                // Get rows loops
-                                $result = $con->query("SELECT * FROM reports");
+                                $result = mysqli_query($con, "SELECT * FROM reports");
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
                                         ?>
@@ -148,39 +135,17 @@ if (isset($_POST['submit'])) {
                                     <?php }
                                 } else { ?>
                                     <tr>
-                                        <td colspan="5">No data found...</td>
+                                        <td colspan="5">No Student(s) Found...</td>
                                     </tr>
                                 <?php }
                                 ?>
                                 </tbody>
                             </table>
                         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     </div>
-
-
-
-
                 </div>
             </div>
         </div>
     </div>
+</div>
 

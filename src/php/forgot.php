@@ -160,8 +160,8 @@ function is_code_correct($code)
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../CSS/login_style.css">
-    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../css/login.css">
+
 </head>
 
 <body>
@@ -173,11 +173,12 @@ function is_code_correct($code)
     </button>
 </nav>
 
-<h2 style="text-align: center; margin-top: 10px;">Student Retention Portal Forgot Password</h2>
-
-
-<div id="box" style="margin-top: 0px; margin-bottom: 0px;">
+<div id="bg"></div>
+<div style="margin: auto;">
     <form class="modal-content" method="post">
+        <h1 style="font-weight: bold; margin: auto; padding-top: 50px;">Forgot Password</h1>
+        <hr class="rounded" style="border-top: 8px solid #47AB11; border-radius: 5px;">
+
         <div class="container" style="font-size: 20px;margin: 10px">
 
 

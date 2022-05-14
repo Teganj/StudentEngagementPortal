@@ -1,6 +1,5 @@
 <?php
 require('top.inc.php');
-isAdmin();
 $user_name = '';
 $name = '';
 $password = '';

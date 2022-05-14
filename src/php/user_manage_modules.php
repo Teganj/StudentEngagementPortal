@@ -6,7 +6,6 @@ include("check_reports.php");
 
 $user_data = check_login($con);
 
-isAdmin();
 $msg = '';
 $module_name = '';
 $course = '';

@@ -4,7 +4,6 @@ include("check_login.php");
 
 $user_data = check_login($con);
 
-isAdmin();
 $module_name = '';
 $module_id = '';
 $course = '';

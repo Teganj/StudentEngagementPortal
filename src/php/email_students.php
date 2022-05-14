@@ -38,7 +38,8 @@ $result = $statement->fetch();
                         </td>
                         <td>
                             <button type="button" name="email_button" class="btn btn-info btn-xs email_button"
-                                    id="'.$count.'" data-email="$row['email']" data-name="$row['name']" data-action="single">Send Single</button></td>
+                                    id="$count" data-email="$row['email']" data-name="$row['name']" data-action="single">Send Single</button>
+                        </td>
 
                     </tr>
                     <?php

@@ -2,47 +2,39 @@
 session_start();
 include("connection.php");
 include("check_login.php");
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     //something was posted
     $user_name = $_POST['user_name'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
+    $role = $_POST['role'];
 
-    if (!empty($user_name) && !empty($password) && !is_numeric($user_name)) {
-        //Read from database
-        $query = "select * from users where user_name = '$user_name' limit 1";
-        $result = mysqli_query($con, $query);
-        if ($result) {
-            if ($result && mysqli_num_rows($result) > 0) {
-                $user_data = mysqli_fetch_assoc($result);
-                if ($user_data['password'] === $password) {
-                    $_SESSION['user_id'] = $user_data['user_id'];
-                    if ($user_data['role'] === 'admin') {
-                        header("Location: admin/admin_index.php");
-                        die;
-                    } else {
-                        header("Location: index.php");
-                        die;
-                    }
-                }
-            }
-        }
-        echo "wrong username or password!";
+    if (!empty($user_name) && !empty($name) && !empty($email) && !empty($password) && !empty($role) && !is_numeric($user_name)) {
+        mysqli_query($con, "insert into users(user_name, name, password, email, role, status) values('$user_name', '$name', '$password','$email','$role',1)");
+
+        header("Location: login.php");
+        die;
     } else {
-        echo "wrong username or password!";
+        echo "Please enter some valid information!";
     }
 }
 ?>
+
+
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
+<html>
 <head>
+    <title>Signup</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
-
 <div id="bg"></div>
 <div style="margin: auto;">
     <form class="modal-content animate" method="post">
@@ -51,17 +43,26 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         <div class="row" style="font-size: 20px;margin: 10px;">
             <h2><label><b>Username:</b></label></h2>
-            <input id="text" type="text" name="user_name" placeholder="Enter Username"><br><br>
+            <input id="text" type="text" name="user_name"><br><br>
 
+            <h2><label><b>Name:</b></label></h2>
+            <input id="text" type="text" name="name"><br><br>
+
+            <h2><label><b>Email:</b></label></h2>
+            <input id="text" type="text" name="email"><br><br>
 
             <h2 style="padding-top: 50px;"><label><b>Password:</b></label></h2>
             <input id="text" type="password" name="password" placeholder="Enter Password"><br><br>
 
+            <label for="role" class=" form-control-label">Role</label>
+            <select id="role" name="role" value="<?php echo $role ?>">
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+            </select>
+            <input id="button" type="submit" value="Signup"><br><br>
+            <a href="login.php">Login</a><br><br>
 
-            <button class="btn" style="margin: auto;" id="button" type="submit" value="Login">Login</button>
-                <a href="forgot.php">Forgot Password?</a><br><br>
         </div>
-        <a href="signup.php"><h5>Admin Signup</h5></a>
 
     </form>
 </div>

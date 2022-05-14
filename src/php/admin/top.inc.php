@@ -1,12 +1,6 @@
 <?php
 require('connection.inc.php');
 require('functions.inc.php');
-if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_LOGIN']!=''){
-
-}else{
-   header('location:login.php');
-   die();
-}
 ?>
 <!doctype html>
 <html class="no-js" lang="">
@@ -32,7 +26,6 @@ if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_LOGIN']!=''){
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                <ul class="nav navbar-nav">
                   <li class="menu-title">ADMIN MENU</li>
-                  <?php if($_SESSION['ADMIN_ROLE']!=1){?>
 				   <li class="menu-item-has-children dropdown">
                      <a href="user_management.php" > User Management </a>
                   </li>
@@ -50,7 +43,6 @@ if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_LOGIN']!=''){
                       <li class="menu-item dropdown">
                           <a href="../logout.php" > Logout </a>
                       </li>
-				  <?php } ?>
                </ul>
             </div>
          </nav>

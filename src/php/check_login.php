@@ -21,40 +21,11 @@ function check_login($con)
                 header("Location: ../home.php");
 
             } else {
-                header("Location: ../index.php?error=Incorect User name or password");
+                header("Location: ../index.php?error=Incorrect User name or password");
             }
 
         }
     }
-}
-
-
-if (isset($_POST['user_name']) && isset($_POST['password']) && isset($_POST['role'])) {
-
-    function test_input($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
-
-    $user_name = test_input($_POST['user_name']);
-    $password = test_input($_POST['password']);
-    $role = test_input($_POST['role']);
-}
-
-
-function random_num($length){
-    $text = "";
-    if ($length < 5) {
-        $length = 5;
-    }
-    $len = rand(4, $length);
-    for ($i = 0; $i < $len; $i++) {
-        $text .= rand(0, 9);
-    }
-    return $text;
 }
 
 ?>

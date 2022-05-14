@@ -1,5 +1,6 @@
 <?php
 require('top.inc.php');
+
 if(isset($_GET['type']) && $_GET['type']!=''){
     $type=get_safe_value($con,$_GET['type']);
 
@@ -11,6 +12,7 @@ if(isset($_GET['type']) && $_GET['type']!=''){
 }
 
 $sql="select * from modules order by id desc";
+
 $res=mysqli_query($con,$sql);
 ?>
 <div class="content pb-0">

@@ -5,11 +5,11 @@ include("check_login.php");
 include("check_reports.php");
 
 $user_data = check_login($con);
+$user_id = $user_data['id'];
 
 $msg = '';
 $module_name = '';
 $course = '';
-$user_id = $user_data['id'];
 $sql = "SELECT * FROM `courses`";
 $all_courses = mysqli_query($con, $sql);
 

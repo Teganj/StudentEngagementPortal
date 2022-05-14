@@ -1,6 +1,6 @@
 <?php
 
-
+$result = $con->query("SELECT * FROM reports ORDER BY id DESC");
 //lazily getting counts of each completed activity, realistically a loop should be used here
 $result2 = $con->query("SELECT count(*) as total from reports where activity1='Completed'");
 $a1 = $result2->fetch_assoc();

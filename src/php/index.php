@@ -5,6 +5,8 @@ require('top.inc.php');
 
 $user_data = check_login($con);
 $id = $user_data['id'];
+
+
 $sql="select * from modules order by id desc";
 $res=mysqli_query($con,$sql);
 
@@ -37,7 +39,7 @@ if(isset($_GET['type']) && $_GET['type']!=''){
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-body" style="padding-bottom: 100px;">
-                            <h1 class="box-title">Welcome, <?php echo $user_data['name']; ?></h1>
+                            <h1 class="box-title">Welcome, <?php echo $_SESSION['name']; ?></h1>
                             <h4 class="box-link"><a href="user_manage_modules.php">Add Module</a> </h4>
 
                             <div class="card-body--">

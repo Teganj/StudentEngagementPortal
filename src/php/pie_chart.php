@@ -1,5 +1,5 @@
 <?php
-
+$result = $con->query("SELECT * FROM reports ORDER BY id DESC");
 //lazily getting counts of each completed activity, realistically a loop should be used here
 $result2 = $con->query("SELECT count(*) as total from reports where activity1='Completed'");
 $a1 = $result2->fetch_assoc();
@@ -37,7 +37,7 @@ if ($result->num_rows > 0) {
     </figure>
     <?php
 } else { ?>
-    No Data exists!!
+    No Data found, Cannot Display Pie Chart!
 <?php }
 ?>
 

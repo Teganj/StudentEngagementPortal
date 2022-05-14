@@ -11,7 +11,6 @@ $course = '';
 $user_id = $user_data['id'];
 $id = $user_data['id'];
 
-
 $msg = '';
 if (isset($_GET['id']) && $_GET['id'] != '') {
     $id = get_safe_value($con, $_GET['id']);
@@ -38,10 +37,10 @@ if (isset($_POST['submit'])) {
             if ($id == $getData['id']) {
 
             } else {
-                $msg = "Module Already Exists 1";
+                $msg = "Module Already Exists";
             }
         } else {
-            $msg = "Module Already Exists 2";
+            $msg = "Module Already Exists";
         }
     }
 
@@ -82,20 +81,15 @@ if (isset($_POST['submit'])) {
                             </div>
                         <?php } ?>
                         <div class="row col-lg-12"
-                             style="width:50%; padding-top: 20px; float: right; border: black solid 3px; background-color: #0c5460; height: 250px;">
-
-
-
-                                <div class="row col-lg-12" style="width:45%; border: black solid 3px; margin: auto; padding:20px;">
-                                    <?php include 'bar_chart.php' ?>
-                                </div>
+                             style="margin: 20px; border: black solid 3px; background-color: #04AA6D; height: 250px;">
+                            <?php include 'bar_chart.php' ?>
                         </div>
 
                         <div class="row col-lg-12"
-                             style="width:45%; padding-top: 20px; float: right; border: black solid 3px; background-color: #888888; height: 250px;">
+                             style="margin: 20px; border: black solid 3px; background-color: #888888; height: 250px;">
                             <?php include 'pie_chart.php' ?>
                         </div>
-                        <div class="row col-lg-12">
+                        <div class="row col-lg-12" style="width: 100%; margin: 20px">
                             <?php include 'email_students.php' ?>
 
                         </div>
@@ -123,7 +117,6 @@ if (isset($_POST['submit'])) {
                                 </thead>
                                 <tbody>
                                 <?php
-                                // Get rows loops
                                 $result = $con->query("SELECT * FROM reports");
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {

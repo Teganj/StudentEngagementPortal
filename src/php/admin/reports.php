@@ -36,7 +36,6 @@ if ($result = mysqli_query($con, $sql)) {
                                 <th width="2%">ID</th>
                                 <th width="20%">Course</th>
                                 <th width="20%">Module Name</th>
-                                <th width="20%">Student Count</th>
                                 <th width="26%"></th>
                             </tr>
                             </thead>
@@ -48,7 +47,6 @@ if ($result = mysqli_query($con, $sql)) {
                                     <td><?php echo $row['id']?></td>
                                     <td><?php echo $row['course']?></td>
                                     <td><?php echo $row['module_name']?></td>
-                                    <td><?php echo $rowcount; ?></td>
 
                                     <td>
                                         <?php

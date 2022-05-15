@@ -99,12 +99,9 @@ if (isset($_POST['submit'])) {
                             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#areachart" aria-expanded="false" aria-controls="collapseExample">
                                 Area Chart Activity Completion
                             </button>
-<!--                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#stackedchart" aria-expanded="false" aria-controls="collapseExample">-->
-<!--                                Student Completion-->
-<!--                            </button>-->
-                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#emailstoStudents" aria-expanded="false" aria-controls="collapseExample">
-                                Email Students
-                            </button>
+                            <!--                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#stackedchart" aria-expanded="false" aria-controls="collapseExample">-->
+                            <!--                                Student Completion-->
+                            <!--                            </button>-->
                         </p>
                         <div class="collapse" id="barchart">
                             <div class="card card-body">
@@ -121,19 +118,17 @@ if (isset($_POST['submit'])) {
                                 <?php include '../area_chart.php' ?>
                             </div>
                         </div>
-<!--                        <div class="collapse" id="stackedchart">-->
-<!--                            <div class="card card-body">-->
-<!--                                --><?php //include 'stacked_chart.php' ?>
-<!--                            </div>-->
-                        </div>
-                        <div class="collapse" id="emailstoStudents">
-                            <div class="card card-body">
-                                <?php include '../email_students.php' ?>
-                            </div>
-                        </div>
+                        <!--                        <div class="collapse" id="stackedchart">-->
+                        <!--                            <div class="card card-body">-->
+                        <!--                                --><?php //include 'stacked_chart.php' ?>
+                        <!--                          </div>-->
+                        <!--                     </div>-->
 
 
-                        <div class="row col-lg-12" style="overflow-x:auto; padding: 20px; margin: auto;">
+
+                        <?php include 'email_students.php' ?>
+
+                        <div class="row col-lg-12" style="width:800px; overflow-x:auto; padding: 20px;">
                             <button id="viewToggle1" style="cursor: pointer;">Toggle EasyView</button>
                             <button id="viewToggle2" style="display: none; cursor: pointer;">Toggle EasyView</button>
                             <table class="table table-striped table-bordered">
@@ -198,103 +193,108 @@ if (isset($_POST['submit'])) {
 
 
 
-<!--                        <div class="row col-lg-12" style="overflow-x:auto; padding: 20px; margin: auto;">-->
-<!--                            <button id="viewToggle1" style="cursor: pointer;">Toggle EasyView</button>-->
-<!--                            <button id="viewToggle2" style="display: none; cursor: pointer;">Toggle EasyView</button>-->
-<!--                            --><?php
-//                                $result_table = $con->query("SELECT * FROM reports where module_name='$module_name'");
-//                                $result_header = $con->query("SELECT * FROM reports limit 1");
-//
+                        <!--                        <div class="row col-lg-12" style="overflow-x:auto; padding: 20px; margin: auto;">-->
+                        <!--                            <button id="viewToggle1" style="cursor: pointer;">Toggle EasyView</button>-->
+                        <!--                            <button id="viewToggle2" style="display: none; cursor: pointer;">Toggle EasyView</button>-->
+                        <!--                            --><?php
+                        //                                $result_table = $con->query("SELECT * FROM reports where module_name='$module_name'");
+                        //                                $result_header = $con->query("SELECT * FROM reports limit 1");
+                        //
 
-//
-//                                $result_countHeader = $con->query("SELECT SUM(CASE WHEN activity1 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity2 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity3 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity4 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity5 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity6 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity7 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity8 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity9 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity10 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity11 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity12 IS NOT NULL THEN 0 ELSE 1  END
-//                                                            + CASE WHEN activity13 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity14 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity15 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity16 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity17 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity18 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity19 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity20 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity21 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity22 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity23 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity24 IS NOT NULL THEN 0 ELSE 1 END
-//                                                            + CASE WHEN activity25 IS NOT NULL THEN 0 ELSE 1 END) AS TotalNullCount FROM reports LIMIT 1");
+                        //
+                        //                                $result_countHeader = $con->query("SELECT SUM(CASE WHEN activity1 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity2 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity3 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity4 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity5 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity6 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity7 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity8 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity9 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity10 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity11 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity12 IS NOT NULL THEN 0 ELSE 1  END
+                        //                                                            + CASE WHEN activity13 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity14 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity15 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity16 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity17 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity18 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity19 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity20 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity21 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity22 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity23 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity24 IS NOT NULL THEN 0 ELSE 1 END
+                        //                                                            + CASE WHEN activity25 IS NOT NULL THEN 0 ELSE 1 END) AS TotalNullCount FROM reports LIMIT 1");
 
 
 
-//                            $result_countHeader = $con->query("SELECT * FROM reports LIMIT 1
+                        //                            $result_countHeader = $con->query("SELECT * FROM reports LIMIT 1
 
-//                             ?>
-<!---->
-<!--                            <table class="table table-striped table-bordered">-->
-<!--                                <thead class="thead-dark">-->
-<!--                                <tr>-->
-<!---->
-<!---->
-<!---->
-<!--                                --><?php
-//                                if ($result_table->num_rows > 0) {
-//                                    while ($row = $result_table->fetch_assoc()) {
-//                                        ?>
-<!---->
-<!--                                            <td>--><?php //echo $row['name']; ?><!--</td>-->
-<!---->
-<!--                                    --><?php //}
-//                                    ?>
-<!--                                    </tr>-->
-<!--                                    </thead>-->
-<!--                                --><?php
-//                                    while ($row = $result_table->fetch_assoc()) {
-//                                        ?>
-<!--                                        <tr>-->
-<!--                                            <td>--><?php //echo $row['name']; ?><!--</td>-->
-<!--                                            <td>--><?php //echo $row['activity1']; ?><!--</td>-->
-<!--                                            <td>--><?php //echo $row['activity2']; ?><!--</td>-->
-<!--                                            <td>--><?php //echo $row['activity3']; ?><!--</td>-->
-<!--                                            <td>--><?php //echo $row['activity4']; ?><!--</td>-->
-<!--                                            <td>--><?php //echo $row['activity5']; ?><!--</td>-->
-<!--                                            <td>--><?php //echo $row['activity6']; ?><!--</td>-->
-<!--                                            <td>--><?php //echo $row['activity7']; ?><!--</td>-->
-<!--                                            <td>--><?php //echo $row['activity8']; ?><!--</td>-->
-<!--                                            <td>--><?php //echo $row['activity9']; ?><!--</td>-->
-<!--                                            <td>--><?php //echo $row['activity10']; ?><!--</td>-->
-<!--                                            <td>--><?php //echo $row['activity11']; ?><!--</td>-->
-<!--                                            <td>--><?php //echo $row['activity12']; ?><!--</td>-->
-<!--                                        </tr>-->
-<!---->
-<!--                                    --><?php //}
-//                                } else { ?>
-<!--                                    <tr>-->
-<!--                                        <td colspan="5">No data found...</td>-->
-<!--                                    </tr>-->
-<!--                                --><?php //}
-//                                ?>
-<!--                                </tbody>-->
-<!---->
-<!--                            </table>-->
-<!--                        </div>-->
-<!--                            -->
-                            
-                            
+                        //                             ?>
+                        <!---->
+                        <!--                            <table class="table table-striped table-bordered">-->
+                        <!--                                <thead class="thead-dark">-->
+                        <!--                                <tr>-->
+                        <!---->
+                        <!---->
+                        <!---->
+                        <!--                                --><?php
+                        //                                if ($result_table->num_rows > 0) {
+                        //                                    while ($row = $result_table->fetch_assoc()) {
+                        //                                        ?>
+                        <!---->
+                        <!--                                            <td>--><?php //echo $row['name']; ?><!--</td>-->
+                        <!---->
+                        <!--                                    --><?php //}
+                        //                                    ?>
+                        <!--                                    </tr>-->
+                        <!--                                    </thead>-->
+                        <!--                                --><?php
+                        //                                    while ($row = $result_table->fetch_assoc()) {
+                        //                                        ?>
+                        <!--                                        <tr>-->
+                        <!--                                            <td>--><?php //echo $row['name']; ?><!--</td>-->
+                        <!--                                            <td>--><?php //echo $row['activity1']; ?><!--</td>-->
+                        <!--                                            <td>--><?php //echo $row['activity2']; ?><!--</td>-->
+                        <!--                                            <td>--><?php //echo $row['activity3']; ?><!--</td>-->
+                        <!--                                            <td>--><?php //echo $row['activity4']; ?><!--</td>-->
+                        <!--                                            <td>--><?php //echo $row['activity5']; ?><!--</td>-->
+                        <!--                                            <td>--><?php //echo $row['activity6']; ?><!--</td>-->
+                        <!--                                            <td>--><?php //echo $row['activity7']; ?><!--</td>-->
+                        <!--                                            <td>--><?php //echo $row['activity8']; ?><!--</td>-->
+                        <!--                                            <td>--><?php //echo $row['activity9']; ?><!--</td>-->
+                        <!--                                            <td>--><?php //echo $row['activity10']; ?><!--</td>-->
+                        <!--                                            <td>--><?php //echo $row['activity11']; ?><!--</td>-->
+                        <!--                                            <td>--><?php //echo $row['activity12']; ?><!--</td>-->
+                        <!--                                        </tr>-->
+                        <!---->
+                        <!--                                    --><?php //}
+                        //                                } else { ?>
+                        <!--                                    <tr>-->
+                        <!--                                        <td colspan="5">No data found...</td>-->
+                        <!--                                    </tr>-->
+                        <!--                                --><?php //}
+                        //                                ?>
+                        <!--                                </tbody>-->
+                        <!---->
+                        <!--                            </table>-->
+                        <!--                        </div>-->
+                        <!--                            -->
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+
+
 <script>
     $( "#viewToggle1" ).click(function() {
         $("td:contains('Not')").css('backgroundColor','#ffc6c4');

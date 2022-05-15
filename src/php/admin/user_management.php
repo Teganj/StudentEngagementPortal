@@ -43,7 +43,6 @@ $res=mysqli_query($con,$sql);
 							   <th width="20%">Username</th>
 							   <th width="20%">Email</th>
 							   <th width="10%">Role</th>
-                                <th width="20%">Password</th>
 							   <th width="26%"></th>
 							</tr>
 						 </thead>
@@ -56,7 +55,6 @@ $res=mysqli_query($con,$sql);
 							   <td><?php echo $row['user_name']?></td>
 							   <td><?php echo $row['email']?></td>
 							   <td><?php echo $row['role']?></td>
-                                <td><?php echo $row['password']?></td>
                                 <td>
 								<?php
 								if($row['status']==1){

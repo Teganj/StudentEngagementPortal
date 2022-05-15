@@ -128,7 +128,7 @@ if (isset($_POST['submit'])) {
 
                     <?php include 'email_students.php' ?>
 
-                        <div class="row col-lg-12" style="overflow-x:auto; padding: 20px; margin: auto;">
+                        <div class="row col-lg-12" style="width:800px; overflow-x:auto; padding: 20px;">
                             <button id="viewToggle1" style="cursor: pointer;">Toggle EasyView</button>
                             <button id="viewToggle2" style="display: none; cursor: pointer;">Toggle EasyView</button>
                             <table class="table table-striped table-bordered">

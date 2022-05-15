@@ -37,10 +37,10 @@ if (isset($_POST['submit'])) {
             if ($id == $getData['id']) {
 
             } else {
-                $msg = "Module Already Exists 1";
+                $msg = "Module Already Exists";
             }
         } else {
-            $msg = "Module Already Exists 2";
+            $msg = "Module Already Exists";
         }
     }
 
@@ -58,7 +58,6 @@ if (isset($_POST['submit'])) {
                         $user_id = $user_data['id'];
                         $name = $line[0];
                         $email = $line[1];
-                        //hardcoding completion elements wont work,need to count them from db first, then loop
                         $activity1 = $line[2];
                         $activity2 = $line[3];
                         $activity3 = $line[4];
@@ -94,7 +93,6 @@ if (isset($_POST['submit'])) {
                         $user_id = $user_data['id'];
                         $name = $line[0];
                         $email = $line[1];
-                        //hardcoding completion elements wont work,need to count them from db first, then loop
                         $activity1 = $line[2];
                         $activity2 = $line[3];
                         $activity3 = $line[4];

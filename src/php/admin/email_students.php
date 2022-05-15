@@ -16,7 +16,8 @@ if (count($_POST) > 0) {
     send_email($email);
 }
 
-function send_email($email){
+function send_email($email)
+{
     $email = addslashes($email);
 
     $subject = 'Reminder - Lesson/Lab incomplete';
@@ -32,15 +33,10 @@ function send_email($email){
     //send email here
     send_mail($email, $subject, $content);
 }
+
 ?>
 
-
-
 <form method="post" action="">
-<!--    <input class="textbox" type="email" name="email" placeholder="Email"><br>-->
-<!--        <br style="display: none;">-->
-
-
     <label for="email" class=" form-control-label">Choose Student to Email</label>
     <select class="form-control" type="email" name="email" required>
         <option value=''>Select</option>
@@ -55,7 +51,6 @@ function send_email($email){
         endwhile;
         ?>
     </select>
-
     <input type="submit" value="Send Email">
     <br><br>
 </form>

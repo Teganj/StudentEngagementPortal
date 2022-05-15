@@ -5,23 +5,22 @@ require('top.inc.php');
 
 $user_data = check_login($con);
 $id = $user_data['id'];
-$sql="select * from modules order by id desc";
-$res=mysqli_query($con,$sql);
+$sql = "select * from modules order by id desc";
+$res = mysqli_query($con, $sql);
 
+if (isset($_GET['type']) && $_GET['type'] != '') {
+    $type = get_safe_value($con, $_GET['type']);
 
-if(isset($_GET['type']) && $_GET['type']!=''){
-    $type=get_safe_value($con,$_GET['type']);
-
-    if($type=='delete'){
-        $id=get_safe_value($con,$_GET['id']);
-        $delete_sql="delete from modules where id='$id'";
-        mysqli_query($con,$delete_sql);
+    if ($type == 'delete') {
+        $id = get_safe_value($con, $_GET['id']);
+        $delete_sql = "delete from modules where id='$id'";
+        mysqli_query($con, $delete_sql);
     }
 }
 
 $studentCount = $con->query("SELECT * from reports ");
 if ($result = mysqli_query($con, $sql)) {
-    $rowcount = mysqli_num_rows( $result );
+    $rowcount = mysqli_num_rows($result);
 }
 ?>
 <div class="content pb-0">
@@ -31,7 +30,6 @@ if ($result = mysqli_query($con, $sql)) {
                 <div class="card">
                     <div class="card-body">
                         <h1 class="box-title">Welcome, <?php echo $user_data['name']; ?></h1>
-
                     </div>
                     <div class="card-body--">
                         <div class="table-stats order-table ov-h">
@@ -46,16 +44,17 @@ if ($result = mysqli_query($con, $sql)) {
                                 </thead>
                                 <tbody>
                                 <?php
-                                $i=1;
-                                while($row=mysqli_fetch_assoc($res)){?>
+                                $i = 1;
+                                while ($row = mysqli_fetch_assoc($res)) {
+                                    ?>
                                     <tr>
-                                        <td><?php echo $row['id']?></td>
-                                        <td><?php echo $row['course']?></td>
-                                        <td><?php echo $row['module_name']?></td>
+                                        <td><?php echo $row['id'] ?></td>
+                                        <td><?php echo $row['course'] ?></td>
+                                        <td><?php echo $row['module_name'] ?></td>
 
                                         <td>
                                             <?php
-                                            echo "<span class='badge badge-success'><a href='viewModule.php?id=".$row['id']."'>View</a></span>&nbsp;";
+                                            echo "<span class='badge badge-success'><a href='viewModule.php?id=" . $row['id'] . "'>View</a></span>&nbsp;";
                                             ?>
                                         </td>
                                     </tr>

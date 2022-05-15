@@ -26,9 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 }
             }
         }
-        echo "wrong username or password!";
+        echo "Wrong username or password!";
     } else {
-        echo "wrong username or password!";
+        echo "Please enter your username and password!";
     }
 }
 ?>

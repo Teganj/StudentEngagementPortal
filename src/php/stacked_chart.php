@@ -89,75 +89,75 @@ $result3 = $con->query("SELECT COUNT(*) FROM reports where activity1='Completed 
 
 if ($result->num_rows > 0) {
     ?>
-    <figure class="highcharts-figure-barchart">
-        <div id="container_barchart"></div>
+    <figure class="highcharts-figure-stackedchart">
+        <div id="container-stackedchart"></div>
     </figure>
     <?php
 } else { ?>
-    No Data found, Cannot Display Bar Chart!
+    No Data found, Cannot Display Stacked Chart!
 <?php }
 ?>
 <script>
-    Highcharts.chart('container_barchart', {
+    Highcharts.chart('container-stackedchart', {
         chart: {
-            type: 'bar'
+            type: 'column'
         },
         title: {
-            text: 'Activities by completion'
-        },
-        subtitle: {
-            text: 'Indicates problem activities'
+            text: 'Stacked column chart'
         },
         xAxis: {
             categories: ['Activity 1', 'Activity 2', 'Activity 3', 'Activity 4', 'Activity 5', 'Activity 6', 'Activity 7', 'Activity 8', 'Activity 9', 'Activity 10', 'Activity 11', 'Activity 12'],
-            title: {
-                text: null
-            }
         },
         yAxis: {
             min: 0,
             title: {
-                text: 'Completion (lessons)',
-                align: 'high'
+                text: 'Completion (activities)'
             },
-            labels: {
-                overflow: 'justify'
+            stackLabels: {
+                enabled: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: ( // theme
+                        Highcharts.defaultOptions.title.style &&
+                        Highcharts.defaultOptions.title.style.color
+                    ) || 'gray'
+                }
             }
         },
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor:
+                Highcharts.defaultOptions.legend.backgroundColor || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
         tooltip: {
-            valueSuffix: ' Lessons'
+            headerFormat: '<b>{point.x}</b><br/>',
+            pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
         },
         plotOptions: {
-            bar: {
+            column: {
+                stacking: 'normal',
                 dataLabels: {
                     enabled: true
                 }
             }
         },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'top',
-            x: -40,
-            y: 80,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor:
-                Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
-            shadow: true
-        },
-        credits: {
-            enabled: false
-        },
         series: [{
-            name: 'Completed',
-            data: [<?php echo $a1['total']?>, <?php echo $a2['total']?>, <?php echo $a3['total']?>, <?php echo $a4['total']?>, <?php echo $a5['total']?>, <?php echo $a6['total']?>, <?php echo $a7['total']?>, <?php echo $a8['total']?>, <?php echo $a9['total']?>, <?php echo $a10['total']?>, <?php echo $a11['total']?>, <?php echo $a12['total']?>]
+            name: '1',
+            data: [5, 3, 4, 7, 2]
         }, {
-            name: 'Not completed',
-            data: [<?php echo $ai1['total']?>, <?php echo $ai2['total']?>, <?php echo $ai3['total']?>, <?php echo $ai4['total']?>, <?php echo $ai5['total']?>, <?php echo $ai6['total']?>, <?php echo $ai7['total']?>, <?php echo $ai8['total']?>, <?php echo $ai9['total']?>, <?php echo $ai10['total']?>, <?php echo $ai11['total']?>, <?php echo $ai12['total']?>]
+            name: '2',
+            data: [2, 2, 3, 2, 1]
         }, {
-            name: 'Not completed',
-            data: [<?php echo $apg1['total']?>, <?php echo $apg2['total']?>, <?php echo $apg3['total']?>, <?php echo $apg4['total']?>, <?php echo $apg5['total']?>, <?php echo $apg6['total']?>, <?php echo $apg7['total']?>, <?php echo $apg8['total']?>, <?php echo $apg9['total']?>, <?php echo $apg10['total']?>, <?php echo $apg11['total']?>, <?php echo $apg12['total']?>]
+            name: '3',
+            data: [3, 4, 4, 2, 5]
         }]
     });
+
 </script>

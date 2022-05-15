@@ -1,16 +1,17 @@
 <?php
 require('top.inc.php');
+include("../connection.php");
 include("../check_login.php");
+include("../check_reports.php");
 
 $user_data = check_login($con);
+$user_id = $_SESSION['id'];
 
 $msg = '';
 $module_name = '';
 $course = '';
-$user_id = $user_data['id'];
 $sql = "SELECT * FROM `courses`";
 $all_courses = mysqli_query($con, $sql);
-
 
 if (isset($_GET['id']) && $_GET['id'] != '') {
     $id = get_safe_value($con, $_GET['id']);
@@ -117,7 +118,7 @@ if (isset($_POST['submit'])) {
                 $msg = 'Please Upload a CSV file.';
             }
         }
-        header('location:admin_index.php');
+        header('location:index.php');
         die();
     }
 }

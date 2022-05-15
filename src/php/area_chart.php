@@ -89,18 +89,19 @@ $result3 = $con->query("SELECT COUNT(*) FROM reports where activity1='Completed 
 
 if ($result->num_rows > 0) {
     ?>
-    <figure class="highcharts-figure-barchart">
-        <div id="container_barchart"></div>
+    <figure class="highcharts-figure-areachart">
+        <div id="container-areachart"></div>
     </figure>
     <?php
 } else { ?>
-    No Data found, Cannot Display Bar Chart!
+    No Data found, Cannot Display Area Chart!
 <?php }
 ?>
 <script>
-    Highcharts.chart('container_barchart', {
+
+    Highcharts.chart('container-areachart', {
         chart: {
-            type: 'bar'
+            type: 'area'
         },
         title: {
             text: 'Activities by completion'
@@ -109,55 +110,57 @@ if ($result->num_rows > 0) {
             text: 'Indicates problem activities'
         },
         xAxis: {
-            categories: ['Activity 1', 'Activity 2', 'Activity 3', 'Activity 4', 'Activity 5', 'Activity 6', 'Activity 7', 'Activity 8', 'Activity 9', 'Activity 10', 'Activity 11', 'Activity 12'],
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Completion (lessons)',
-                align: 'high'
-            },
+            allowDecimals: false,
             labels: {
-                overflow: 'justify'
-            }
-        },
-        tooltip: {
-            valueSuffix: ' Lessons'
-        },
-        plotOptions: {
-            bar: {
-                dataLabels: {
-                    enabled: true
+                formatter: function () {
+                    return this.value;
                 }
             }
         },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'top',
-            x: -40,
-            y: 80,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor:
-                Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
-            shadow: true
+        yAxis: {
+            title: {
+                text: 'Completion (lessons)'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value;
+                }
+            }
         },
-        credits: {
-            enabled: false
+        tooltip: {
+            pointFormat: 'Lessons'
+        },
+        plotOptions: {
+            area: {
+                pointStart: 1,
+                marker: {
+                    enabled: false,
+                    symbol: 'circle',
+                    radius: 2,
+                    states: {
+                        hover: {
+                            enabled: true
+                        }
+                    }
+                }
+            }
         },
         series: [{
             name: 'Completed',
             data: [<?php echo $a1['total']?>, <?php echo $a2['total']?>, <?php echo $a3['total']?>, <?php echo $a4['total']?>, <?php echo $a5['total']?>, <?php echo $a6['total']?>, <?php echo $a7['total']?>, <?php echo $a8['total']?>, <?php echo $a9['total']?>, <?php echo $a10['total']?>, <?php echo $a11['total']?>, <?php echo $a12['total']?>]
+
         }, {
-            name: 'Not completed',
+            name: 'Not Completed',
             data: [<?php echo $ai1['total']?>, <?php echo $ai2['total']?>, <?php echo $ai3['total']?>, <?php echo $ai4['total']?>, <?php echo $ai5['total']?>, <?php echo $ai6['total']?>, <?php echo $ai7['total']?>, <?php echo $ai8['total']?>, <?php echo $ai9['total']?>, <?php echo $ai10['total']?>, <?php echo $ai11['total']?>, <?php echo $ai12['total']?>]
-        }, {
+
+        },
+            {
             name: 'Not completed',
-            data: [<?php echo $apg1['total']?>, <?php echo $apg2['total']?>, <?php echo $apg3['total']?>, <?php echo $apg4['total']?>, <?php echo $apg5['total']?>, <?php echo $apg6['total']?>, <?php echo $apg7['total']?>, <?php echo $apg8['total']?>, <?php echo $apg9['total']?>, <?php echo $apg10['total']?>, <?php echo $apg11['total']?>, <?php echo $apg12['total']?>]
+                data: [<?php echo $apg1['total']?>, <?php echo $apg2['total']?>, <?php echo $apg3['total']?>, <?php echo $apg4['total']?>, <?php echo $apg5['total']?>, <?php echo $apg6['total']?>, <?php echo $apg7['total']?>, <?php echo $apg8['total']?>, <?php echo $apg9['total']?>, <?php echo $apg10['total']?>, <?php echo $apg11['total']?>, <?php echo $apg12['total']?>]
         }]
     });
+
+
+
 </script>
+

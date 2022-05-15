@@ -5,7 +5,7 @@ include("check_login.php");
 include("check_reports.php");
 
 $user_data = check_login($con);
-$user_id = $user_data['id'];
+$user_id = $_SESSION['id'];
 
 $msg = '';
 $module_name = '';

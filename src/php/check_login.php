@@ -1,13 +1,14 @@
 <?php
+include 'connection.php';
 function check_login($con)
 {
-    if (isset($_SESSION['user_id'])) {
+    if (isset($_SESSION['id'])) {
         $id = $_SESSION['user_id'];
-        $query = "select * from users where user_id = '$id' limit 1";
-
+        $query = "select * from users where id = '$id' limit 1";
         $result = mysqli_query($con, $query);
         if ($result && mysqli_num_rows($result) > 0) {
             $user_data = mysqli_fetch_assoc($result);
+
             return $user_data;
             $result = mysqli_query($con, $query);
 
@@ -18,7 +19,10 @@ function check_login($con)
                 $_SESSION['$role'] = $row['role'];
                 $_SESSION['$user_name'] = $row['user_name'];
 
-                header("Location: ../home.php");
+                $_SESSION['$module_name'] = $row['module_name'];
+
+                echo $user_data;
+
 
             } else {
                 header("Location: ../index.php?error=Incorrect User name or password");
@@ -26,7 +30,8 @@ function check_login($con)
 
         }
     }
-}
 
+}
+check_login($con);
 ?>
 

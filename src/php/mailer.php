@@ -21,7 +21,7 @@ function send_mail($recipient,$subject,$message)
   $mail->Password   = "kbdugsdcficqxieh";
 
   $mail->IsHTML(true);
-  $mail->AddAddress($recipient, "esteemed customer");
+  $mail->AddAddress($recipient, "Online Learning Support");
   $mail->SetFrom("teganjennings580@gmail.com", "Student Engagement Portal");
   //$mail->AddReplyTo("reply-to-email", "reply-to-name");
   //$mail->AddCC("cc-recipient-email", "cc-recipient-name");
@@ -30,6 +30,7 @@ function send_mail($recipient,$subject,$message)
 
   $mail->MsgHTML($content); 
   if(!$mail->Send()) {
+
     //echo "Error while sending Email.";
     //echo "<pre>";
     //var_dump($mail);

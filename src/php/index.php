@@ -37,6 +37,7 @@ if (isset($_GET['type']) && $_GET['type'] != '') {
                     <div class="card-body" style="padding-bottom: 100px;">
                         <h1 class="box-title">Welcome, <?php echo $user_data['name']; ?></h1>
                         <h4 class="box-link"><a href="user_manage_modules.php">Add Module</a></h4>
+
                         <div class="card-body--">
                             <h3 style="text-align: center; font-weight: bold; margin: auto; padding: 50px;">Your
                                 Modules</h3>

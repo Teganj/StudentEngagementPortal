@@ -2,7 +2,13 @@
     "require": {
         "phpmailer/phpmailer": "^6.6",
         "yidas/pagination": "^1.0",
-        "php": "8.1.0"
+        "php": "8.1.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "../php/admin"
+        }
     },
     "post-install-cmd": [
         "php artisan clear-compiled",

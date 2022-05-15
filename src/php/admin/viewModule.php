@@ -1,7 +1,7 @@
 <?php
 require('top.inc.php');
-include("connection.php");
-include("check_login.php");
+include("../connection.php");
+include("../check_login.php");
 
 $user_data = check_login($con);
 
@@ -108,17 +108,17 @@ if (isset($_POST['submit'])) {
                         </p>
                         <div class="collapse" id="barchart">
                             <div class="card card-body">
-                                <?php include 'bar_chart.php' ?>
+                                <?php include '../bar_chart.php' ?>
                             </div>
                         </div>
                         <div class="collapse" id="piechart">
                             <div class="card card-body">
-                                <?php include 'pie_chart.php' ?>
+                                <?php include '../pie_chart.php' ?>
                             </div>
                         </div>
                         <div class="collapse" id="areachart">
                             <div class="card card-body">
-                                <?php include 'area_chart.php' ?>
+                                <?php include '../area_chart.php' ?>
                             </div>
                         </div>
 <!--                        <div class="collapse" id="stackedchart">-->
@@ -128,11 +128,9 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="collapse" id="emailstoStudents">
                             <div class="card card-body">
-                                <?php include 'email_students.php' ?>
+                                <?php include '../email_students.php' ?>
                             </div>
                         </div>
-
-
 
 
                         <div class="row col-lg-12" style="overflow-x:auto; padding: 20px; margin: auto;">
@@ -290,18 +288,13 @@ if (isset($_POST['submit'])) {
 <!--                        </div>-->
 <!--                            -->
                             
-                </div>
+                            
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
-
-
+</div>
 <script>
     $( "#viewToggle1" ).click(function() {
         $("td:contains('Not')").css('backgroundColor','#ffc6c4');

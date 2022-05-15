@@ -52,7 +52,7 @@ if ($result = mysqli_query($con, $sql)) {
 
                                     <td>
                                         <?php
-                                        echo "<span class='badge badge-success'><a href='../viewModule.php?id=".$row['id']."'>View</a></span>&nbsp;";
+                                        echo "<span class='badge badge-success'><a href='viewModule.php?id=".$row['id']."'>View</a></span>&nbsp;";
                                         ?>
                                     </td>
                                 </tr>

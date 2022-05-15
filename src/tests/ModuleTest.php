@@ -1,28 +1,51 @@
 <?php declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 
-final class ModuleTest extends TestCase
-{
-    public function testSuccesslidEmail(): void
-    {
+final class ModuleTest extends TestCase{
+    public function testSuccessModuleName(): void{
         $this->assertInstanceOf(
-            Email::class,
-            Email::fromString('user@example.com')
+            Text::class,
+            Text::fromString('Test Software Development')
         );
     }
-    public function testDangerInvalidEmail(): void
-    {
+    public function testDangerModuleName(): void{
         $this->expectException(InvalidArgumentException::class);
 
-        Email::fromString('invalid');
+        Text::fromString('1');
     }
-
-    public function testCanBeUsedAsString(): void
-    {
+    public function testStringModuleName(): void{
         $this->assertEquals(
-            'user@example.com',
-            Email::fromString('user@example.com')
+            'Test Software Development',
+            Text::fromString('Test Software Development')
         );
+    }
+    public function testSuccessCourseID(): void{
+        $this->assertInstanceOf(
+            Text::class,
+            Text::fromString('HDipComp')
+        );
+    }
+    public function testDangerCourseID(): void{
+        $this->expectException(InvalidArgumentException::class);
+
+        Text::fromString('invalid');
+    }
+    public function testStringCourseID(): void{
+        $this->assertEquals(
+            'HDipComp',
+            Text::fromString('HDipComp')
+        );
+    }
+    public function testSuccessFile(): void{
+        $this->assertInstanceOf(
+            Text::class,
+            Text::fromString('HDipComp.csv')
+        );
+    }
+    public function testDangerFile(): void{
+        $this->expectException(InvalidArgumentException::class);
+
+        Text::fromString('invalid');
     }
 }
 

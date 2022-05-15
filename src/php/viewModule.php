@@ -102,9 +102,6 @@ if (isset($_POST['submit'])) {
 <!--                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#stackedchart" aria-expanded="false" aria-controls="collapseExample">-->
 <!--                                Student Completion-->
 <!--                            </button>-->
-                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#emailstoStudents" aria-expanded="false" aria-controls="collapseExample">
-                                Email Students
-                            </button>
                         </p>
                         <div class="collapse" id="barchart">
                             <div class="card card-body">
@@ -124,16 +121,12 @@ if (isset($_POST['submit'])) {
 <!--                        <div class="collapse" id="stackedchart">-->
 <!--                            <div class="card card-body">-->
 <!--                                --><?php //include 'stacked_chart.php' ?>
-<!--                            </div>-->
-                        </div>
-                        <div class="collapse" id="emailstoStudents">
-                            <div class="card card-body">
-                                <?php include 'email_students.php' ?>
-                            </div>
-                        </div>
+<!--                          </div>-->
+<!--                     </div>-->
 
 
 
+                    <?php include 'email_students.php' ?>
 
                         <div class="row col-lg-12" style="overflow-x:auto; padding: 20px; margin: auto;">
                             <button id="viewToggle1" style="cursor: pointer;">Toggle EasyView</button>

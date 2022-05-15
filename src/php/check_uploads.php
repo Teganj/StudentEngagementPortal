@@ -10,12 +10,11 @@ function check_uploads($con)
             $user_data = mysqli_fetch_assoc($result);
             return $user_data;
             $result = mysqli_query($con, $query);
-
             $_SESSION['$file_name'] = $row['file_name'];
             $_SESSION['$uploaded_on'] = $row['uploaded_on'];
-
         }
-        }
+    }
     die;
 }
 ?>
+

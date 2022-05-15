@@ -39,7 +39,6 @@ if ($result->num_rows > 0) {
     No Data found, Cannot Display Pie Chart!
 <?php }
 ?>
-
 <script>
     Highcharts.chart('container_piechart', {
         chart: {

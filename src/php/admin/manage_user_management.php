@@ -69,21 +69,27 @@ if (isset($_POST['submit'])) {
                     <div class="card-header"><strong>User Management Update</strong><small> </small></div>
                     <form method="post" enctype="multipart/form-data">
                         <div class="card-body card-block">
+
+
                             <div class="form-group">
                                 <label for="user_name" class=" form-control-label">Username</label>
                                 <input type="text" name="user_name" placeholder="Enter username" class="form-control"
                                        required value="<?php echo $user_name ?>">
                             </div>
+
                             <div class="form-group">
                                 <label for="name" class=" form-control-label">Name</label>
                                 <input type="text" name="name" placeholder="Enter Name" class="form-control"
                                        required value="<?php echo $name ?>">
                             </div>
+
+
                             <div class="form-group">
                                 <label for="password" class=" form-control-label">Password</label>
                                 <input type="text" name="password" placeholder="Enter password" class="form-control"
                                        required value="<?php echo $password ?>">
                             </div>
+
                             <div class="form-group">
                                 <label for="email" class=" form-control-label">Email</label>
                                 <input type="email" name="email" placeholder="Enter email" class="form-control" required
@@ -96,6 +102,8 @@ if (isset($_POST['submit'])) {
                                     <option value="user">User</option>
                                 </select>
                             </div>
+
+
                             <button id="payment-button" name="submit" type="submit"
                                     class="btn btn-lg btn-info btn-block">
                                 <span id="payment-button-amount">SUBMIT</span>

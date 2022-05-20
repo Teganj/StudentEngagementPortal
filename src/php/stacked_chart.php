@@ -3,6 +3,8 @@ $module_name = $_SESSION['module_name'];
 
 $result = $con->query("SELECT * FROM reports where module_name='$module_name'");
 
+
+
 $result1 = $con->query("SELECT count(*) as total from reports where activity1='Completed'");
 $a1 = $result1->fetch_assoc();
 $result1 = $con->query("SELECT count(*) as total from reports where activity2='Completed'");
@@ -28,6 +30,7 @@ $a11 = $result1->fetch_assoc();
 $result1 = $con->query("SELECT count(*) as total from reports where activity12='Completed'");
 $a12 = $result1->fetch_assoc();
 $result1 = $con->query("SELECT COUNT(*) FROM reports where activity1='Completed'");
+
 
 $result2 = $con->query("SELECT count(*) as total from reports where activity1='Not completed'");
 $ai1 = $result2->fetch_assoc();
@@ -55,6 +58,7 @@ $result2 = $con->query("SELECT count(*) as total from reports where activity12='
 $ai12 = $result2->fetch_assoc();
 $result2 = $con->query("SELECT COUNT(*) FROM reports where activity1='Not completed'");
 
+
 $result3 = $con->query("SELECT count(*) as total from reports where activity1='Completed (achieved pass grade)'");
 $apg1 = $result3->fetch_assoc();
 $result3 = $con->query("SELECT count(*) as total from reports where activity2='Completed (achieved pass grade)'");
@@ -80,6 +84,8 @@ $apg11 = $result3->fetch_assoc();
 $result3 = $con->query("SELECT count(*) as total from reports where activity12='Completed (achieved pass grade)'");
 $apg12 = $result3->fetch_assoc();
 $result3 = $con->query("SELECT COUNT(*) FROM reports where activity1='Completed (achieved pass grade)'");
+
+
 
 if ($result->num_rows > 0) {
     ?>

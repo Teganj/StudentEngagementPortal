@@ -21,7 +21,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
         $row = mysqli_fetch_assoc($res);
         $module_name = $row['module_name'];
     } else {
-        header('location:index.php');
+        header('location:modules.php');
         die();
     }
 }
@@ -37,10 +37,10 @@ if (isset($_POST['submit'])) {
             if ($id == $getData['id']) {
 
             } else {
-                $msg = "Module Already Exists";
+                $msg = "Module Already Exists 1";
             }
         } else {
-            $msg = "Module Already Exists";
+            $msg = "Module Already Exists 2";
         }
     }
 
@@ -58,6 +58,7 @@ if (isset($_POST['submit'])) {
                         $user_id = $user_data['id'];
                         $name = $line[0];
                         $email = $line[1];
+                        //hardcoding completion elements wont work,need to count them from db first, then loop
                         $activity1 = $line[2];
                         $activity2 = $line[3];
                         $activity3 = $line[4];
@@ -93,6 +94,7 @@ if (isset($_POST['submit'])) {
                         $user_id = $user_data['id'];
                         $name = $line[0];
                         $email = $line[1];
+                        //hardcoding completion elements wont work,need to count them from db first, then loop
                         $activity1 = $line[2];
                         $activity2 = $line[3];
                         $activity3 = $line[4];

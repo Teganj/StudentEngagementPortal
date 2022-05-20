@@ -106,6 +106,7 @@ function save_password($password)
 function valid_email($email)
 {
     global $con;
+
     $email = addslashes($email);
 
     $query = "select * from users where email = '$email' limit 1";
@@ -115,8 +116,11 @@ function valid_email($email)
             return true;
         }
     }
+
     return false;
+
 }
+
 function is_code_correct($code)
 {
     global $con;
@@ -140,6 +144,7 @@ function is_code_correct($code)
             return "the code is incorrect";
         }
     }
+
     return "the code is incorrect";
 }
 
@@ -155,7 +160,8 @@ function is_code_correct($code)
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../CSS/login_style.css">
+    <link rel="stylesheet" href="../CSS/style.css">
 </head>
 
 <body>
@@ -180,7 +186,7 @@ function is_code_correct($code)
             switch ($mode) {
             case 'enter_email':
                 ?>
-                <form class="modal-content animate" method="post" action="forgot.php?mode=enter_email">
+                <form method="post" action="forgot.php?mode=enter_email">
                     <h5>Enter your email below</h5>
 
                     <span style="font-size: 12px;color:red;">
@@ -201,7 +207,7 @@ function is_code_correct($code)
 
             case 'enter_code':
                 ?>
-                <form class="modal-content animate" method="post" action="forgot.php?mode=enter_code">
+                <form method="post" action="forgot.php?mode=enter_code">
                     <h5>Enter your the code sent to your email</h5>
 
                     <span style="font-size: 12px;color:red;">
@@ -226,7 +232,7 @@ function is_code_correct($code)
 
             case 'enter_password':
             ?>
-            <form class="modal-content animate" method="post" action="forgot.php?mode=enter_password">
+            <form method="post" action="forgot.php?mode=enter_password">
                 <h5>Enter your new password</h5>
 
                 <span style="font-size: 12px;color:red;">

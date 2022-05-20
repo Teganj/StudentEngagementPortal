@@ -3,10 +3,7 @@ include("connection.php");
 include("check_login.php");
 require('top.inc.php');
 
-$user_data = check_login($con);
-
-$sql = "select * from modules order by id desc";
-$res = mysqli_query($con, $sql);
+$user_id = $_SESSION['user_id'];
 
 if (isset($_GET['type']) && $_GET['type'] != '') {
     $type = get_safe_value($con, $_GET['type']);
@@ -18,6 +15,9 @@ if (isset($_GET['type']) && $_GET['type'] != '') {
     }
 }
 
+$sql = "select * from modules where user_id='$user_id'";
+
+$res = mysqli_query($con, $sql);
 ?>
 <!DOCTYPE HTML>
 <html>

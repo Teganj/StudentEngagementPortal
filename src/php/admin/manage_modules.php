@@ -5,12 +5,16 @@ include("../check_login.php");
 include("../check_reports.php");
 
 $user_data = check_login($con);
-
 $msg = '';
 $module_name = '';
 $course = '';
+$user_id = $_SESSION['user_id'];
 $sql = "SELECT * FROM `courses`";
 $all_courses = mysqli_query($con, $sql);
+
+echo '<pre>';
+var_dump($_SESSION);
+echo '</pre>';
 
 if (isset($_GET['id']) && $_GET['id'] != '') {
     $id = get_safe_value($con, $_GET['id']);
@@ -25,7 +29,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
     }
 }
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit']) && !empty($_POST['module_name']) && !empty($_POST['course'])) {
     $module_name = get_safe_value($con, $_POST['module_name']);
     $course = get_safe_value($con, $_POST['course']);
     $res = mysqli_query($con, "select * from modules where module_name='$module_name'");
@@ -45,7 +49,7 @@ if (isset($_POST['submit'])) {
 
     if ($msg == '') {
         if (isset($_GET['id']) && $_GET['id'] != '') {
-            mysqli_query($con, "update modules set user_id='$user_id', course='$course', module_name='$module_name', uploaded_on='NOW()' where id='$id'");
+            mysqli_query($con, "UPDATE modules SET user_id='$user_id', course='$course', module_name='$module_name', uploaded_on='NOW()' WHERE id='$id'");
 
             $allowTypes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
             if (!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $allowTypes)) {
@@ -54,7 +58,7 @@ if (isset($_POST['submit'])) {
                     fgetcsv($csvFile);
 
                     while (($line = fgetcsv($csvFile)) !== FALSE) {
-                        $user_id = $user_data['id'];
+                        $user_id;
                         $name = $line[0];
                         $email = $line[1];
                         $activity1 = $line[2];
@@ -89,7 +93,7 @@ if (isset($_POST['submit'])) {
                     fgetcsv($csvFile);
 
                     while (($line = fgetcsv($csvFile)) !== FALSE) {
-                        $user_id = $user_data['id'];
+                        $user_id;
                         $name = $line[0];
                         $email = $line[1];
                         $activity1 = $line[2];

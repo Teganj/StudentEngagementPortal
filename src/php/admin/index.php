@@ -21,6 +21,11 @@ $studentCount = $con->query("SELECT * from reports ");
 if ($result = mysqli_query($con, $sql)) {
     $rowcount = mysqli_num_rows($result);
 }
+
+echo '<pre>';
+var_dump($_SESSION);
+echo '</pre>';
+
 ?>
 <div class="content pb-0">
     <div class="orders">

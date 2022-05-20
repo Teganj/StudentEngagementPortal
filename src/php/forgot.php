@@ -117,6 +117,7 @@ function valid_email($email)
     }
     return false;
 }
+
 function is_code_correct($code)
 {
     global $con;
@@ -159,19 +160,11 @@ function is_code_correct($code)
 </head>
 
 <body>
-<nav class="navbar navbar-icon-top navbar-expand-lg" style="background-color: #784794;">
-    <a class="navbar-brand" href="login.php" style="color: white; font-weight: bold;">Student Engagement Portal</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</nav>
-
-<h2 style="text-align: center; margin-top: 10px;">Student Retention Portal Forgot Password</h2>
-
-
-<div id="box" style="margin-top: 0px; margin-bottom: 0px;">
-    <form class="modal-content" method="post">
+<div id="bg"></div>
+<form class="modal-content animate" method="post">
+    <h1 style="font-weight: bold; margin: auto; padding-top: 50px;">Student Engagement Portal Forgot Password</h1>
+    <hr class="rounded" style="border-top: 8px solid #47AB11; border-radius: 5px;">
+    <div class="row" style="font-size: 20px;margin: 10px;">
         <div class="container" style="font-size: 20px;margin: 10px">
 
 
@@ -249,6 +242,8 @@ function is_code_correct($code)
             </form>
 
         </div>
+    </div>
+</form>
 </div>
 </body>
 <?php

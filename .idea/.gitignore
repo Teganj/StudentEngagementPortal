@@ -8,3 +8,4 @@
 /httpRequests/
 
 ../src/PHP/mailer.php
+../scr/php/connection.php

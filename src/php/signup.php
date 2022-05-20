@@ -21,8 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 }
 ?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,20 +38,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <form class="modal-content animate" method="post">
         <h1 style="font-weight: bold; margin: auto; padding-top: 50px;">Student Retention Portal Login</h1>
         <hr class="rounded" style="border-top: 8px solid #47AB11; border-radius: 5px;">
-
         <div class="row" style="font-size: 20px;margin: 10px;">
             <h2><label><b>Username:</b></label></h2>
             <input id="text" type="text" name="user_name"><br><br>
-
             <h2><label><b>Name:</b></label></h2>
             <input id="text" type="text" name="name"><br><br>
-
             <h2><label><b>Email:</b></label></h2>
             <input id="text" type="text" name="email"><br><br>
-
             <h2 style="padding-top: 50px;"><label><b>Password:</b></label></h2>
             <input id="text" type="password" name="password" placeholder="Enter Password"><br><br>
-
             <label for="role" class=" form-control-label">Role</label>
             <select id="role" name="role" value="<?php echo $role ?>">
                 <option value="admin">Admin</option>
@@ -61,9 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             </select>
             <input id="button" type="submit" value="Signup"><br><br>
             <a href="login.php">Login</a><br><br>
-
         </div>
-
     </form>
 </div>
 

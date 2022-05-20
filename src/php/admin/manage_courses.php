@@ -61,7 +61,6 @@ if (isset($_POST['submit']) && !empty($_POST['course_name']) && !empty($_POST['c
                                 <label for="course_code" class=" form-control-label">Course Code</label>
                                 <input type="text" name="course_code" placeholder="ENTER COURSE CODE"
                                        class="form-control" required value="<?php echo $course_code ?>">
-
                             </div>
                             <button id="payment-button" name="submit" type="submit"
                                     class="btn btn-lg btn-info btn-block">

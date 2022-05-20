@@ -3,8 +3,6 @@ $module_name = $_SESSION['module_name'];
 
 $result = $con->query("SELECT * FROM reports where module_name='$module_name'");
 
-
-
 $result1 = $con->query("SELECT count(*) as total from reports where activity1='Completed'");
 $a1 = $result1->fetch_assoc();
 $result1 = $con->query("SELECT count(*) as total from reports where activity2='Completed'");
@@ -30,7 +28,6 @@ $a11 = $result1->fetch_assoc();
 $result1 = $con->query("SELECT count(*) as total from reports where activity12='Completed'");
 $a12 = $result1->fetch_assoc();
 $result1 = $con->query("SELECT COUNT(*) FROM reports where activity1='Completed'");
-
 
 $result2 = $con->query("SELECT count(*) as total from reports where activity1='Not completed'");
 $ai1 = $result2->fetch_assoc();
@@ -58,7 +55,6 @@ $result2 = $con->query("SELECT count(*) as total from reports where activity12='
 $ai12 = $result2->fetch_assoc();
 $result2 = $con->query("SELECT COUNT(*) FROM reports where activity1='Not completed'");
 
-
 $result3 = $con->query("SELECT count(*) as total from reports where activity1='Completed (achieved pass grade)'");
 $apg1 = $result3->fetch_assoc();
 $result3 = $con->query("SELECT count(*) as total from reports where activity2='Completed (achieved pass grade)'");
@@ -84,8 +80,6 @@ $apg11 = $result3->fetch_assoc();
 $result3 = $con->query("SELECT count(*) as total from reports where activity12='Completed (achieved pass grade)'");
 $apg12 = $result3->fetch_assoc();
 $result3 = $con->query("SELECT COUNT(*) FROM reports where activity1='Completed (achieved pass grade)'");
-
-
 
 if ($result->num_rows > 0) {
     ?>
@@ -151,13 +145,19 @@ if ($result->num_rows > 0) {
         },
         series: [{
             name: 'Completed',
-            data: [<?php echo $a1['total']?>, <?php echo $a2['total']?>, <?php echo $a3['total']?>, <?php echo $a4['total']?>, <?php echo $a5['total']?>, <?php echo $a6['total']?>, <?php echo $a7['total']?>, <?php echo $a8['total']?>, <?php echo $a9['total']?>, <?php echo $a10['total']?>, <?php echo $a11['total']?>, <?php echo $a12['total']?>]
+            data: [<?php echo $a1['total']?>, <?php echo $a2['total']?>, <?php echo $a3['total']?>, <?php echo $a4['total']?>, <?php echo $a5['total']?>,
+                <?php echo $a6['total']?>, <?php echo $a7['total']?>, <?php echo $a8['total']?>, <?php echo $a9['total']?>, <?php echo $a10['total']?>,
+                <?php echo $a11['total']?>, <?php echo $a12['total']?>]
         }, {
             name: 'Not completed',
-            data: [<?php echo $ai1['total']?>, <?php echo $ai2['total']?>, <?php echo $ai3['total']?>, <?php echo $ai4['total']?>, <?php echo $ai5['total']?>, <?php echo $ai6['total']?>, <?php echo $ai7['total']?>, <?php echo $ai8['total']?>, <?php echo $ai9['total']?>, <?php echo $ai10['total']?>, <?php echo $ai11['total']?>, <?php echo $ai12['total']?>]
+            data: [<?php echo $ai1['total']?>, <?php echo $ai2['total']?>, <?php echo $ai3['total']?>, <?php echo $ai4['total']?>, <?php echo $ai5['total']?>,
+                <?php echo $ai6['total']?>, <?php echo $ai7['total']?>, <?php echo $ai8['total']?>, <?php echo $ai9['total']?>, <?php echo $ai10['total']?>,
+                <?php echo $ai11['total']?>, <?php echo $ai12['total']?>]
         }, {
-            name: 'Not completed',
-            data: [<?php echo $apg1['total']?>, <?php echo $apg2['total']?>, <?php echo $apg3['total']?>, <?php echo $apg4['total']?>, <?php echo $apg5['total']?>, <?php echo $apg6['total']?>, <?php echo $apg7['total']?>, <?php echo $apg8['total']?>, <?php echo $apg9['total']?>, <?php echo $apg10['total']?>, <?php echo $apg11['total']?>, <?php echo $apg12['total']?>]
+            name: 'Completed (achieved a passing grade',
+            data: [<?php echo $apg1['total']?>, <?php echo $apg2['total']?>, <?php echo $apg3['total']?>, <?php echo $apg4['total']?>, <?php echo $apg5['total']?>,
+                <?php echo $apg6['total']?>, <?php echo $apg7['total']?>, <?php echo $apg8['total']?>, <?php echo $apg9['total']?>, <?php echo $apg10['total']?>,
+                <?php echo $apg11['total']?>, <?php echo $apg12['total']?>]
         }]
     });
 </script>

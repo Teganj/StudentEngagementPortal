@@ -5,7 +5,7 @@ include("check_login.php");
 include("check_reports.php");
 
 $user_data = check_login($con);
-$user_id = $_SESSION['id'];
+$user_id = $_SESSION['user_id'];
 
 $msg = '';
 $module_name = '';
@@ -21,7 +21,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
         $row = mysqli_fetch_assoc($res);
         $module_name = $row['module_name'];
     } else {
-        header('location:modules.php');
+        header('location:index.php');
         die();
     }
 }
@@ -37,10 +37,10 @@ if (isset($_POST['submit'])) {
             if ($id == $getData['id']) {
 
             } else {
-                $msg = "Module Already Exists 1";
+                $msg = "Module Already Exists";
             }
         } else {
-            $msg = "Module Already Exists 2";
+            $msg = "Module Already Exists";
         }
     }
 
@@ -55,10 +55,9 @@ if (isset($_POST['submit'])) {
                     fgetcsv($csvFile);
 
                     while (($line = fgetcsv($csvFile)) !== FALSE) {
-                        $user_id = $user_data['id'];
+                        $user_id;
                         $name = $line[0];
                         $email = $line[1];
-                        //hardcoding completion elements wont work,need to count them from db first, then loop
                         $activity1 = $line[2];
                         $activity2 = $line[3];
                         $activity3 = $line[4];
@@ -91,10 +90,9 @@ if (isset($_POST['submit'])) {
                     fgetcsv($csvFile);
 
                     while (($line = fgetcsv($csvFile)) !== FALSE) {
-                        $user_id = $user_data['id'];
+                        $user_id;
                         $name = $line[0];
                         $email = $line[1];
-                        //hardcoding completion elements wont work,need to count them from db first, then loop
                         $activity1 = $line[2];
                         $activity2 = $line[3];
                         $activity3 = $line[4];
@@ -122,6 +120,7 @@ if (isset($_POST['submit'])) {
         die();
     }
 }
+
 ?>
 <div class="content pb-0">
     <div class="animated fadeIn">

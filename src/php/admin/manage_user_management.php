@@ -5,8 +5,8 @@ $name = '';
 $password = '';
 $email = '';
 $role = '';
-
 $msg = '';
+
 if (isset($_GET['id']) && $_GET['id'] != '') {
     $id = get_safe_value($con, $_GET['id']);
     $res = mysqli_query($con, "select * from users where id='$id'");

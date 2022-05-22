@@ -12,9 +12,6 @@ $user_id = $_SESSION['user_id'];
 $sql = "SELECT * FROM `courses`";
 $all_courses = mysqli_query($con, $sql);
 
-echo '<pre>';
-var_dump($_SESSION);
-echo '</pre>';
 
 if (isset($_GET['id']) && $_GET['id'] != '') {
     $id = get_safe_value($con, $_GET['id']);

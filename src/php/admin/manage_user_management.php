@@ -92,6 +92,7 @@ if (isset($_POST['submit'])) {
                             <div class="form-group">
                                 <label for="role" class=" form-control-label">Role</label>
                                 <select id="role" name="role" value="<?php echo $role ?>">
+                                    <option value="<?php echo $role ?>"><?php echo $role ?></option>
                                     <option value="admin">Admin</option>
                                     <option value="user">User</option>
                                 </select>

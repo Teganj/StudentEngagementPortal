@@ -10,6 +10,8 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
     if ($check > 0) {
         $row = mysqli_fetch_assoc($res);
         $course_name = $row['course_name'];
+        $course_code = $row['course_code'];
+
     } else {
         header('location:courses.php');
         die();

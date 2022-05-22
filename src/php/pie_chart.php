@@ -2,33 +2,34 @@
 $module_name = $_SESSION['module_name'];
 
 $result = $con->query("SELECT * FROM reports where module_name='$module_name'");
+while ("SELECT * FROM reports where module_name='$module_name'") {
 
-$result1 = $con->query("SELECT count(*) as total from reports where activity1='Completed'");
-$a1 = $result1->fetch_assoc();
-$result1 = $con->query("SELECT count(*) as total from reports where activity2='Completed'");
-$a2 = $result1->fetch_assoc();
-$result1 = $con->query("SELECT count(*) as total from reports where activity3='Completed'");
-$a3 = $result1->fetch_assoc();
-$result1 = $con->query("SELECT count(*) as total from reports where activity4='Completed'");
-$a4 = $result1->fetch_assoc();
-$result1 = $con->query("SELECT count(*) as total from reports where activity5='Completed'");
-$a5 = $result1->fetch_assoc();
-$result1 = $con->query("SELECT count(*) as total from reports where activity6='Completed'");
-$a6 = $result1->fetch_assoc();
-$result1 = $con->query("SELECT count(*) as total from reports where activity7='Completed'");
-$a7 = $result1->fetch_assoc();
-$result1 = $con->query("SELECT count(*) as total from reports where activity8='Completed'");
-$a8 = $result1->fetch_assoc();
-$result1 = $con->query("SELECT count(*) as total from reports where activity9='Completed'");
-$a9 = $result1->fetch_assoc();
-$result1 = $con->query("SELECT count(*) as total from reports where activity10='Completed'");
-$a10 = $result1->fetch_assoc();
-$result1 = $con->query("SELECT count(*) as total from reports where activity11='Completed'");
-$a11 = $result1->fetch_assoc();
-$result1 = $con->query("SELECT count(*) as total from reports where activity12='Completed'");
-$a12 = $result1->fetch_assoc();
-$result1 = $con->query("SELECT COUNT(*) FROM reports where activity1='Completed'");
-
+    $result1 = $con->query("SELECT count(*) as total from reports where activity1='Completed'");
+    $a1 = $result1->fetch_assoc();
+    $result1 = $con->query("SELECT count(*) as total from reports where activity2='Completed'");
+    $a2 = $result1->fetch_assoc();
+    $result1 = $con->query("SELECT count(*) as total from reports where activity3='Completed'");
+    $a3 = $result1->fetch_assoc();
+    $result1 = $con->query("SELECT count(*) as total from reports where activity4='Completed'");
+    $a4 = $result1->fetch_assoc();
+    $result1 = $con->query("SELECT count(*) as total from reports where activity5='Completed'");
+    $a5 = $result1->fetch_assoc();
+    $result1 = $con->query("SELECT count(*) as total from reports where activity6='Completed'");
+    $a6 = $result1->fetch_assoc();
+    $result1 = $con->query("SELECT count(*) as total from reports where activity7='Completed'");
+    $a7 = $result1->fetch_assoc();
+    $result1 = $con->query("SELECT count(*) as total from reports where activity8='Completed'");
+    $a8 = $result1->fetch_assoc();
+    $result1 = $con->query("SELECT count(*) as total from reports where activity9='Completed'");
+    $a9 = $result1->fetch_assoc();
+    $result1 = $con->query("SELECT count(*) as total from reports where activity10='Completed'");
+    $a10 = $result1->fetch_assoc();
+    $result1 = $con->query("SELECT count(*) as total from reports where activity11='Completed'");
+    $a11 = $result1->fetch_assoc();
+    $result1 = $con->query("SELECT count(*) as total from reports where activity12='Completed'");
+    $a12 = $result1->fetch_assoc();
+    $result1 = $con->query("SELECT COUNT(*) FROM reports where activity1='Completed'");
+}
 if ($result->num_rows > 0) {
     ?>
     <figure class="highcharts-figure-piechart">

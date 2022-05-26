@@ -2,7 +2,6 @@
 require('top.inc.php');
 include("../connection.php");
 include("../check_login.php");
-include("../check_reports.php");
 
 $user_data = check_login($con);
 $msg = '';

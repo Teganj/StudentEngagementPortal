@@ -64,7 +64,7 @@ if (count($_POST) > 0) {
                     unset($_SESSION['forgot']);
                 }
 
-                header("Location: login.php");
+                header("Location: index.php");
                 die;
             }
             break;
@@ -289,7 +289,7 @@ function is_code_correct($code)
                     <br style="clear: both;">
                     <input type="submit" value="Next">
                     <br><br>
-                    <div><a href="login.php">Login</a></div>
+                    <div><a href="index.php">Login</a></div>
                 </form>
                 <?php
                 break;
@@ -314,7 +314,7 @@ function is_code_correct($code)
                         <input type="button" value="Start Over">
                     </a>
                     <br><br>
-                    <div><a href="login.php">Login</a></div>
+                    <div><a href="index.php">Login</a></div>
                 </form>
                 <?php
                 break;
@@ -340,7 +340,7 @@ function is_code_correct($code)
                     <input type="button" value="Start Over">
                 </a>
                 <br><br>
-                <div><a href="login.php">Login</a></div>
+                <div><a href="index.php">Login</a></div>
             </form>
 
         </div>

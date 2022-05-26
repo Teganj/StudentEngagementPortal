@@ -27,7 +27,7 @@ require('admin/functions.inc.php');
             <ul class="nav navbar-nav">
                 <li class="menu-title">USER MENU</li>
                 <li class="menu-item-has-children dropdown">
-                    <a href="index.php"> Dashboards </a>
+                    <a href="userHome.php"> Dashboards </a>
                 </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="user_manage_modules.php"> Add A Module </a>
@@ -41,7 +41,7 @@ require('admin/functions.inc.php');
 </aside>
 <div id="right-panel" class="right-panel">
     <header id="header" class="header" style="background-color: #784794;">
-        <a class="navbar-brand" href="index.php" style="color: white; font-weight: bold;">Student Engagement</a>
+        <a class="navbar-brand" href="userHome.php" style="color: white; font-weight: bold;">Student Engagement</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

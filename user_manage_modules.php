@@ -2,7 +2,6 @@
 require('top.inc.php');
 include("connection.php");
 include("check_login.php");
-include("check_reports.php");
 
 $user_data = check_login($con);
 $user_id = $_SESSION['user_id'];
@@ -21,7 +20,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
         $row = mysqli_fetch_assoc($res);
         $module_name = $row['module_name'];
     } else {
-        header('location:index.php');
+        header('location:userHome.php');
         die();
     }
 }
@@ -116,7 +115,7 @@ if (isset($_POST['submit'])) {
                 $msg = 'Please Upload a CSV file.';
             }
         }
-        header('location:index.php');
+        header('location:userHome.php');
         die();
     }
 }

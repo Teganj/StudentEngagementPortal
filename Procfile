@@ -1,1 +1,1 @@
-web:php login.php
+web: vendor/bin/heroku-php-apache2

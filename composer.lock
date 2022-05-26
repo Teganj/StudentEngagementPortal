@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7d272b35c16e2901bee56fc73e2d9d71",
+    "content-hash": "51eac0363ce9884c6616d3605a235fd0",
     "packages": [
         {
             "name": "phpmailer/phpmailer",
@@ -83,47 +83,6 @@
                 }
             ],
             "time": "2022-02-28T15:31:21+00:00"
-        },
-        {
-            "name": "yidas/pagination",
-            "version": "1.0.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yidas/php-pagination.git",
-                "reference": "d6b95bbab65e75b69517f755df3e23f93b4e0e78"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yidas/php-pagination/zipball/d6b95bbab65e75b69517f755df3e23f93b4e0e78",
-                "reference": "d6b95bbab65e75b69517f755df3e23f93b4e0e78",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "yidas\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "PHP Paginator with Pager Widget (pure PHP, CI, Yii, Laravel support)",
-            "homepage": "https://github.com/yidas/php-pagination",
-            "keywords": [
-                "codeigniter",
-                "linkpager",
-                "pagination",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/yidas/php-pagination/issues",
-                "source": "https://github.com/yidas/php-pagination"
-            },
-            "time": "2021-09-06T07:25:31+00:00"
         }
     ],
     "packages-dev": [],
@@ -132,7 +91,9 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": "^8.1.0"
+    },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
 }

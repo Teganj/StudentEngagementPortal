@@ -80,50 +80,6 @@
                 }
             ],
             "install-path": "../phpmailer/phpmailer"
-        },
-        {
-            "name": "yidas/pagination",
-            "version": "1.0.7",
-            "version_normalized": "1.0.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yidas/php-pagination.git",
-                "reference": "d6b95bbab65e75b69517f755df3e23f93b4e0e78"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yidas/php-pagination/zipball/d6b95bbab65e75b69517f755df3e23f93b4e0e78",
-                "reference": "d6b95bbab65e75b69517f755df3e23f93b4e0e78",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "time": "2021-09-06T07:25:31+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "yidas\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "PHP Paginator with Pager Widget (pure PHP, CI, Yii, Laravel support)",
-            "homepage": "https://github.com/yidas/php-pagination",
-            "keywords": [
-                "codeigniter",
-                "linkpager",
-                "pagination",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/yidas/php-pagination/issues",
-                "source": "https://github.com/yidas/php-pagination"
-            },
-            "install-path": "../yidas/pagination"
         }
     ],
     "dev": true,

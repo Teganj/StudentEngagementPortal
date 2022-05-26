@@ -19,7 +19,6 @@ $sql = "select * from modules where user_id='$user_id'";
 
 $res = mysqli_query($con, $sql);
 
-echo "hello";
 ?>
 <!DOCTYPE HTML>
 <html>

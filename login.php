@@ -43,6 +43,109 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../css/login.css">
 </head>
+
+<style>
+
+    @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
+    #bg {
+        background-image: url('img/background.jpg');
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        filter: blur(5px);
+    }
+    .modal-content {
+        background-color: #fefefe;
+        margin: 3% auto 5% auto; /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 80%;
+    }
+    /* Add Zoom Animation */
+    .animate {
+        -webkit-animation: animatezoom 0.6s;
+        animation: animatezoom 0.6s
+    }
+
+    @-webkit-keyframes animatezoom {
+        from {-webkit-transform: scale(0)}
+        to {-webkit-transform: scale(1)}
+    }
+
+    @keyframes animatezoom {
+        from {transform: scale(0)}
+        to {transform: scale(1)}
+    }
+
+    form {
+        width: 350px;
+        position: relative;
+    }
+    form .form-field::before {
+        font-size: 20px;
+        position: absolute;
+        left: 15px;
+        top: 17px;
+        color: #888888;
+        content: " ";
+        display: block;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    form .form-field {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-bottom: 1rem;
+        position: relative;
+    }
+    form input {
+        font-family: inherit;
+        width: 100%;
+        outline: none;
+        background-color: #fff;
+        border-radius: 4px;
+        border: none;
+        display: block;
+        padding: 0.9rem 0.7rem;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+        font-size: 17px;
+        color: #4A4A4A;
+        text-indent: 40px;
+    }
+    form .btn {
+        outline: none;
+        border: none;
+        cursor: pointer;
+        display: inline-block;
+        text-align: center;
+        border-radius: 4px;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+        font-size: 17px;
+        background-color: #04AA6D;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        width: 20%;
+        margin-top: 80px !important;
+        margin-bottom: 80px !important;
+    }
+
+
+    button:hover {
+        opacity: 0.8;
+    }
+
+</style>
 <body>
 <div id="bg"></div>
 <div style="margin: auto;">
